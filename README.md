@@ -14,10 +14,3 @@ Buka tautan berikut di browser:
 ```bash
 git clone https://github.com/annisa165/pembelajaran-kelas1sd.git
 ```
-
-## ⚙️ Mengaktifkan GitHub Pages (jika belum aktif)
-
-1. Buka repository di GitHub → tab **Settings**.
-2. Pilih menu **Pages** di sidebar kiri.
-3. Pada bagian **Source**, pilih branch `main` dan folder `/ (root)`, lalu klik **Save**.
-4. Tunggu 1–2 menit, web akan aktif di `https://annisa165.github.io/pembelajaran-kelas1sd/`.

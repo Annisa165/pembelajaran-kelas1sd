@@ -289,7 +289,7 @@
     gap:12px;
     margin:6px 0 10px;
   }
-  .flash-tile{ perspective:1000px; cursor:pointer; height:140px; }
+  .flash-tile{ perspective:1000px; cursor:pointer; height:152px; }
   .flash-tile-inner{
     width:100%; height:100%; position:relative;
     transition:transform 0.5s cubic-bezier(.4,.2,.2,1);
@@ -304,10 +304,12 @@
   }
   .flash-tile-front{background:linear-gradient(160deg,#FFF3D6,#FFE1A3); border:3px solid var(--sun);}
   .flash-tile-back{background:linear-gradient(160deg,#DFF7E3,#B9EFC4); border:3px solid var(--leaf); transform:rotateY(180deg);}
-  .flash-tile-emoji{font-size:38px; line-height:1;}
-  .flash-tile-label{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:15px; text-align:center; margin-top:4px; color:var(--ink);}
+  .flash-tile-emoji{font-size:30px; line-height:1;}
+  .flash-tile-label{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:13px; text-align:center; margin-top:4px; color:var(--ink);}
   .flash-tile-desc{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:13px; text-align:center; color:var(--leaf-dark); line-height:1.25;}
   .flash-tile-num{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:38px; color:var(--grape);}
+  .flash-tile-letter{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:38px; color:var(--grape);}
+  .flash-tile-word-en{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:11.5px; color:var(--coral-dark); margin-top:2px; text-align:center; background:#FFE1E1; padding:2px 8px; border-radius:999px;}
   .flash-hint-text{font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); margin:2px 0 14px; font-size:14px;}
   .menu-btn.flash{background:linear-gradient(160deg,#6FC2F0,var(--ocean,#3E9FE0));}
 </style>
@@ -373,6 +375,11 @@
         <span class="emoji">🔢</span>
         Bahasa Inggris: Angka
         <small>20 kartu</small>
+      </button>
+      <button class="menu-btn flash" id="btnFlashLetters">
+        <span class="emoji">🔤</span>
+        Kartu Huruf A-Z
+        <small>26 kartu</small>
       </button>
     </div>
     <button class="back-btn" id="btnFlashCatBack" style="margin-top:20px;">⬅ Menu Utama</button>
@@ -478,6 +485,7 @@
     btnFlashcards: document.getElementById('btnFlashcards'),
     btnFlashBody: document.getElementById('btnFlashBody'),
     btnFlashEnglish: document.getElementById('btnFlashEnglish'),
+    btnFlashLetters: document.getElementById('btnFlashLetters'),
     btnFlashCatBack: document.getElementById('btnFlashCatBack'),
     btnFlashBack: document.getElementById('btnFlashBack'),
     flashGrid: document.getElementById('flashGrid'),
@@ -532,6 +540,29 @@
       [a[i],a[j]] = [a[j],a[i]];
     }
     return a;
+  }
+
+  // "Kantong acak": menarik soal tanpa pengulangan sampai semua item di bank
+  // sudah pernah muncul, baru diacak ulang dari awal. Item yang sudah terpilih
+  // di ronde yang sama tidak akan terpilih dobel walau kantong diisi ulang.
+  function createShuffleBag(items){
+    let bag = [];
+    return function draw(n){
+      const result = [];
+      while(result.length < n){
+        if(bag.length === 0){
+          bag = shuffle(items);
+          if(result.length){
+            const resultSet = new Set(result);
+            const fresh = bag.filter(x => !resultSet.has(x));
+            const used = bag.filter(x => resultSet.has(x));
+            bag = fresh.concat(used);
+          }
+        }
+        result.push(bag.shift());
+      }
+      return result;
+    };
   }
 
   function generateMathQuestions(count){
@@ -593,8 +624,10 @@
     {q:"Paru-paru kita berguna untuk apa?", emoji:"🌬️", options:["Bernapas","Berjalan","Melihat","Mendengar"], answer:0, tip:"Paru-paru membantu kita bernapas menghirup udara."}
   ];
 
+  const drawIpasQuestion = createShuffleBag(ipasBank);
+
   function generateIpasQuestions(count){
-    const pool = shuffle(ipasBank).slice(0, count);
+    const pool = drawIpasQuestion(count);
     return pool.map(item => {
       const optionObjs = item.options.map((text, idx) => ({text, isCorrect: idx === item.answer}));
       const shuffled = shuffle(optionObjs);
@@ -693,14 +726,44 @@
     {num:19, word:'nineteen'}, {num:20, word:'twenty'}
   ];
 
+  const flashLetterCards = [
+    {letter:'A', word:'Apel', en:'Apple', emoji:'🍎'},
+    {letter:'B', word:'Bola', en:'Ball', emoji:'⚽'},
+    {letter:'C', word:'Cicak', en:'Lizard', emoji:'🦎'},
+    {letter:'D', word:'Domba', en:'Sheep', emoji:'🐑'},
+    {letter:'E', word:'Ember', en:'Bucket', emoji:'🪣'},
+    {letter:'F', word:'Flamingo', en:'Flamingo', emoji:'🦩'},
+    {letter:'G', word:'Gajah', en:'Elephant', emoji:'🐘'},
+    {letter:'H', word:'Harimau', en:'Tiger', emoji:'🐯'},
+    {letter:'I', word:'Ikan', en:'Fish', emoji:'🐟'},
+    {letter:'J', word:'Jam', en:'Clock', emoji:'⏰'},
+    {letter:'K', word:'Kucing', en:'Cat', emoji:'🐱'},
+    {letter:'L', word:'Lebah', en:'Bee', emoji:'🐝'},
+    {letter:'M', word:'Mobil', en:'Car', emoji:'🚗'},
+    {letter:'N', word:'Nanas', en:'Pineapple', emoji:'🍍'},
+    {letter:'O', word:'Ombak', en:'Wave', emoji:'🌊'},
+    {letter:'P', word:'Pisang', en:'Banana', emoji:'🍌'},
+    {letter:'Q', word:'Quokka', en:'Quokka', emoji:'🐹'},
+    {letter:'R', word:'Rumah', en:'House', emoji:'🏠'},
+    {letter:'S', word:'Sepeda', en:'Bicycle', emoji:'🚲'},
+    {letter:'T', word:'Topi', en:'Hat', emoji:'🎩'},
+    {letter:'U', word:'Ular', en:'Snake', emoji:'🐍'},
+    {letter:'V', word:'Voli', en:'Volleyball', emoji:'🏐'},
+    {letter:'W', word:'Wortel', en:'Carrot', emoji:'🥕'},
+    {letter:'X', word:'Sinar-X', en:'X-ray', emoji:'🩻'},
+    {letter:'Y', word:'Yoyo', en:'Yoyo', emoji:'🪀'},
+    {letter:'Z', word:'Zebra', en:'Zebra', emoji:'🦓'}
+  ];
+
   function startFlashcards(category){
     showScreen('flash-viewer');
     renderFlashGrid(category);
   }
 
   function renderFlashGrid(category){
-    const cards = category === 'body' ? flashBodyCards : flashEnglishCards;
-    els.flashCounter.textContent = category === 'body' ? 'IPA: Anggota Tubuh' : 'Bahasa Inggris: Angka';
+    const cards = category === 'body' ? flashBodyCards : (category === 'english' ? flashEnglishCards : flashLetterCards);
+    const titles = { body:'IPA: Anggota Tubuh', english:'Bahasa Inggris: Angka', letters:'Kartu Huruf A-Z' };
+    els.flashCounter.textContent = titles[category];
     els.flashGrid.innerHTML = '';
 
     cards.forEach(card => {
@@ -719,9 +782,12 @@
       if(category === 'body'){
         front.innerHTML = `<div class="flash-tile-emoji">${card.emoji}</div><div class="flash-tile-label">${card.label}</div>`;
         back.innerHTML = `<div class="flash-tile-emoji">${card.emoji}</div><div class="flash-tile-desc">${card.desc}</div>`;
-      } else {
+      } else if(category === 'english'){
         front.innerHTML = `<div class="flash-tile-num">${card.num}</div>`;
         back.innerHTML = `<div class="flash-tile-emoji">🔤</div><div class="flash-tile-label">${card.word}</div>`;
+      } else {
+        front.innerHTML = `<div class="flash-tile-letter">${card.letter}</div>`;
+        back.innerHTML = `<div class="flash-tile-emoji">${card.emoji}</div><div class="flash-tile-label">${card.word}</div><div class="flash-tile-word-en">🔤 ${card.en}</div>`;
       }
 
       inner.appendChild(front);
@@ -1012,6 +1078,7 @@
   els.btnFlashCatBack.addEventListener('click', () => showScreen('menu'));
   els.btnFlashBody.addEventListener('click', () => startFlashcards('body'));
   els.btnFlashEnglish.addEventListener('click', () => startFlashcards('english'));
+  els.btnFlashLetters.addEventListener('click', () => startFlashcards('letters'));
   els.btnFlashBack.addEventListener('click', () => showScreen('flash-categories'));
 
   showScreen('menu');

@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Bagian 1: Petualangan Belajar Bintang 🌟</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#7FD1FF;
+    --sky-bottom:#FFE9B8;
+    --card:#FFFFFF;
+    --coral:#FF6B6B;
+    --coral-dark:#E5504F;
+    --sun:#FFC93C;
+    --sun-dark:#F0A500;
+    --leaf:#4ECE6F;
+    --leaf-dark:#33A852;
+    --grape:#9B72CF;
+    --grape-dark:#7E52B3;
+    --ink:#2B3A55;
+    --ink-soft:#5C6C8A;
+    --cream:#FFF8EA;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Nunito',sans-serif;
+    min-height:100vh;
+    background:linear-gradient(180deg,var(--sky-top) 0%, #B9E7FF 40%, var(--sky-bottom) 100%);
+    overflow-x:hidden;
+    color:var(--ink);
+    position:relative;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  /* Decorative background */
+  .bg-decor{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
+  .cloud{position:absolute; opacity:0.85; animation:drift linear infinite;}
+  .cloud svg{width:100%; height:100%; display:block;}
+  @keyframes drift{
+    from{transform:translateX(-10vw);}
+    to{transform:translateX(110vw);}
+  }
+  .twinkle{position:absolute; font-size:22px; animation:twinkle 2.6s ease-in-out infinite;}
+  @keyframes twinkle{
+    0%,100%{opacity:0.25; transform:scale(0.8) rotate(0deg);}
+    50%{opacity:1; transform:scale(1.15) rotate(15deg);}
+  }
+  .ground{position:fixed; left:0; right:0; bottom:0; height:70px; background:linear-gradient(180deg,#8CE28A,#5FCB6B); z-index:0; border-top:6px solid #4BAE58;}
+
+  .app{position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:20px 16px 90px;}
+
+  /* Top bar */
+  .topbar{width:100%; max-width:640px; display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .brand{display:flex; align-items:center; gap:8px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:20px; color:var(--ink);}
+  .brand .star-ico{font-size:26px; animation:spin-slow 6s linear infinite;}
+  @keyframes spin-slow{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+  .star-total{display:flex; align-items:center; gap:6px; background:var(--card); padding:8px 14px; border-radius:999px; font-weight:800; box-shadow:0 4px 0 rgba(0,0,0,0.08); font-family:'Baloo 2',sans-serif; color:var(--sun-dark);}
+
+  .card{
+    background:var(--card);
+    border-radius:28px;
+    box-shadow:0 10px 0 rgba(43,58,85,0.12), 0 16px 30px rgba(43,58,85,0.12);
+    padding:28px 24px;
+    width:100%;
+    max-width:640px;
+    text-align:center;
+    position:relative;
+  }
+
+  /* Mascot */
+  .mascot-wrap{display:flex; justify-content:center; margin-bottom:6px;}
+  .mascot{
+    font-size:74px;
+    display:inline-block;
+    animation:bob 2.4s ease-in-out infinite;
+    filter:drop-shadow(0 8px 6px rgba(0,0,0,0.15));
+  }
+  @keyframes bob{
+    0%,100%{transform:translateY(0) rotate(-4deg);}
+    50%{transform:translateY(-10px) rotate(4deg);}
+  }
+  .mascot.happy{animation:happyjump 0.6s ease-in-out 2;}
+  @keyframes happyjump{
+    0%{transform:translateY(0) scale(1);}
+    30%{transform:translateY(-24px) scale(1.15) rotate(-10deg);}
+    60%{transform:translateY(0) scale(0.95) rotate(10deg);}
+    100%{transform:translateY(0) scale(1);}
+  }
+  .mascot.sad{animation:wobble 0.5s ease-in-out;}
+  @keyframes wobble{
+    0%,100%{transform:rotate(0);}
+    25%{transform:rotate(-8deg) translateX(-4px);}
+    75%{transform:rotate(8deg) translateX(4px);}
+  }
+  .speech{
+    display:inline-block;
+    background:var(--cream);
+    border:3px solid #FFE1A3;
+    padding:10px 18px;
+    border-radius:18px;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin-top:4px;
+    font-size:15px;
+    min-height:24px;
+  }
+
+  h1.title{
+    font-family:'Baloo 2',sans-serif;
+    font-size:clamp(28px,6vw,40px);
+    margin:6px 0 4px;
+    color:var(--ink);
+    font-weight:800;
+  }
+  p.subtitle{
+    font-size:16px;
+    color:var(--ink-soft);
+    margin:0 0 22px;
+    font-weight:700;
+  }
+
+  /* Menu buttons */
+  .menu-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:18px; margin-top:8px;}
+  @media (max-width:480px){ .menu-grid{grid-template-columns:1fr;} }
+  .menu-btn{
+    border:none;
+    border-radius:24px;
+    padding:26px 16px;
+    cursor:pointer;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    font-size:22px;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    box-shadow:0 6px 0 rgba(0,0,0,0.15);
+    transition:transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .menu-btn .emoji{font-size:44px;}
+  .menu-btn:active{transform:translateY(5px); box-shadow:0 1px 0 rgba(0,0,0,0.15);}
+  .menu-btn.math{background:linear-gradient(160deg,#FF8B6B,var(--coral));}
+  .menu-btn.ipas{background:linear-gradient(160deg,#6FD98A,var(--leaf));}
+  .menu-btn.english{background:linear-gradient(160deg,#B292E8,var(--grape));}
+  .menu-btn small{font-family:'Nunito',sans-serif; font-weight:700; font-size:13px; opacity:0.95;}
+
+  /* Game header */
+  .game-header{display:flex; align-items:center; justify-content:space-between; width:100%; margin-bottom:18px; gap:10px;}
+  .back-btn{
+    background:var(--cream); border:none; border-radius:14px; padding:10px 14px;
+    font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); cursor:pointer;
+    box-shadow:0 3px 0 rgba(0,0,0,0.08);
+  }
+  .progress-wrap{flex:1; margin:0 12px;}
+  .progress-track{background:#EFEFEF; border-radius:999px; height:16px; overflow:hidden; box-shadow:inset 0 2px 3px rgba(0,0,0,0.08);}
+  .progress-fill{height:100%; border-radius:999px; background:linear-gradient(90deg,var(--sun),var(--coral)); transition:width 0.4s ease;}
+  .score-pill{display:flex; align-items:center; gap:4px; background:var(--card); border:2px solid var(--sun); border-radius:999px; padding:6px 12px; font-family:'Baloo 2',sans-serif; font-weight:800; color:var(--sun-dark); white-space:nowrap;}
+
+  /* Question card */
+  .question-emoji-row{
+    font-size:44px;
+    line-height:1.3;
+    margin:10px 0 20px;
+    letter-spacing:2px;
+    word-break:break-word;
+  }
+  .question-text{
+    font-family:'Baloo 2',sans-serif;
+    font-size:clamp(20px,5vw,26px);
+    font-weight:700;
+    color:var(--ink);
+    margin:0 0 20px;
+  }
+  .math-visual{display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:22px;}
+  .math-group{display:flex; flex-wrap:wrap; max-width:180px; gap:2px; justify-content:center;}
+  .math-op{font-family:'Baloo 2',sans-serif; font-size:36px; font-weight:800; color:var(--coral);}
+  .math-emoji{font-size:30px;}
+  .digit-display{
+    font-family:'Baloo 2',sans-serif;
+    font-size:clamp(64px,18vw,96px);
+    font-weight:800;
+    color:var(--grape);
+    line-height:1;
+    margin-bottom:14px;
+    text-shadow:0 6px 0 rgba(0,0,0,0.08);
+  }
+
+  .options-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:420px){ .options-grid{grid-template-columns:1fr;} }
+  .opt-btn{
+    background:var(--cream);
+    border:3px solid #FFE1A3;
+    border-radius:18px;
+    padding:16px 12px;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:19px;
+    color:var(--ink);
+    cursor:pointer;
+    transition:transform 0.1s ease, background 0.2s ease, border-color 0.2s ease;
+    box-shadow:0 4px 0 rgba(0,0,0,0.06);
+  }
+  .opt-btn:hover:not(:disabled){transform:translateY(-2px);}
+  .opt-btn:active:not(:disabled){transform:translateY(2px);}
+  .opt-btn:disabled{cursor:default;}
+  .opt-btn.correct{background:#DFF7E3; border-color:var(--leaf); color:var(--leaf-dark);}
+  .opt-btn.wrong{background:#FFE1DE; border-color:var(--coral); color:var(--coral-dark); animation:shake 0.4s ease;}
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-8px);}
+    75%{transform:translateX(8px);}
+  }
+
+  .feedback-banner{
+    margin-top:18px;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    min-height:26px;
+    color:var(--ink-soft);
+  }
+
+  .next-btn{
+    margin-top:16px;
+    background:linear-gradient(160deg,#FFD873,var(--sun));
+    border:none;
+    border-radius:16px;
+    padding:12px 28px;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:800;
+    font-size:17px;
+    color:var(--ink);
+    cursor:pointer;
+    box-shadow:0 5px 0 var(--sun-dark);
+    display:none;
+  }
+  .next-btn:active{transform:translateY(4px); box-shadow:0 1px 0 var(--sun-dark);}
+  .next-btn.show{display:inline-block; animation:pop-in 0.3s ease;}
+  @keyframes pop-in{
+    0%{transform:scale(0.7); opacity:0;}
+    100%{transform:scale(1); opacity:1;}
+  }
+
+  /* Result screen */
+  .result-stars{font-size:54px; margin:14px 0; letter-spacing:6px;}
+  .result-stars span{display:inline-block; animation:star-pop 0.5s ease backwards;}
+  .result-stars span:nth-child(1){animation-delay:0.1s;}
+  .result-stars span:nth-child(2){animation-delay:0.3s;}
+  .result-stars span:nth-child(3){animation-delay:0.5s;}
+  @keyframes star-pop{
+    0%{transform:scale(0) rotate(-90deg); opacity:0;}
+    70%{transform:scale(1.3) rotate(10deg); opacity:1;}
+    100%{transform:scale(1) rotate(0);}
+  }
+  .result-msg{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:24px; margin:6px 0 4px; color:var(--ink);}
+  .result-sub{color:var(--ink-soft); font-weight:700; margin-bottom:22px;}
+  .result-actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .action-btn{
+    border:none; border-radius:16px; padding:14px 22px; font-family:'Baloo 2',sans-serif; font-weight:800;
+    font-size:16px; color:white; cursor:pointer; box-shadow:0 5px 0 rgba(0,0,0,0.18);
+  }
+  .action-btn.replay{background:linear-gradient(160deg,#FF8B6B,var(--coral));}
+  .action-btn.menu{background:linear-gradient(160deg,#8DA6F0,var(--grape));}
+  .action-btn:active{transform:translateY(4px); box-shadow:0 1px 0 rgba(0,0,0,0.18);}
+
+  /* Confetti */
+  .confetti-piece{
+    position:fixed; top:-20px; width:10px; height:16px; z-index:50; pointer-events:none;
+    animation:fall linear forwards;
+    border-radius:2px;
+  }
+  @keyframes fall{
+    to{transform:translateY(110vh) rotate(540deg); opacity:0.9;}
+  }
+
+  .hidden{display:none !important;}
+
+  /* Flashcards */
+  .flash-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(120px, 1fr));
+    gap:12px;
+    margin:6px 0 10px;
+  }
+  .flash-tile{ perspective:1000px; cursor:pointer; height:140px; }
+  .flash-tile-inner{
+    width:100%; height:100%; position:relative;
+    transition:transform 0.5s cubic-bezier(.4,.2,.2,1);
+    transform-style:preserve-3d;
+  }
+  .flash-tile.flipped .flash-tile-inner{transform:rotateY(180deg);}
+  .flash-tile-face{
+    position:absolute; inset:0; backface-visibility:hidden;
+    border-radius:18px; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; padding:8px;
+    box-shadow:0 5px 0 rgba(0,0,0,0.1);
+  }
+  .flash-tile-front{background:linear-gradient(160deg,#FFF3D6,#FFE1A3); border:3px solid var(--sun);}
+  .flash-tile-back{background:linear-gradient(160deg,#DFF7E3,#B9EFC4); border:3px solid var(--leaf); transform:rotateY(180deg);}
+  .flash-tile-emoji{font-size:38px; line-height:1;}
+  .flash-tile-label{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:15px; text-align:center; margin-top:4px; color:var(--ink);}
+  .flash-tile-desc{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:13px; text-align:center; color:var(--leaf-dark); line-height:1.25;}
+  .flash-tile-num{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:38px; color:var(--grape);}
+  .flash-hint-text{font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); margin:2px 0 14px; font-size:14px;}
+  .menu-btn.flash{background:linear-gradient(160deg,#6FC2F0,var(--ocean,#3E9FE0));}
+</style>
+</head>
+<body>
+
+<div class="bg-decor" id="bgDecor"></div>
+<div class="ground"></div>
+
+<div class="app">
+  <div class="topbar">
+    <a href="index.html" class="brand" style="text-decoration:none;"><span class="star-ico">⭐</span> Petualangan Belajar</a>
+    <div class="star-total">⭐ <span id="totalStars">0</span></div>
+  </div>
+
+  <div style="width:100%; max-width:640px; margin:-6px 0 14px;">
+    <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:14px; color:var(--ink-soft); background:var(--card); padding:8px 14px; border-radius:999px; box-shadow:0 3px 0 rgba(0,0,0,0.08);">🏠 Beranda</a>
+  </div>
+
+  <!-- MENU SCREEN -->
+  <div class="card" id="screen-menu">
+    <div class="mascot-wrap"><div class="mascot" id="mascotMenu">🌟</div></div>
+    <div class="speech" id="menuSpeech">Halo! Aku Bintang. Ayo main sambil belajar!</div>
+    <h1 class="title">Mau belajar apa hari ini?</h1>
+    <p class="subtitle">Pilih permainan seru di bawah ini yuk!</p>
+    <div class="menu-grid">
+      <button class="menu-btn math" id="btnMath">
+        <span class="emoji">➕</span>
+        Matematika
+        <small>Berhitung seru 1-10</small>
+      </button>
+      <button class="menu-btn ipas" id="btnIpas">
+        <span class="emoji">🧍</span>
+        IPAS
+        <small>Anggota tubuh kita</small>
+      </button>
+      <button class="menu-btn english" id="btnEnglish">
+        <span class="emoji">🔤</span>
+        Bahasa Inggris
+        <small>Angka 1-20 seru</small>
+      </button>
+      <button class="menu-btn flash" id="btnFlashcards">
+        <span class="emoji">📇</span>
+        Kartu Belajar
+        <small>Balik & hafalkan</small>
+      </button>
+    </div>
+  </div>
+
+  <!-- FLASHCARD CATEGORY SCREEN -->
+  <div class="card hidden" id="screen-flash-categories">
+    <div class="mascot-wrap"><div class="mascot" id="mascotFlashCat">📇</div></div>
+    <div class="speech">Pilih kartu yang mau kamu ingat-ingat!</div>
+    <h1 class="title">Kartu Belajar</h1>
+    <p class="subtitle">Ketuk kartu untuk melihat detailnya!</p>
+    <div class="menu-grid">
+      <button class="menu-btn ipas" id="btnFlashBody">
+        <span class="emoji">🧍</span>
+        IPA: Anggota Tubuh
+        <small>12 kartu</small>
+      </button>
+      <button class="menu-btn english" id="btnFlashEnglish">
+        <span class="emoji">🔢</span>
+        Bahasa Inggris: Angka
+        <small>20 kartu</small>
+      </button>
+    </div>
+    <button class="back-btn" id="btnFlashCatBack" style="margin-top:20px;">⬅ Menu Utama</button>
+  </div>
+
+  <!-- FLASHCARD VIEWER SCREEN -->
+  <div class="card hidden" id="screen-flash-viewer">
+    <div class="game-header">
+      <button class="back-btn" id="btnFlashBack">⬅ Kategori</button>
+      <div class="flash-counter" id="flashCounter" style="font-family:'Baloo 2',sans-serif; font-weight:800; color:var(--ink-soft);"></div>
+    </div>
+    <div class="flash-hint-text">👆 Ketuk sebuah kartu untuk melihat detailnya</div>
+    <div class="flash-grid" id="flashGrid"></div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div class="card hidden" id="screen-game">
+    <div class="game-header">
+      <button class="back-btn" id="btnBack">⬅ Menu</button>
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      </div>
+      <div class="score-pill">⭐ <span id="roundStars">0</span></div>
+    </div>
+
+    <div class="mascot-wrap"><div class="mascot" id="mascotGame">🌟</div></div>
+    <div class="speech" id="gameSpeech">Ayo coba jawab!</div>
+
+    <div id="questionArea"></div>
+
+    <div class="options-grid" id="optionsGrid"></div>
+
+    <div class="feedback-banner" id="feedbackBanner"></div>
+    <button class="next-btn" id="btnNext">Lanjut ➡</button>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div class="card hidden" id="screen-result">
+    <div class="mascot-wrap"><div class="mascot happy" id="mascotResult">🏆</div></div>
+    <div class="result-stars" id="resultStars"></div>
+    <div class="result-msg" id="resultMsg">Hebat sekali!</div>
+    <div class="result-sub" id="resultSub">Kamu menjawab benar 0 dari 0 soal</div>
+    <div class="result-actions">
+      <button class="action-btn replay" id="btnReplay">🔁 Main Lagi</button>
+      <button class="action-btn menu" id="btnMenu2">🏠 Menu Utama</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Background decor ---------- */
+  const bgDecor = document.getElementById('bgDecor');
+  function makeCloud(top, size, duration, delay){
+    const div = document.createElement('div');
+    div.className = 'cloud';
+    div.style.top = top;
+    div.style.width = size + 'px';
+    div.style.height = (size*0.6) + 'px';
+    div.style.animationDuration = duration + 's';
+    div.style.animationDelay = delay + 's';
+    div.innerHTML = '<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="35" rx="28" ry="20" fill="white"/><ellipse cx="55" cy="25" rx="24" ry="22" fill="white"/><ellipse cx="75" cy="38" rx="20" ry="16" fill="white"/></svg>';
+    bgDecor.appendChild(div);
+  }
+  makeCloud('6%', 120, 38, 0);
+  makeCloud('14%', 80, 30, 6);
+  makeCloud('3%', 90, 45, 15);
+
+  const twinkleEmojis = ['✨','⭐','🌟'];
+  for(let i=0;i<8;i++){
+    const t = document.createElement('div');
+    t.className = 'twinkle';
+    t.textContent = twinkleEmojis[i % twinkleEmojis.length];
+    t.style.left = (5 + Math.random()*90) + 'vw';
+    t.style.top = (5 + Math.random()*55) + 'vh';
+    t.style.animationDelay = (Math.random()*2.5) + 's';
+    bgDecor.appendChild(t);
+  }
+
+  /* ---------- State ---------- */
+  const state = {
+    totalStars: Number(sessionStorage.getItem('bintang_totalStars') || 0),
+    mode: null,       // 'math' | 'ipas'
+    questions: [],
+    index: 0,
+    correctCount: 0,
+    roundStars: 0,
+    answered: false
+  };
+
+  const els = {
+    totalStars: document.getElementById('totalStars'),
+    screenMenu: document.getElementById('screen-menu'),
+    screenGame: document.getElementById('screen-game'),
+    screenResult: document.getElementById('screen-result'),
+    screenFlashCategories: document.getElementById('screen-flash-categories'),
+    screenFlashViewer: document.getElementById('screen-flash-viewer'),
+    btnMath: document.getElementById('btnMath'),
+    btnIpas: document.getElementById('btnIpas'),
+    btnEnglish: document.getElementById('btnEnglish'),
+    btnFlashcards: document.getElementById('btnFlashcards'),
+    btnFlashBody: document.getElementById('btnFlashBody'),
+    btnFlashEnglish: document.getElementById('btnFlashEnglish'),
+    btnFlashCatBack: document.getElementById('btnFlashCatBack'),
+    btnFlashBack: document.getElementById('btnFlashBack'),
+    flashGrid: document.getElementById('flashGrid'),
+    flashCounter: document.getElementById('flashCounter'),
+    btnBack: document.getElementById('btnBack'),
+    progressFill: document.getElementById('progressFill'),
+    roundStars: document.getElementById('roundStars'),
+    mascotGame: document.getElementById('mascotGame'),
+    mascotMenu: document.getElementById('mascotMenu'),
+    mascotResult: document.getElementById('mascotResult'),
+    gameSpeech: document.getElementById('gameSpeech'),
+    menuSpeech: document.getElementById('menuSpeech'),
+    questionArea: document.getElementById('questionArea'),
+    optionsGrid: document.getElementById('optionsGrid'),
+    feedbackBanner: document.getElementById('feedbackBanner'),
+    btnNext: document.getElementById('btnNext'),
+    resultStars: document.getElementById('resultStars'),
+    resultMsg: document.getElementById('resultMsg'),
+    resultSub: document.getElementById('resultSub'),
+    btnReplay: document.getElementById('btnReplay'),
+    btnMenu2: document.getElementById('btnMenu2')
+  };
+
+  els.totalStars.textContent = state.totalStars;
+
+  function showScreen(name){
+    const screens = {
+      menu: els.screenMenu,
+      game: els.screenGame,
+      result: els.screenResult,
+      'flash-categories': els.screenFlashCategories,
+      'flash-viewer': els.screenFlashViewer
+    };
+    Object.keys(screens).forEach(key => {
+      screens[key].classList.toggle('hidden', key !== name);
+    });
+  }
+
+  function saveStars(){
+    sessionStorage.setItem('bintang_totalStars', String(state.totalStars));
+    els.totalStars.textContent = state.totalStars;
+  }
+
+  /* ---------- Question generators ---------- */
+  const QUESTIONS_PER_ROUND = 8;
+  const mathIcons = ['🍎','🍌','🍊','⚽','🐱','🐶','🎈','🧸','🌸','🍓'];
+
+  function shuffle(arr){
+    const a = arr.slice();
+    for(let i=a.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [a[i],a[j]] = [a[j],a[i]];
+    }
+    return a;
+  }
+
+  function generateMathQuestions(count){
+    const list = [];
+    for(let i=0;i<count;i++){
+      const isAdd = Math.random() < 0.55;
+      const icon = mathIcons[Math.floor(Math.random()*mathIcons.length)];
+      let a,b,answer,opSymbol;
+      if(isAdd){
+        a = 1 + Math.floor(Math.random()*8);
+        b = 1 + Math.floor(Math.random()*(10-a));
+        answer = a + b;
+        opSymbol = '+';
+      } else {
+        a = 2 + Math.floor(Math.random()*9);
+        b = Math.floor(Math.random()*a);
+        answer = a - b;
+        opSymbol = '−';
+      }
+      const options = new Set([answer]);
+      while(options.size < 4){
+        const delta = Math.floor(Math.random()*5) - 2;
+        const candidate = Math.max(0, answer + delta + (Math.random()<0.5?0:1));
+        if(candidate !== answer || options.size===0) options.add(candidate);
+        if(options.size >= 8) break;
+      }
+      let opts = shuffle(Array.from(options)).slice(0,4);
+      if(!opts.includes(answer)){ opts[0] = answer; }
+      opts = shuffle(opts);
+
+      list.push({
+        type:'math',
+        icon, a, b, opSymbol, answer,
+        options: opts,
+        prompt: `${a} ${opSymbol} ${b} = ?`
+      });
+    }
+    return list;
+  }
+
+  const ipasBank = [
+    {q:"Kita melihat menggunakan apa?", emoji:"👀", options:["Mata","Telinga","Hidung","Mulut"], answer:0, tip:"Mata kita gunakan untuk melihat dunia yang indah!"},
+    {q:"Kita mendengar menggunakan apa?", emoji:"👂", options:["Telinga","Mata","Kaki","Tangan"], answer:0, tip:"Telinga membantu kita mendengar suara."},
+    {q:"Kita mencium bau menggunakan apa?", emoji:"👃", options:["Hidung","Mata","Telinga","Rambut"], answer:0, tip:"Hidung adalah indera penciuman kita."},
+    {q:"Kita mengunyah makanan menggunakan apa?", emoji:"🦷", options:["Gigi","Rambut","Kuku","Alis"], answer:0, tip:"Gigi membantu kita mengunyah makanan sampai halus."},
+    {q:"Kita merasakan manis dan asin dengan apa?", emoji:"👅", options:["Lidah","Hidung","Telinga","Dahi"], answer:0, tip:"Lidah adalah indera pengecap rasa."},
+    {q:"Kita berjalan dan berlari menggunakan apa?", emoji:"🦵", options:["Kaki","Tangan","Kepala","Perut"], answer:0, tip:"Kaki membantu kita berjalan, berlari, dan melompat."},
+    {q:"Kita memegang dan menulis menggunakan apa?", emoji:"✋", options:["Tangan","Kaki","Perut","Telinga"], answer:0, tip:"Tangan dan jari kita gunakan untuk memegang benda."},
+    {q:"Berapa jumlah mata kita?", emoji:"👀", options:["Dua","Satu","Tiga","Empat"], answer:0, tip:"Kita punya dua mata di wajah kita."},
+    {q:"Berapa jumlah telinga kita?", emoji:"👂", options:["Dua","Satu","Tiga","Lima"], answer:0, tip:"Kita punya dua telinga, kanan dan kiri."},
+    {q:"Berapa jumlah hidung kita?", emoji:"👃", options:["Satu","Dua","Tiga","Empat"], answer:0, tip:"Kita hanya punya satu hidung di tengah wajah."},
+    {q:"Berapa jumlah jari pada satu tangan?", emoji:"🖐️", options:["Lima","Empat","Enam","Tiga"], answer:0, tip:"Setiap tangan kita punya lima jari."},
+    {q:"Bagian tubuh untuk berpikir adalah?", emoji:"🧠", options:["Otak","Perut","Kaki","Kuku"], answer:0, tip:"Otak ada di dalam kepala dan gunanya untuk berpikir."},
+    {q:"Rambut biasanya tumbuh di bagian mana?", emoji:"💇", options:["Kepala","Kaki","Tangan","Perut"], answer:0, tip:"Rambut tumbuh di kepala kita."},
+    {q:"Bagian tubuh yang menutupi seluruh tubuh kita adalah?", emoji:"🧴", options:["Kulit","Tulang","Rambut","Kuku"], answer:0, tip:"Kulit melindungi seluruh bagian tubuh kita."},
+    {q:"Sebelum makan, sebaiknya kita mencuci apa?", emoji:"🧼", options:["Tangan","Rambut","Baju","Sepatu"], answer:0, tip:"Cuci tangan membuat kita bersih dan sehat sebelum makan."},
+    {q:"Bagian tubuh untuk menendang bola adalah?", emoji:"⚽", options:["Kaki","Tangan","Kepala","Telinga"], answer:0, tip:"Kita menendang bola menggunakan kaki."},
+    {q:"Jantung kita bekerja untuk memompa apa?", emoji:"❤️", options:["Darah","Air","Udara","Makanan"], answer:0, tip:"Jantung memompa darah ke seluruh tubuh kita."},
+    {q:"Paru-paru kita berguna untuk apa?", emoji:"🌬️", options:["Bernapas","Berjalan","Melihat","Mendengar"], answer:0, tip:"Paru-paru membantu kita bernapas menghirup udara."}
+  ];
+
+  function generateIpasQuestions(count){
+    const pool = shuffle(ipasBank).slice(0, count);
+    return pool.map(item => {
+      const optionObjs = item.options.map((text, idx) => ({text, isCorrect: idx === item.answer}));
+      const shuffled = shuffle(optionObjs);
+      return {
+        type:'ipas',
+        emoji:item.emoji,
+        prompt:item.q,
+        tip:item.tip,
+        options: shuffled
+      };
+    });
+  }
+
+  /* ---------- English numbers ---------- */
+  const numberWords = [
+    'zero','one','two','three','four','five','six','seven','eight','nine','ten',
+    'eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'
+  ];
+  const englishObjects = [
+    {icon:'🍎', en:'apples'},
+    {icon:'⭐', en:'stars'},
+    {icon:'🎈', en:'balloons'},
+    {icon:'🐱', en:'cats'},
+    {icon:'🐶', en:'dogs'},
+    {icon:'🌸', en:'flowers'},
+    {icon:'🍓', en:'strawberries'}
+  ];
+
+  function buildWordOptions(answerWord){
+    const idx = numberWords.indexOf(answerWord);
+    const pool = new Set([answerWord]);
+    let guard = 0;
+    while(pool.size < 4 && guard < 30){
+      guard++;
+      const offset = Math.floor(Math.random()*7) - 3;
+      let candIdx = idx + offset;
+      if(candIdx < 1) candIdx = 1;
+      if(candIdx > 20) candIdx = 20;
+      pool.add(numberWords[candIdx]);
+    }
+    return shuffle(Array.from(pool)).slice(0,4);
+  }
+
+  function generateEnglishQuestions(count){
+    const list = [];
+    for(let i=0;i<count;i++){
+      const useDigit = Math.random() < 0.55;
+
+      if(useDigit){
+        const num = 1 + Math.floor(Math.random()*20);
+        const answer = numberWords[num];
+        const options = buildWordOptions(answer);
+        list.push({
+          type:'english-digit',
+          num, answer, options,
+          prompt: `Kata Bahasa Inggris untuk angka ${num} adalah?`
+        });
+      } else {
+        const num = 1 + Math.floor(Math.random()*12);
+        const answer = numberWords[num];
+        const options = buildWordOptions(answer);
+        const obj = englishObjects[Math.floor(Math.random()*englishObjects.length)];
+        list.push({
+          type:'english-count',
+          icon:obj.icon, num, objName:obj.en, answer, options,
+          prompt: `Ada berapa banyak dalam Bahasa Inggris?`
+        });
+      }
+    }
+    return list;
+  }
+
+  /* ---------- Flashcards ---------- */
+  const flashBodyCards = [
+    {emoji:'👀', label:'Mata', desc:'Untuk melihat'},
+    {emoji:'👂', label:'Telinga', desc:'Untuk mendengar'},
+    {emoji:'👃', label:'Hidung', desc:'Untuk mencium bau'},
+    {emoji:'👅', label:'Lidah', desc:'Untuk mengecap rasa'},
+    {emoji:'🦷', label:'Gigi', desc:'Untuk mengunyah makanan'},
+    {emoji:'✋', label:'Tangan', desc:'Untuk memegang & menulis'},
+    {emoji:'🦵', label:'Kaki', desc:'Untuk berjalan & berlari'},
+    {emoji:'🧠', label:'Otak', desc:'Untuk berpikir'},
+    {emoji:'❤️', label:'Jantung', desc:'Untuk memompa darah'},
+    {emoji:'🌬️', label:'Paru-paru', desc:'Untuk bernapas'},
+    {emoji:'🧴', label:'Kulit', desc:'Untuk melindungi tubuh'},
+    {emoji:'💇', label:'Rambut', desc:'Tumbuh di kepala'}
+  ];
+
+  const flashEnglishCards = [
+    {num:1, word:'one'}, {num:2, word:'two'}, {num:3, word:'three'},
+    {num:4, word:'four'}, {num:5, word:'five'}, {num:6, word:'six'},
+    {num:7, word:'seven'}, {num:8, word:'eight'}, {num:9, word:'nine'},
+    {num:10, word:'ten'}, {num:11, word:'eleven'}, {num:12, word:'twelve'},
+    {num:13, word:'thirteen'}, {num:14, word:'fourteen'}, {num:15, word:'fifteen'},
+    {num:16, word:'sixteen'}, {num:17, word:'seventeen'}, {num:18, word:'eighteen'},
+    {num:19, word:'nineteen'}, {num:20, word:'twenty'}
+  ];
+
+  function startFlashcards(category){
+    showScreen('flash-viewer');
+    renderFlashGrid(category);
+  }
+
+  function renderFlashGrid(category){
+    const cards = category === 'body' ? flashBodyCards : flashEnglishCards;
+    els.flashCounter.textContent = category === 'body' ? 'IPA: Anggota Tubuh' : 'Bahasa Inggris: Angka';
+    els.flashGrid.innerHTML = '';
+
+    cards.forEach(card => {
+      const tile = document.createElement('div');
+      tile.className = 'flash-tile';
+
+      const inner = document.createElement('div');
+      inner.className = 'flash-tile-inner';
+
+      const front = document.createElement('div');
+      front.className = 'flash-tile-face flash-tile-front';
+
+      const back = document.createElement('div');
+      back.className = 'flash-tile-face flash-tile-back';
+
+      if(category === 'body'){
+        front.innerHTML = `<div class="flash-tile-emoji">${card.emoji}</div><div class="flash-tile-label">${card.label}</div>`;
+        back.innerHTML = `<div class="flash-tile-emoji">${card.emoji}</div><div class="flash-tile-desc">${card.desc}</div>`;
+      } else {
+        front.innerHTML = `<div class="flash-tile-num">${card.num}</div>`;
+        back.innerHTML = `<div class="flash-tile-emoji">🔤</div><div class="flash-tile-label">${card.word}</div>`;
+      }
+
+      inner.appendChild(front);
+      inner.appendChild(back);
+      tile.appendChild(inner);
+      tile.addEventListener('click', () => tile.classList.toggle('flipped'));
+      els.flashGrid.appendChild(tile);
+    });
+  }
+
+  /* ---------- Mascot / speech helpers ---------- */
+  const encourageMessages = [
+    "Ayo coba jawab!",
+    "Kamu pasti bisa!",
+    "Semangat belajar!",
+    "Pikirkan baik-baik ya!",
+    "Ayo kita cari tahu!"
+  ];
+  const correctMessages = ["Betul sekali! 🎉","Hebat! Kamu pintar!","Wah, keren!","Jawaban tepat!","Luar biasa!"];
+  const wrongMessages = ["Belum tepat, coba lagi ya!","Ups, hampir benar!","Yuk coba pikirkan lagi!","Tidak apa-apa, terus belajar!"];
+
+  function setMascotState(el, mood){
+    el.classList.remove('happy','sad');
+    if(mood === 'happy'){ el.classList.add('happy'); }
+    if(mood === 'sad'){ el.classList.add('sad'); }
+  }
+
+  /* ---------- Confetti ---------- */
+  const confettiColors = ['#FF6B6B','#FFC93C','#4ECE6F','#9B72CF','#5BC8FF'];
+  function burstConfetti(x, y, count){
+    count = count || 18;
+    for(let i=0;i<count;i++){
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = (x + (Math.random()*160-80)) + 'px';
+      piece.style.top = (y) + 'px';
+      piece.style.background = confettiColors[Math.floor(Math.random()*confettiColors.length)];
+      piece.style.animationDuration = (1.2 + Math.random()*0.8) + 's';
+      piece.style.transform = `rotate(${Math.random()*360}deg)`;
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), 2200);
+    }
+  }
+
+  /* ---------- Round flow ---------- */
+  function startRound(mode){
+    state.mode = mode;
+    state.index = 0;
+    state.correctCount = 0;
+    state.roundStars = 0;
+    state.answered = false;
+    if(mode === 'math'){
+      state.questions = generateMathQuestions(QUESTIONS_PER_ROUND);
+    } else if(mode === 'ipas'){
+      state.questions = generateIpasQuestions(QUESTIONS_PER_ROUND);
+    } else {
+      state.questions = generateEnglishQuestions(QUESTIONS_PER_ROUND);
+    }
+
+    els.roundStars.textContent = '0';
+    showScreen('game');
+    renderQuestion();
+  }
+
+  function renderQuestion(){
+    state.answered = false;
+    els.btnNext.classList.remove('show');
+    els.feedbackBanner.textContent = '';
+    setMascotState(els.mascotGame, null);
+    els.mascotGame.textContent = '🌟';
+    els.gameSpeech.textContent = encourageMessages[Math.floor(Math.random()*encourageMessages.length)];
+
+    const pct = Math.round((state.index / QUESTIONS_PER_ROUND) * 100);
+    els.progressFill.style.width = pct + '%';
+
+    const q = state.questions[state.index];
+    els.questionArea.innerHTML = '';
+    els.optionsGrid.innerHTML = '';
+
+    if(q.type === 'math'){
+      const wrap = document.createElement('div');
+
+      const visual = document.createElement('div');
+      visual.className = 'math-visual';
+
+      const groupA = document.createElement('div');
+      groupA.className = 'math-group';
+      for(let i=0;i<q.a;i++){
+        const s = document.createElement('span');
+        s.className = 'math-emoji';
+        s.textContent = q.icon;
+        groupA.appendChild(s);
+      }
+      const op = document.createElement('div');
+      op.className = 'math-op';
+      op.textContent = q.opSymbol;
+
+      const groupB = document.createElement('div');
+      groupB.className = 'math-group';
+      for(let i=0;i<q.b;i++){
+        const s = document.createElement('span');
+        s.className = 'math-emoji';
+        s.textContent = q.icon;
+        groupB.appendChild(s);
+      }
+
+      visual.appendChild(groupA);
+      visual.appendChild(op);
+      visual.appendChild(groupB);
+
+      const promptEl = document.createElement('div');
+      promptEl.className = 'question-text';
+      promptEl.textContent = q.prompt;
+
+      wrap.appendChild(visual);
+      wrap.appendChild(promptEl);
+      els.questionArea.appendChild(wrap);
+
+      q.options.forEach(optVal => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.textContent = optVal;
+        btn.addEventListener('click', () => handleAnswer(btn, optVal === q.answer, q));
+        els.optionsGrid.appendChild(btn);
+      });
+
+    } else if(q.type === 'ipas'){
+      const wrap = document.createElement('div');
+      const emojiRow = document.createElement('div');
+      emojiRow.className = 'question-emoji-row';
+      emojiRow.textContent = q.emoji;
+      const promptEl = document.createElement('div');
+      promptEl.className = 'question-text';
+      promptEl.textContent = q.prompt;
+      wrap.appendChild(emojiRow);
+      wrap.appendChild(promptEl);
+      els.questionArea.appendChild(wrap);
+
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.textContent = opt.text;
+        btn.addEventListener('click', () => handleAnswer(btn, opt.isCorrect, q));
+        els.optionsGrid.appendChild(btn);
+      });
+
+    } else if(q.type === 'english-digit'){
+      const wrap = document.createElement('div');
+      const digitEl = document.createElement('div');
+      digitEl.className = 'digit-display';
+      digitEl.textContent = q.num;
+      const promptEl = document.createElement('div');
+      promptEl.className = 'question-text';
+      promptEl.textContent = q.prompt;
+      wrap.appendChild(digitEl);
+      wrap.appendChild(promptEl);
+      els.questionArea.appendChild(wrap);
+
+      q.options.forEach(optWord => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.textContent = optWord;
+        btn.addEventListener('click', () => handleAnswer(btn, optWord === q.answer, q));
+        els.optionsGrid.appendChild(btn);
+      });
+
+    } else if(q.type === 'english-count'){
+      const wrap = document.createElement('div');
+      const group = document.createElement('div');
+      group.className = 'math-group';
+      group.style.margin = '0 auto 14px';
+      for(let i=0;i<q.num;i++){
+        const s = document.createElement('span');
+        s.className = 'math-emoji';
+        s.textContent = q.icon;
+        group.appendChild(s);
+      }
+      const promptEl = document.createElement('div');
+      promptEl.className = 'question-text';
+      promptEl.textContent = q.prompt;
+      wrap.appendChild(group);
+      wrap.appendChild(promptEl);
+      els.questionArea.appendChild(wrap);
+
+      q.options.forEach(optWord => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.textContent = optWord;
+        btn.addEventListener('click', () => handleAnswer(btn, optWord === q.answer, q));
+        els.optionsGrid.appendChild(btn);
+      });
+    }
+  }
+
+  function handleAnswer(btn, isCorrect, q){
+    if(state.answered) return;
+    state.answered = true;
+
+    const allBtns = els.optionsGrid.querySelectorAll('.opt-btn');
+    allBtns.forEach(b => b.disabled = true);
+
+    if(isCorrect){
+      btn.classList.add('correct');
+      state.correctCount++;
+      state.roundStars++;
+      state.totalStars++;
+      saveStars();
+      els.roundStars.textContent = state.roundStars;
+      setMascotState(els.mascotGame, 'happy');
+      els.mascotGame.textContent = '🤩';
+      els.gameSpeech.textContent = correctMessages[Math.floor(Math.random()*correctMessages.length)];
+      els.feedbackBanner.style.color = '#33A852';
+      els.feedbackBanner.textContent = q.type === 'ipas' && q.tip ? q.tip : 'Jawaban kamu benar! ⭐';
+      const rect = btn.getBoundingClientRect();
+      burstConfetti(rect.left + rect.width/2, rect.top);
+    } else {
+      btn.classList.add('wrong');
+      setMascotState(els.mascotGame, 'sad');
+      els.mascotGame.textContent = '😅';
+      els.gameSpeech.textContent = wrongMessages[Math.floor(Math.random()*wrongMessages.length)];
+      els.feedbackBanner.style.color = '#E5504F';
+      let correctText = '';
+      if(q.type === 'math'){
+        correctText = 'Jawaban yang benar adalah ' + q.answer;
+        allBtns.forEach(b => { if(Number(b.textContent) === q.answer) b.classList.add('correct'); });
+      } else if(q.type === 'ipas'){
+        const correctOpt = q.options.find(o => o.isCorrect);
+        correctText = 'Jawaban yang benar: ' + correctOpt.text + (q.tip ? '. ' + q.tip : '');
+        allBtns.forEach(b => { if(b.textContent === correctOpt.text) b.classList.add('correct'); });
+      } else if(q.type === 'english-digit' || q.type === 'english-count'){
+        correctText = 'Jawaban yang benar: "' + q.answer + '" (angka ' + q.num + ')';
+        allBtns.forEach(b => { if(b.textContent === q.answer) b.classList.add('correct'); });
+      }
+      els.feedbackBanner.textContent = correctText;
+    }
+
+    els.btnNext.classList.add('show');
+  }
+
+  function goToNext(){
+    state.index++;
+    if(state.index >= QUESTIONS_PER_ROUND){
+      showResult();
+    } else {
+      renderQuestion();
+    }
+  }
+
+  function showResult(){
+    showScreen('result');
+    const correct = state.correctCount;
+    const total = QUESTIONS_PER_ROUND;
+    const ratio = correct / total;
+
+    let starCount = 1;
+    if(ratio >= 0.85) starCount = 3;
+    else if(ratio >= 0.5) starCount = 2;
+
+    els.resultStars.innerHTML = '';
+    for(let i=0;i<3;i++){
+      const s = document.createElement('span');
+      s.textContent = i < starCount ? '⭐' : '☆';
+      els.resultStars.appendChild(s);
+    }
+
+    let msg = 'Terus berlatih ya!';
+    if(starCount === 3) msg = 'Luar biasa hebat! 🎉';
+    else if(starCount === 2) msg = 'Bagus sekali!';
+
+    els.resultMsg.textContent = msg;
+    els.resultSub.textContent = `Kamu menjawab benar ${correct} dari ${total} soal`;
+
+    if(starCount === 3){
+      setTimeout(() => burstConfetti(window.innerWidth/2, 120, 40), 200);
+    }
+  }
+
+  /* ---------- Events ---------- */
+  els.btnMath.addEventListener('click', () => startRound('math'));
+  els.btnIpas.addEventListener('click', () => startRound('ipas'));
+  els.btnEnglish.addEventListener('click', () => startRound('english'));
+  els.btnBack.addEventListener('click', () => showScreen('menu'));
+  els.btnNext.addEventListener('click', goToNext);
+  els.btnReplay.addEventListener('click', () => startRound(state.mode));
+  els.btnMenu2.addEventListener('click', () => showScreen('menu'));
+
+  els.btnFlashcards.addEventListener('click', () => showScreen('flash-categories'));
+  els.btnFlashCatBack.addEventListener('click', () => showScreen('menu'));
+  els.btnFlashBody.addEventListener('click', () => startFlashcards('body'));
+  els.btnFlashEnglish.addEventListener('click', () => startFlashcards('english'));
+  els.btnFlashBack.addEventListener('click', () => showScreen('flash-categories'));
+
+  showScreen('menu');
+})();
+</script>
+</body>
+</html>

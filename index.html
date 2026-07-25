@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petualangan Belajar Bintang 🌟</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#7FD1FF;
+    --sky-bottom:#FFE9B8;
+    --card:#FFFFFF;
+    --coral:#FF6B6B;
+    --coral-dark:#E5504F;
+    --sun:#FFC93C;
+    --sun-dark:#F0A500;
+    --leaf:#4ECE6F;
+    --leaf-dark:#33A852;
+    --grape:#9B72CF;
+    --grape-dark:#7E52B3;
+    --ocean:#3E9FE0;
+    --ink:#2B3A55;
+    --ink-soft:#5C6C8A;
+    --cream:#FFF8EA;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Nunito',sans-serif;
+    min-height:100vh;
+    background:linear-gradient(180deg,var(--sky-top) 0%, #B9E7FF 40%, var(--sky-bottom) 100%);
+    overflow-x:hidden;
+    color:var(--ink);
+    position:relative;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  .bg-decor{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
+  .cloud{position:absolute; opacity:0.85; animation:drift linear infinite;}
+  .cloud svg{width:100%; height:100%; display:block;}
+  @keyframes drift{ from{transform:translateX(-10vw);} to{transform:translateX(110vw);} }
+  .twinkle{position:absolute; font-size:22px; animation:twinkle 2.6s ease-in-out infinite;}
+  @keyframes twinkle{
+    0%,100%{opacity:0.25; transform:scale(0.8) rotate(0deg);}
+    50%{opacity:1; transform:scale(1.15) rotate(15deg);}
+  }
+  .ground{position:fixed; left:0; right:0; bottom:0; height:70px; background:linear-gradient(180deg,#8CE28A,#5FCB6B); z-index:0; border-top:6px solid #4BAE58;}
+
+  .app{position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:36px 16px 100px;}
+
+  .mascot{
+    font-size:84px;
+    display:inline-block;
+    animation:bob 2.4s ease-in-out infinite;
+    filter:drop-shadow(0 8px 6px rgba(0,0,0,0.15));
+  }
+  @keyframes bob{
+    0%,100%{transform:translateY(0) rotate(-4deg);}
+    50%{transform:translateY(-10px) rotate(4deg);}
+  }
+  .speech{
+    display:inline-block;
+    background:var(--cream);
+    border:3px solid #FFE1A3;
+    padding:10px 18px;
+    border-radius:18px;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin-top:10px;
+    font-size:15px;
+  }
+
+  h1.title{
+    font-family:'Baloo 2',sans-serif;
+    font-size:clamp(30px,7vw,46px);
+    margin:14px 0 6px;
+    color:var(--ink);
+    font-weight:800;
+    text-align:center;
+  }
+  p.subtitle{
+    font-size:16px;
+    color:var(--ink-soft);
+    margin:0 0 34px;
+    font-weight:700;
+    text-align:center;
+    max-width:480px;
+  }
+
+  .parts-wrap{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+    width:100%;
+    max-width:640px;
+  }
+
+  .part-card{
+    background:var(--card);
+    border-radius:28px;
+    box-shadow:0 10px 0 rgba(43,58,85,0.12), 0 16px 30px rgba(43,58,85,0.12);
+    padding:26px 24px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    position:relative;
+    overflow:hidden;
+  }
+  .part-card.locked{opacity:0.75;}
+
+  .part-top{display:flex; align-items:center; gap:16px;}
+  .part-icon{
+    font-size:42px;
+    background:linear-gradient(160deg,#FFF3D6,#FFE1A3);
+    border:3px solid var(--sun);
+    border-radius:20px;
+    width:76px; height:76px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .part-card.locked .part-icon{
+    background:#EFEFEF; border-color:#D8D8D8; filter:grayscale(0.4);
+  }
+  .part-heading{flex:1;}
+  .part-eyebrow{
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:12px;
+    letter-spacing:1px; text-transform:uppercase; color:var(--coral);
+  }
+  .part-card.locked .part-eyebrow{color:var(--ink-soft);}
+  .part-name{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:23px; color:var(--ink); margin-top:2px;}
+
+  .part-desc{color:var(--ink-soft); font-weight:700; font-size:15px; line-height:1.5; margin:0;}
+
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-family:'Baloo 2',sans-serif; font-weight:700; font-size:12.5px;
+    background:var(--cream); border:2px solid #FFE1A3; color:var(--ink);
+    padding:6px 12px; border-radius:999px;
+  }
+  .part-card.locked .chip{background:#F3F3F3; border-color:#E2E2E2; color:var(--ink-soft);}
+
+  .part-action{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:16px;
+    padding:14px 20px; border-radius:16px; text-decoration:none;
+    color:white; background:linear-gradient(160deg,#FF8B6B,var(--coral));
+    box-shadow:0 5px 0 var(--coral-dark);
+    align-self:flex-start;
+    transition:transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  .part-action:active{transform:translateY(4px); box-shadow:0 1px 0 var(--coral-dark);}
+
+  .part-action.disabled{
+    background:#E4E4E4; color:#9AA3B5; box-shadow:0 5px 0 #C9C9C9;
+    cursor:default; pointer-events:none;
+  }
+
+  .badge-soon{
+    position:absolute; top:18px; right:18px;
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:11.5px;
+    background:var(--grape); color:white; padding:6px 12px; border-radius:999px;
+    box-shadow:0 3px 0 var(--grape-dark);
+    letter-spacing:0.5px;
+  }
+
+  .footnote{
+    margin-top:30px; font-family:'Baloo 2',sans-serif; font-weight:700;
+    color:var(--ink-soft); font-size:13px; text-align:center; max-width:420px;
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-decor" id="bgDecor"></div>
+<div class="ground"></div>
+
+<div class="app">
+  <div class="mascot">🌟</div>
+  <div class="speech">Halo! Aku Bintang. Yuk pilih bagian belajarnya!</div>
+  <h1 class="title">Petualangan Belajar Bintang</h1>
+  <p class="subtitle">Website belajar sambil bermain untuk anak kelas 1 SD, seru dan penuh warna!</p>
+
+  <div class="parts-wrap">
+    <div class="part-card">
+      <div class="part-top">
+        <div class="part-icon">🚀</div>
+        <div class="part-heading">
+          <div class="part-eyebrow">Bagian 1 · Bisa dimainkan</div>
+          <div class="part-name">Matematika, IPA & Bahasa Inggris</div>
+        </div>
+      </div>
+      <p class="part-desc">Berhitung seru, mengenal anggota tubuh, belajar angka Bahasa Inggris, lengkap dengan kartu belajar untuk mengingat-ingat.</p>
+      <div class="chip-row">
+        <span class="chip">➕ Matematika</span>
+        <span class="chip">🧍 IPA</span>
+        <span class="chip">🔤 Bahasa Inggris</span>
+        <span class="chip">📇 Kartu Belajar</span>
+      </div>
+      <a href="part1.html" class="part-action">Mulai Belajar ➡</a>
+    </div>
+
+    <div class="part-card locked">
+      <div class="badge-soon">Segera Hadir</div>
+      <div class="part-top">
+        <div class="part-icon">🔒</div>
+        <div class="part-heading">
+          <div class="part-eyebrow">Bagian 2 · Segera diperbarui</div>
+          <div class="part-name">Materi Baru Menyusul</div>
+        </div>
+      </div>
+      <p class="part-desc">Bagian ini sedang disiapkan. Nantikan permainan dan kartu belajar seru lainnya di sini ya!</p>
+      <div class="chip-row">
+        <span class="chip">✨ Coming soon</span>
+      </div>
+      <span class="part-action disabled">Segera Hadir 🔒</span>
+    </div>
+  </div>
+
+  <p class="footnote">Skor bintang kamu tersimpan otomatis selama sesi belajar berlangsung. Selamat belajar! 🎉</p>
+</div>
+
+<script>
+  const bgDecor = document.getElementById('bgDecor');
+  function makeCloud(top, size, duration, delay){
+    const div = document.createElement('div');
+    div.className = 'cloud';
+    div.style.top = top;
+    div.style.width = size + 'px';
+    div.style.height = (size*0.6) + 'px';
+    div.style.animationDuration = duration + 's';
+    div.style.animationDelay = delay + 's';
+    div.innerHTML = '<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="35" rx="28" ry="20" fill="white"/><ellipse cx="55" cy="25" rx="24" ry="22" fill="white"/><ellipse cx="75" cy="38" rx="20" ry="16" fill="white"/></svg>';
+    bgDecor.appendChild(div);
+  }
+  makeCloud('6%', 120, 38, 0);
+  makeCloud('14%', 80, 30, 6);
+  makeCloud('3%', 90, 45, 15);
+
+  const twinkleEmojis = ['✨','⭐','🌟'];
+  for(let i=0;i<8;i++){
+    const t = document.createElement('div');
+    t.className = 'twinkle';
+    t.textContent = twinkleEmojis[i % twinkleEmojis.length];
+    t.style.left = (5 + Math.random()*90) + 'vw';
+    t.style.top = (5 + Math.random()*55) + 'vh';
+    t.style.animationDelay = (Math.random()*2.5) + 's';
+    bgDecor.appendChild(t);
+  }
+</script>
+</body>
+</html>

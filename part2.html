@@ -449,6 +449,29 @@
     return a;
   }
 
+  // "Kantong acak": menarik soal tanpa pengulangan sampai semua item di bank
+  // sudah pernah muncul, baru diacak ulang dari awal. Item yang sudah terpilih
+  // di ronde yang sama tidak akan terpilih dobel walau kantong diisi ulang.
+  function createShuffleBag(items){
+    let bag = [];
+    return function draw(n){
+      const result = [];
+      while(result.length < n){
+        if(bag.length === 0){
+          bag = shuffle(items);
+          if(result.length){
+            const resultSet = new Set(result);
+            const fresh = bag.filter(x => !resultSet.has(x));
+            const used = bag.filter(x => resultSet.has(x));
+            bag = fresh.concat(used);
+          }
+        }
+        result.push(bag.shift());
+      }
+      return result;
+    };
+  }
+
   const confettiColors = ['#F0608C','#FFC24D','#4ECE6F','#4FB8D9','#9B72CF'];
   function burstConfetti(x, y, count){
     count = count || 18;
@@ -513,6 +536,7 @@
   const letterPool = ['A','B','C','D','E','G','H','I','J','K','L','M','N','P','R','S','T','U'];
   const LETTER_ROUND_LEN = 8;
   const letterState = { questions:[], index:0, score:0, answered:false };
+  const drawLetterQuestion = createShuffleBag(letterBank);
 
   function buildLetterOptions(correct){
     const pool = new Set([correct]);
@@ -525,7 +549,7 @@
   }
 
   function startLetterGame(){
-    letterState.questions = shuffle(letterBank).slice(0, LETTER_ROUND_LEN);
+    letterState.questions = drawLetterQuestion(LETTER_ROUND_LEN);
     letterState.index = 0;
     letterState.score = 0;
     document.getElementById('letterScore').textContent = '0';

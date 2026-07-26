@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Bagian 3: Sekolahku 🦉</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bgTop:#C9D6FF;
+    --bgBottom:#FFF3D6;
+    --card:#FFFFFF;
+    --cream:#FFF9EC;
+    --ink:#26314A;
+    --ink-soft:#5C6A82;
+    --indigo:#5B6EF5;
+    --indigo-dark:#4351D6;
+    --mustard:#F5A623;
+    --mustard-dark:#D98A0A;
+    --mint:#4ECE6F;
+    --mint-dark:#33A852;
+    --pink:#F0608C;
+    --pink-dark:#D1436C;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Nunito',sans-serif;
+    min-height:100vh;
+    background:linear-gradient(180deg,var(--bgTop) 0%, #E7ECFF 45%, var(--bgBottom) 100%);
+    overflow-x:hidden;
+    color:var(--ink);
+    position:relative;
+    touch-action:manipulation;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  /* Decor */
+  .bg-decor{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
+  .floater{position:absolute; font-size:24px; animation:drift-diag linear infinite;}
+  @keyframes drift-diag{
+    from{transform:translate(-10vw,0) rotate(0deg);}
+    to{transform:translate(110vw,-4vh) rotate(15deg);}
+  }
+  .sparkle{position:absolute; font-size:18px; animation:sway 3s ease-in-out infinite;}
+  @keyframes sway{
+    0%,100%{opacity:0.3; transform:translateY(0) rotate(-8deg);}
+    50%{opacity:1; transform:translateY(-12px) rotate(8deg);}
+  }
+  .ground{position:fixed; left:0; right:0; bottom:0; height:60px; background:linear-gradient(180deg,#7C8CF7,var(--indigo-dark)); z-index:0; border-top:6px solid #3A47B8;}
+
+  .app{position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:20px 16px 90px;}
+
+  .topbar{width:100%; max-width:640px; display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+  .brand{display:flex; align-items:center; gap:8px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:20px; color:var(--ink); text-decoration:none;}
+  .brand .mascot-ico{font-size:26px; animation:flit 3s ease-in-out infinite;}
+  @keyframes flit{
+    0%,100%{transform:translateY(0) rotate(-6deg);}
+    50%{transform:translateY(-6px) rotate(6deg);}
+  }
+  .star-total{display:flex; align-items:center; gap:6px; background:var(--card); padding:8px 14px; border-radius:999px; font-weight:800; box-shadow:0 4px 0 rgba(0,0,0,0.08); font-family:'Baloo 2',sans-serif; color:var(--mustard-dark);}
+  .home-link{display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:13px; color:var(--ink-soft); background:var(--card); padding:8px 14px; border-radius:999px; box-shadow:0 3px 0 rgba(0,0,0,0.08); margin-bottom:14px; align-self:flex-start;}
+
+  .card{
+    background:var(--card);
+    border-radius:28px;
+    box-shadow:0 10px 0 rgba(38,49,74,0.10), 0 16px 30px rgba(38,49,74,0.10);
+    padding:26px 22px;
+    width:100%;
+    max-width:640px;
+    text-align:center;
+    position:relative;
+  }
+
+  .mascot-wrap{display:flex; justify-content:center; margin-bottom:4px;}
+  .mascot{
+    font-size:68px;
+    display:inline-block;
+    animation:flit2 2.6s ease-in-out infinite;
+    filter:drop-shadow(0 8px 6px rgba(0,0,0,0.15));
+  }
+  @keyframes flit2{
+    0%,100%{transform:translateY(0) rotate(-5deg);}
+    50%{transform:translateY(-9px) rotate(6deg);}
+  }
+  .mascot.happy{animation:happyjump 0.6s ease-in-out 2;}
+  @keyframes happyjump{
+    0%{transform:translateY(0) scale(1);}
+    30%{transform:translateY(-22px) scale(1.15) rotate(-10deg);}
+    60%{transform:translateY(0) scale(0.95) rotate(10deg);}
+    100%{transform:translateY(0) scale(1);}
+  }
+  .mascot.sad{animation:wobble 0.5s ease-in-out;}
+  @keyframes wobble{
+    0%,100%{transform:rotate(0);}
+    25%{transform:rotate(-8deg) translateX(-4px);}
+    75%{transform:rotate(8deg) translateX(4px);}
+  }
+  .speech{
+    display:inline-block;
+    background:var(--cream);
+    border:3px solid #FFE1A3;
+    padding:9px 16px;
+    border-radius:16px;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin-top:4px;
+    font-size:14.5px;
+    min-height:22px;
+  }
+
+  h1.title{
+    font-family:'Baloo 2',sans-serif;
+    font-size:clamp(26px,6vw,38px);
+    margin:6px 0 4px;
+    color:var(--ink);
+    font-weight:800;
+  }
+  p.subtitle{
+    font-size:15.5px;
+    color:var(--ink-soft);
+    margin:0 0 20px;
+    font-weight:700;
+  }
+
+  .menu-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:16px; margin-top:6px;}
+  @media (max-width:480px){ .menu-grid{grid-template-columns:1fr 1fr;} }
+  .menu-btn{
+    border:none; border-radius:22px; padding:22px 14px; cursor:pointer;
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:16.5px; color:white;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    box-shadow:0 6px 0 rgba(0,0,0,0.15);
+    transition:transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .menu-btn .emoji{font-size:38px;}
+  .menu-btn:active{transform:translateY(5px); box-shadow:0 1px 0 rgba(0,0,0,0.15);}
+  .menu-btn small{font-family:'Nunito',sans-serif; font-weight:700; font-size:12px; opacity:0.95;}
+  .menu-btn.b-science{background:linear-gradient(160deg,#7FE3B4,var(--mint));}
+  .menu-btn.b-math{background:linear-gradient(160deg,#8DA6F5,var(--indigo));}
+  .menu-btn.b-english{background:linear-gradient(160deg,#FFC876,var(--mustard));}
+  .menu-btn.b-flash{background:linear-gradient(160deg,#F98FB0,var(--pink));}
+
+  .back-btn{
+    background:var(--cream); border:none; border-radius:14px; padding:10px 14px;
+    font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); cursor:pointer;
+    box-shadow:0 3px 0 rgba(0,0,0,0.08);
+  }
+  .game-header{display:flex; align-items:center; justify-content:space-between; width:100%; margin-bottom:16px; gap:10px;}
+  .progress-wrap{flex:1; margin:0 12px;}
+  .progress-track{background:#EFEFEF; border-radius:999px; height:14px; overflow:hidden; box-shadow:inset 0 2px 3px rgba(0,0,0,0.08);}
+  .progress-fill{height:100%; border-radius:999px; background:linear-gradient(90deg,var(--mustard),var(--pink)); transition:width 0.4s ease;}
+  .score-pill{display:flex; align-items:center; gap:4px; background:var(--card); border:2px solid var(--mustard); border-radius:999px; padding:6px 12px; font-family:'Baloo 2',sans-serif; font-weight:800; color:var(--mustard-dark); white-space:nowrap;}
+
+  /* Shared quiz styling */
+  .quiz-emoji{font-size:56px; margin-bottom:6px;}
+  .question-text{font-family:'Baloo 2',sans-serif; font-size:17px; font-weight:700; color:var(--ink-soft); margin:0 0 20px;}
+  .options-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:420px){ .options-grid{grid-template-columns:1fr;} }
+  .opt-btn{
+    background:var(--cream); border:3px solid #FFDDA8; border-radius:18px; padding:16px 12px;
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:18px; color:var(--ink); cursor:pointer;
+    transition:transform 0.1s ease; box-shadow:0 4px 0 rgba(0,0,0,0.06);
+  }
+  .opt-btn:hover:not(:disabled){transform:translateY(-2px);}
+  .opt-btn:active:not(:disabled){transform:translateY(2px);}
+  .opt-btn:disabled{cursor:default;}
+  .opt-btn.correct{background:#DFF7E3; border-color:var(--mint); color:var(--mint-dark);}
+  .opt-btn.wrong{background:#FFE1DE; border-color:#FF6B6B; color:#C64643; animation:shake 0.4s ease;}
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-8px);}
+    75%{transform:translateX(8px);}
+  }
+  .feedback-banner{margin-top:16px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:15px; min-height:24px; color:var(--ink-soft);}
+  .next-btn{
+    margin-top:14px; background:linear-gradient(160deg,#FFC876,var(--mustard)); border:none; border-radius:16px;
+    padding:12px 26px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:16px; color:var(--ink);
+    cursor:pointer; box-shadow:0 5px 0 var(--mustard-dark); display:none;
+  }
+  .next-btn.show{display:inline-block; animation:pop-in 0.3s ease;}
+  @keyframes pop-in{
+    0%{transform:scale(0.7); opacity:0;} 100%{transform:scale(1); opacity:1;}
+  }
+
+  /* Body diagram (Science) */
+  .body-diagram-wrap{display:flex; justify-content:center; margin:8px 0 12px;}
+  .body-svg{width:220px; height:auto;}
+  .hotspot{fill:rgba(255,255,255,0.001); stroke:transparent; stroke-width:4; cursor:pointer; transition:fill 0.2s ease, stroke 0.2s ease;}
+  .hotspot:hover{fill:rgba(245,166,35,0.30); stroke:var(--mustard);}
+  .hotspot.found{fill:rgba(78,206,111,0.30); stroke:var(--mint-dark); stroke-width:5;}
+  .hotspot.pulse{animation:hotspotPulse 2.2s ease-in-out infinite;}
+  @keyframes hotspotPulse{
+    0%,100%{stroke-opacity:0.15;}
+    50%{stroke-opacity:0.55;}
+  }
+  .science-progress{font-family:'Baloo 2',sans-serif; font-weight:800; color:var(--ink-soft); margin:6px 0 14px; font-size:14px;}
+  .science-info{
+    background:var(--cream); border:3px solid #FFE1A3; border-radius:18px; padding:14px 18px;
+    margin:6px 0 4px; min-height:64px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+  }
+  .science-info .si-emoji{font-size:34px;}
+  .science-info .si-label{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:18px; color:var(--ink);}
+  .science-info .si-desc{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:13.5px; color:var(--mint-dark);}
+  .science-info.placeholder .si-label{color:var(--ink-soft); font-weight:700; font-size:14px;}
+  .badge-tray{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:4px 0 12px;}
+  .badge-slot{
+    width:38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+    font-size:20px; background:#EFEFEF; filter:grayscale(1); opacity:0.5;
+    transition:transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease, background 0.3s ease;
+  }
+  .badge-slot.found{
+    background:linear-gradient(160deg,#DFF7E3,#B9EFC4); filter:grayscale(0); opacity:1;
+    transform:scale(1.12); box-shadow:0 3px 0 var(--mint-dark);
+    animation:badge-pop 0.4s ease;
+  }
+  @keyframes badge-pop{
+    0%{transform:scale(0.5) rotate(-15deg);} 60%{transform:scale(1.25) rotate(8deg);} 100%{transform:scale(1.12) rotate(0);}
+  }
+  .bonus-banner{
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:14px; color:var(--indigo-dark);
+    background:#E7EBFF; border:2px solid var(--indigo); border-radius:999px; padding:6px 14px; margin:0 0 10px; display:inline-block;
+  }
+
+  /* Math sequencing */
+  .seq-bar{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; min-height:52px; margin:10px 0 18px; padding:10px; background:var(--cream); border-radius:16px; border:2px dashed #FFE1A3;}
+  .seq-chip{
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:16px; color:white;
+    background:linear-gradient(160deg,#7FE3B4,var(--mint)); border-radius:10px; padding:8px 12px; min-width:34px; text-align:center;
+  }
+  .seq-chip.empty{background:#EFEFEF; color:#C7C7C7; box-shadow:inset 0 2px 3px rgba(0,0,0,0.06);}
+  .num-tiles{display:grid; grid-template-columns:repeat(4, 1fr); gap:12px;}
+  @media (max-width:420px){ .num-tiles{grid-template-columns:repeat(3,1fr);} }
+  .num-tile{
+    background:var(--cream); border:3px solid #C7D0FF; border-radius:16px; padding:16px 8px;
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:22px; color:var(--ink); cursor:pointer;
+    transition:transform 0.1s ease, opacity 0.2s ease; box-shadow:0 4px 0 rgba(0,0,0,0.06);
+  }
+  .num-tile:active:not(:disabled){transform:translateY(2px);}
+  .num-tile:disabled{opacity:0.25; cursor:default;}
+  .num-tile.wrong-shake{animation:shake 0.4s ease;}
+  .math-stats{font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); margin-top:16px; font-size:14px;}
+  .target-hint{
+    background:var(--cream); border:3px solid #C7D0FF; border-radius:18px; padding:14px 16px; margin-bottom:16px;
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+  }
+  .target-hint .th-label{font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); font-size:13px;}
+  .target-hint .th-stars{
+    font-size:22px; line-height:1.4; width:100%; max-width:280px;
+    display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:2px;
+  }
+  .streak-indicator{
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:14px; color:var(--mustard-dark);
+    background:#FFF3D6; border:2px solid var(--mustard); border-radius:999px; padding:5px 12px; display:inline-block; margin-bottom:10px;
+  }
+  .rocket-track{position:relative; height:26px; margin:4px 0 14px;}
+  .rocket-track .progress-track{height:10px; margin-top:8px;}
+  .rocket-rider{position:absolute; top:-4px; left:0%; font-size:24px; transition:left 0.4s ease; transform:translateX(-50%);}
+
+  /* Compare numbers */
+  .compare-row{display:grid; grid-template-columns:1fr auto 1fr; gap:10px; align-items:center; margin:6px 0 20px;}
+  .compare-box{
+    background:var(--cream); border:3px solid #C7D0FF; border-radius:18px; padding:14px 10px; min-height:96px;
+    display:flex; flex-wrap:wrap; align-content:center; justify-content:center; gap:2px; font-size:20px;
+  }
+  .compare-num{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:15px; color:var(--ink-soft); text-align:center; margin-top:6px;}
+  .compare-vs{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:26px; color:var(--indigo);}
+  .compare-options{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+  @media (max-width:420px){ .compare-options{grid-template-columns:1fr;} }
+  .compare-opt{
+    background:var(--cream); border:3px solid #FFDDA8; border-radius:16px; padding:14px 8px;
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:15px; color:var(--ink); cursor:pointer;
+    transition:transform 0.1s ease; box-shadow:0 4px 0 rgba(0,0,0,0.06);
+  }
+  .compare-opt:hover:not(:disabled){transform:translateY(-2px);}
+  .compare-opt:active:not(:disabled){transform:translateY(2px);}
+  .compare-opt:disabled{cursor:default;}
+  .compare-opt.correct{background:#DFF7E3; border-color:var(--mint); color:var(--mint-dark);}
+  .compare-opt.wrong{background:#FFE1DE; border-color:#FF6B6B; color:#C64643; animation:shake 0.4s ease;}
+
+  /* Flashcards */
+  .flash-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(110px,1fr)); gap:12px; margin:6px 0 10px;}
+  .flash-tile{perspective:900px; cursor:pointer; height:150px;}
+  .flash-tile-inner{width:100%; height:100%; position:relative; transition:transform 0.5s cubic-bezier(.4,.2,.2,1); transform-style:preserve-3d;}
+  .flash-tile.flipped .flash-tile-inner{transform:rotateY(180deg);}
+  .flash-tile-face{position:absolute; inset:0; backface-visibility:hidden; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px; box-shadow:0 5px 0 rgba(0,0,0,0.1);}
+  .flash-tile-front{background:linear-gradient(160deg,#8DA6F5,var(--indigo)); border:3px solid var(--indigo-dark); color:white;}
+  .flash-tile-back{background:linear-gradient(160deg,#DFF7E3,#B9EFC4); border:3px solid var(--mint); transform:rotateY(180deg);}
+  .flash-tile-emoji{font-size:32px;}
+  .flash-tile-word{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:13px; color:var(--ink); margin-top:4px; text-align:center;}
+  .flash-tile-word-en{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:11.5px; color:var(--pink-dark); margin-top:2px; text-align:center; background:#FDE4EC; padding:2px 8px; border-radius:999px;}
+  .flash-hint-text{font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); margin:2px 0 14px; font-size:14px;}
+
+  /* Result */
+  .result-stars{font-size:52px; margin:12px 0; letter-spacing:6px;}
+  .result-stars span{display:inline-block; animation:star-pop 0.5s ease backwards;}
+  .result-stars span:nth-child(1){animation-delay:0.1s;}
+  .result-stars span:nth-child(2){animation-delay:0.3s;}
+  .result-stars span:nth-child(3){animation-delay:0.5s;}
+  @keyframes star-pop{
+    0%{transform:scale(0) rotate(-90deg); opacity:0;}
+    70%{transform:scale(1.3) rotate(10deg); opacity:1;}
+    100%{transform:scale(1) rotate(0);}
+  }
+  .result-msg{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:23px; margin:4px 0 4px; color:var(--ink);}
+  .result-sub{color:var(--ink-soft); font-weight:700; margin-bottom:20px; font-size:14.5px;}
+  .result-actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .action-btn{border:none; border-radius:16px; padding:13px 20px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:15px; color:white; cursor:pointer; box-shadow:0 5px 0 rgba(0,0,0,0.18);}
+  .action-btn.replay{background:linear-gradient(160deg,#8DA6F5,var(--indigo));}
+  .action-btn.menu{background:linear-gradient(160deg,#FFC876,var(--mustard));}
+  .action-btn:active{transform:translateY(4px); box-shadow:0 1px 0 rgba(0,0,0,0.18);}
+
+  .confetti-piece{position:fixed; top:-20px; width:10px; height:16px; z-index:900; pointer-events:none; animation:fall linear forwards; border-radius:2px;}
+  @keyframes fall{ to{transform:translateY(110vh) rotate(540deg); opacity:0.9;} }
+
+  .hidden{display:none !important;}
+</style>
+</head>
+<body>
+
+<div class="bg-decor" id="bgDecor"></div>
+<div class="ground"></div>
+
+<div class="app">
+  <div class="topbar">
+    <a href="index.html" class="brand"><span class="mascot-ico">🦉</span> Sekolahku</a>
+    <div class="star-total">⭐ <span id="totalStars">0</span></div>
+  </div>
+  <a href="index.html" class="home-link">🏠 Beranda</a>
+
+  <!-- MENU -->
+  <div class="card" id="screen-menu">
+    <div class="mascot-wrap"><div class="mascot" id="mascotMenu">🦉</div></div>
+    <div class="speech">Halo! Aku Ori. Yuk belajar di Sekolahku!</div>
+    <h1 class="title">Bagian 3: Sekolahku</h1>
+    <p class="subtitle">Mengenal tubuhku, bilangan 0-20, dan kosakata di sekolah!</p>
+    <div class="menu-grid">
+      <button class="menu-btn b-science" id="btnScience">
+        <span class="emoji">🧍</span>
+        IPA: Tubuhku
+        <small>Ketuk & temukan</small>
+      </button>
+      <button class="menu-btn b-math" id="btnMath">
+        <span class="emoji">🔢</span>
+        Matematika
+        <small>Bilangan 0-20</small>
+      </button>
+      <button class="menu-btn b-english" id="btnEnglish">
+        <span class="emoji">🎒</span>
+        Bahasa Inggris
+        <small>Di Sekolah</small>
+      </button>
+      <button class="menu-btn b-flash" id="btnFlash">
+        <span class="emoji">📇</span>
+        Kartu Sekolah
+        <small>Balik & hafalkan</small>
+      </button>
+    </div>
+  </div>
+
+  <!-- SCIENCE: BODY DIAGRAM -->
+  <div class="card hidden" id="screen-science">
+    <div class="game-header">
+      <button class="back-btn" id="btnScienceBack">⬅ Menu</button>
+      <div style="flex:1;"></div>
+      <div class="score-pill">🔍 <span id="scienceFound">0</span>/8</div>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotScience">🦉</div></div>
+    <div class="speech">Ketuk bagian tubuh untuk mempelajarinya!</div>
+    <div class="body-diagram-wrap">
+      <svg class="body-svg" viewBox="0 0 240 360" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="140" cy="330" rx="22" ry="12" fill="#F0608C"/>
+        <ellipse cx="100" cy="330" rx="22" ry="12" fill="#F0608C"/>
+        <rect x="122" y="235" width="30" height="90" rx="14" fill="#26314A"/>
+        <rect x="88" y="235" width="30" height="90" rx="14" fill="#26314A"/>
+        <circle cx="187" cy="245" r="16" fill="#FFD9B3"/>
+        <circle cx="53" cy="245" r="16" fill="#FFD9B3"/>
+        <rect x="174" y="140" width="26" height="95" rx="13" fill="#5B6EF5"/>
+        <rect x="40" y="140" width="26" height="95" rx="13" fill="#5B6EF5"/>
+        <rect x="70" y="130" width="100" height="110" rx="30" fill="#5B6EF5" stroke="#26314A" stroke-width="3"/>
+        <rect x="110" y="115" width="20" height="18" fill="#FFD9B3"/>
+        <circle cx="72" cy="72" r="10" fill="#FFD9B3" stroke="#26314A" stroke-width="2"/>
+        <circle cx="168" cy="72" r="10" fill="#FFD9B3" stroke="#26314A" stroke-width="2"/>
+        <circle cx="120" cy="70" r="48" fill="#FFD9B3" stroke="#26314A" stroke-width="3"/>
+        <path d="M72,58 A48,42 0 0,1 168,58 Q168,30 120,26 Q72,30 72,58 Z" fill="#5C3A21"/>
+        <circle cx="104" cy="68" r="6" fill="#26314A"/>
+        <circle cx="136" cy="68" r="6" fill="#26314A"/>
+        <circle cx="120" cy="80" r="4" fill="#E8957A"/>
+        <path d="M105,90 Q120,102 135,90" stroke="#26314A" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+        <!-- Hotspots (invisible clickable areas) -->
+        <circle class="hotspot pulse" data-part="rambut" cx="120" cy="42" r="24"></circle>
+        <circle class="hotspot pulse" data-part="mata" cx="120" cy="68" r="24"></circle>
+        <circle class="hotspot pulse" data-part="telinga" cx="72" cy="72" r="18"></circle>
+        <circle class="hotspot pulse" data-part="telinga" cx="168" cy="72" r="18"></circle>
+        <circle class="hotspot pulse" data-part="hidung" cx="120" cy="80" r="16"></circle>
+        <circle class="hotspot pulse" data-part="mulut" cx="120" cy="94" r="18"></circle>
+        <circle class="hotspot pulse" data-part="tangan" cx="53" cy="245" r="22"></circle>
+        <circle class="hotspot pulse" data-part="tangan" cx="187" cy="245" r="22"></circle>
+        <circle class="hotspot pulse" data-part="perut" cx="120" cy="190" r="30"></circle>
+        <circle class="hotspot pulse" data-part="kaki" cx="100" cy="320" r="24"></circle>
+        <circle class="hotspot pulse" data-part="kaki" cx="140" cy="320" r="24"></circle>
+      </svg>
+    </div>
+    <div class="badge-tray" id="badgeTray"></div>
+    <div class="science-progress" id="scienceProgress">Ketuk salah satu bagian tubuh untuk memulai!</div>
+    <div class="science-info placeholder" id="scienceInfo">
+      <div class="si-label">Belum ada yang dipilih</div>
+    </div>
+  </div>
+
+  <!-- SCIENCE RESULT -->
+  <div class="card hidden" id="screen-science-result">
+    <div class="mascot-wrap"><div class="mascot happy" id="mascotScienceResult">🏆</div></div>
+    <div class="result-stars"><span>⭐</span><span>⭐</span><span>⭐</span></div>
+    <div class="result-msg" id="scienceResultMsg">Semua bagian tubuh ditemukan! 🎉</div>
+    <div class="result-sub" id="scienceResultSub">Kamu berhasil mengenal 8 bagian tubuh dan fungsinya</div>
+    <div class="result-actions">
+      <button class="action-btn replay" id="btnScienceReplay">🔁 Main Lagi</button>
+      <button class="action-btn menu" id="btnScienceMenu">🏠 Menu</button>
+    </div>
+  </div>
+
+  <!-- MATH SUB-MENU -->
+  <div class="card hidden" id="screen-math-menu">
+    <div class="mascot-wrap"><div class="mascot" id="mascotMathMenu">🦉</div></div>
+    <div class="speech">Mau latihan bilangan yang mana?</div>
+    <h1 class="title">Matematika</h1>
+    <p class="subtitle">Pilih permainan bilangan 0-20 di bawah ini!</p>
+    <div class="menu-grid">
+      <button class="menu-btn b-math" id="btnMathSort">
+        <span class="emoji">🔢</span>
+        Urutkan Bilangan
+        <small>Kecil ke besar</small>
+      </button>
+      <button class="menu-btn b-science" id="btnMathCompare">
+        <span class="emoji">⚖️</span>
+        Bandingkan Bilangan
+        <small>&gt; &lt; =</small>
+      </button>
+    </div>
+    <button class="back-btn" id="btnMathMenuBack" style="margin-top:20px;">⬅ Menu Utama</button>
+  </div>
+
+  <!-- MATH: SEQUENCING -->
+  <div class="card hidden" id="screen-math">
+    <div class="game-header">
+      <button class="back-btn" id="btnMathBack">⬅ Menu</button>
+      <div style="flex:1;"></div>
+      <div class="score-pill">🔢 <span id="mathBuiltCount">0</span>/8</div>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotMath">🦉</div></div>
+    <div class="speech" id="mathSpeech">Hitung bintangnya, lalu ketuk angka yang cocok!</div>
+    <div class="target-hint" id="targetHint">
+      <div class="th-label">Ada berapa bintang ini?</div>
+      <div class="th-stars" id="thStars"></div>
+    </div>
+    <div id="streakWrap"></div>
+    <div class="seq-bar" id="seqBar"></div>
+    <div class="rocket-track">
+      <div class="rocket-rider" id="rocketRider">🚀</div>
+      <div class="progress-track"><div class="progress-fill" id="mathProgressFill" style="width:0%"></div></div>
+    </div>
+    <div class="num-tiles" id="numTiles"></div>
+    <div class="math-stats" id="mathStats">0 kesalahan</div>
+  </div>
+
+  <!-- MATH RESULT -->
+  <div class="card hidden" id="screen-math-result">
+    <div class="mascot-wrap"><div class="mascot happy" id="mascotMathResult">🏆</div></div>
+    <div class="result-stars" id="mathResultStars"></div>
+    <div class="result-msg" id="mathResultMsg">Urutan sempurna!</div>
+    <div class="result-sub" id="mathResultSub"></div>
+    <div class="result-actions">
+      <button class="action-btn replay" id="btnMathReplay">🔁 Main Lagi</button>
+      <button class="action-btn menu" id="btnMathMenu">🏠 Menu</button>
+    </div>
+  </div>
+
+  <!-- COMPARE NUMBERS -->
+  <div class="card hidden" id="screen-compare">
+    <div class="game-header">
+      <button class="back-btn" id="btnCompareBack">⬅ Menu</button>
+      <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="compareProgress" style="width:0%"></div></div></div>
+      <div class="score-pill">⭐ <span id="compareScore">0</span></div>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotCompare">🦉</div></div>
+    <div class="speech" id="compareSpeech">Bandingkan kedua kelompok bintang ini!</div>
+    <div class="compare-row">
+      <div>
+        <div class="compare-box" id="compareBoxLeft"></div>
+        <div class="compare-num" id="compareNumLeft"></div>
+      </div>
+      <div class="compare-vs">VS</div>
+      <div>
+        <div class="compare-box" id="compareBoxRight"></div>
+        <div class="compare-num" id="compareNumRight"></div>
+      </div>
+    </div>
+    <p class="question-text">Kelompok kiri dibanding kelompok kanan?</p>
+    <div class="compare-options" id="compareOptions"></div>
+    <div class="feedback-banner" id="compareFeedback"></div>
+    <button class="next-btn" id="btnCompareNext">Lanjut ➡</button>
+  </div>
+
+  <!-- COMPARE RESULT -->
+  <div class="card hidden" id="screen-compare-result">
+    <div class="mascot-wrap"><div class="mascot happy" id="mascotCompareResult">🏆</div></div>
+    <div class="result-stars" id="compareResultStars"></div>
+    <div class="result-msg" id="compareResultMsg">Hebat sekali!</div>
+    <div class="result-sub" id="compareResultSub"></div>
+    <div class="result-actions">
+      <button class="action-btn replay" id="btnCompareReplay">🔁 Main Lagi</button>
+      <button class="action-btn menu" id="btnCompareMenu">🏠 Menu</button>
+    </div>
+  </div>
+
+  <!-- ENGLISH: AT SCHOOL QUIZ -->
+  <div class="card hidden" id="screen-english">
+    <div class="game-header">
+      <button class="back-btn" id="btnEnglishBack">⬅ Menu</button>
+      <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="englishProgress" style="width:0%"></div></div></div>
+      <div class="score-pill">⭐ <span id="englishScore">0</span></div>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotEnglish">🦉</div></div>
+    <div class="speech" id="englishSpeech">Ayo tebak kosakata sekolah dalam Bahasa Inggris!</div>
+    <div class="quiz-emoji" id="englishEmoji"></div>
+    <p class="question-text">Bahasa Inggris untuk gambar ini adalah?</p>
+    <div class="options-grid" id="englishOptions"></div>
+    <div class="feedback-banner" id="englishFeedback"></div>
+    <button class="next-btn" id="btnEnglishNext">Lanjut ➡</button>
+  </div>
+
+  <!-- ENGLISH RESULT -->
+  <div class="card hidden" id="screen-english-result">
+    <div class="mascot-wrap"><div class="mascot happy" id="mascotEnglishResult">🏆</div></div>
+    <div class="result-stars" id="englishResultStars"></div>
+    <div class="result-msg" id="englishResultMsg">Hebat sekali!</div>
+    <div class="result-sub" id="englishResultSub"></div>
+    <div class="result-actions">
+      <button class="action-btn replay" id="btnEnglishReplay">🔁 Main Lagi</button>
+      <button class="action-btn menu" id="btnEnglishMenu">🏠 Menu</button>
+    </div>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div class="card hidden" id="screen-flash">
+    <div class="game-header">
+      <button class="back-btn" id="btnFlashBack">⬅ Menu</button>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotFlash">🦉</div></div>
+    <div class="speech">Kartu Perlengkapan Sekolah</div>
+    <div class="flash-hint-text">👆 Ketuk kartu untuk lihat kata Indonesia & Inggrisnya</div>
+    <div class="flash-grid" id="flashGrid"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Background decor ---------- */
+  const bgDecor = document.getElementById('bgDecor');
+  const floaterEmojis = ['✏️','📚','⭐'];
+  for(let i=0;i<7;i++){
+    const f = document.createElement('div');
+    f.className = 'floater';
+    f.textContent = floaterEmojis[i % floaterEmojis.length];
+    f.style.top = (Math.random()*60) + 'vh';
+    f.style.left = '-8vw';
+    f.style.animationDuration = (16 + Math.random()*14) + 's';
+    f.style.animationDelay = (Math.random()*10) + 's';
+    bgDecor.appendChild(f);
+  }
+  const sparkleEmojis = ['✨','🌟','📎'];
+  for(let i=0;i<8;i++){
+    const p = document.createElement('div');
+    p.className = 'sparkle';
+    p.textContent = sparkleEmojis[i % sparkleEmojis.length];
+    p.style.left = (5 + Math.random()*90) + 'vw';
+    p.style.top = (5 + Math.random()*55) + 'vh';
+    p.style.animationDelay = (Math.random()*2.5) + 's';
+    bgDecor.appendChild(p);
+  }
+
+  /* ---------- Shared helpers ---------- */
+  function shuffle(arr){
+    const a = arr.slice();
+    for(let i=a.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [a[i],a[j]] = [a[j],a[i]];
+    }
+    return a;
+  }
+
+  function createShuffleBag(items){
+    let bag = [];
+    return function draw(n){
+      const result = [];
+      while(result.length < n){
+        if(bag.length === 0){
+          bag = shuffle(items);
+          if(result.length){
+            const resultSet = new Set(result);
+            const fresh = bag.filter(x => !resultSet.has(x));
+            const used = bag.filter(x => resultSet.has(x));
+            bag = fresh.concat(used);
+          }
+        }
+        result.push(bag.shift());
+      }
+      return result;
+    };
+  }
+
+  const confettiColors = ['#5B6EF5','#F5A623','#4ECE6F','#F0608C','#8DA6F5'];
+  function burstConfetti(x, y, count){
+    count = count || 18;
+    for(let i=0;i<count;i++){
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = (x + (Math.random()*160-80)) + 'px';
+      piece.style.top = (y) + 'px';
+      piece.style.background = confettiColors[Math.floor(Math.random()*confettiColors.length)];
+      piece.style.animationDuration = (1.2 + Math.random()*0.8) + 's';
+      piece.style.transform = `rotate(${Math.random()*360}deg)`;
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), 2200);
+    }
+  }
+
+  let totalStars = Number(sessionStorage.getItem('sekolah_totalStars') || 0);
+  const totalStarsEl = document.getElementById('totalStars');
+  totalStarsEl.textContent = totalStars;
+  function addStars(n){
+    totalStars += n;
+    sessionStorage.setItem('sekolah_totalStars', String(totalStars));
+    totalStarsEl.textContent = totalStars;
+  }
+
+  function setMascotState(el, mood){
+    el.classList.remove('happy','sad');
+    if(mood) el.classList.add(mood);
+  }
+
+  /* ---------- Screens ---------- */
+  const screenIds = ['menu','science','science-result','math-menu','math','math-result','compare','compare-result','english','english-result','flash'];
+  const screens = {};
+  screenIds.forEach(id => screens[id] = document.getElementById('screen-' + id));
+  function showScreen(name){
+    screenIds.forEach(id => screens[id].classList.toggle('hidden', id !== name));
+  }
+
+  /* =========================================================
+     SCIENCE — Diagram Tubuh Interaktif
+  ========================================================= */
+  const bodyPartsInfo = {
+    rambut: {label:'Rambut', emoji:'💇', desc:'Tumbuh di kepala kita'},
+    mata: {label:'Mata', emoji:'👀', desc:'Untuk melihat'},
+    telinga: {label:'Telinga', emoji:'👂', desc:'Untuk mendengar'},
+    hidung: {label:'Hidung', emoji:'👃', desc:'Untuk mencium bau'},
+    mulut: {label:'Mulut', emoji:'👄', desc:'Untuk makan dan berbicara'},
+    tangan: {label:'Tangan', emoji:'✋', desc:'Untuk memegang & menulis'},
+    perut: {label:'Perut', emoji:'🫃', desc:'Tempat makanan dicerna'},
+    kaki: {label:'Kaki', emoji:'🦵', desc:'Untuk berjalan & berlari'}
+  };
+  const scienceTotal = Object.keys(bodyPartsInfo).length;
+  let scienceFound = new Set();
+  const scienceBonus = { active:false, queue:[], index:0, correct:0, total:3 };
+
+  function startScienceGame(){
+    scienceFound = new Set();
+    scienceBonus.active = false;
+    scienceBonus.index = 0;
+    scienceBonus.correct = 0;
+    document.getElementById('scienceFound').textContent = '0';
+    document.getElementById('scienceProgress').textContent = 'Ketuk salah satu bagian tubuh untuk memulai!';
+    const infoBox = document.getElementById('scienceInfo');
+    infoBox.className = 'science-info placeholder';
+    infoBox.innerHTML = '<div class="si-label">Belum ada yang dipilih</div>';
+    document.querySelectorAll('#screen-science .hotspot').forEach(h => h.classList.remove('found'));
+
+    const tray = document.getElementById('badgeTray');
+    tray.innerHTML = '';
+    Object.keys(bodyPartsInfo).forEach(key => {
+      const slot = document.createElement('div');
+      slot.className = 'badge-slot';
+      slot.id = 'badge-' + key;
+      slot.textContent = bodyPartsInfo[key].emoji;
+      tray.appendChild(slot);
+    });
+
+    setMascotState(document.getElementById('mascotScience'), null);
+    document.getElementById('mascotScience').textContent = '🦉';
+    showScreen('science');
+  }
+
+  function startScienceBonus(){
+    scienceBonus.active = true;
+    scienceBonus.index = 0;
+    scienceBonus.correct = 0;
+    scienceBonus.queue = shuffle(Object.keys(bodyPartsInfo)).slice(0, scienceBonus.total);
+    document.querySelectorAll('#screen-science .hotspot').forEach(h => h.classList.remove('found'));
+    askScienceBonusQuestion();
+  }
+
+  function askScienceBonusQuestion(){
+    const part = scienceBonus.queue[scienceBonus.index];
+    const info = bodyPartsInfo[part];
+    document.getElementById('scienceProgress').innerHTML = `<span class="bonus-banner">🎯 Tantangan ${scienceBonus.index + 1}/${scienceBonus.total}</span>`;
+    const infoBox = document.getElementById('scienceInfo');
+    infoBox.className = 'science-info placeholder';
+    infoBox.innerHTML = `<div class="si-label">Coba tunjukkan: ${info.label} ${info.emoji}</div>`;
+    document.getElementById('mascotScience').textContent = '🦉';
+    setMascotState(document.getElementById('mascotScience'), null);
+  }
+
+  document.querySelectorAll('#screen-science .hotspot').forEach(hotspot => {
+    hotspot.addEventListener('click', () => {
+      const part = hotspot.dataset.part;
+      const info = bodyPartsInfo[part];
+      if(!info) return;
+      const mascot = document.getElementById('mascotScience');
+
+      if(scienceBonus.active){
+        const target = scienceBonus.queue[scienceBonus.index];
+        if(part === target){
+          document.querySelectorAll(`#screen-science .hotspot[data-part="${part}"]`).forEach(h => h.classList.add('found'));
+          scienceBonus.correct++;
+          addStars(2);
+          setMascotState(mascot, 'happy'); mascot.textContent = '🤩';
+          const rect = hotspot.getBoundingClientRect();
+          burstConfetti(rect.left + rect.width/2, rect.top, 14);
+          scienceBonus.index++;
+          setTimeout(() => {
+            document.querySelectorAll('#screen-science .hotspot').forEach(h => h.classList.remove('found'));
+            if(scienceBonus.index >= scienceBonus.total){
+              scienceBonus.active = false;
+              showScienceResult();
+            } else {
+              askScienceBonusQuestion();
+            }
+          }, 600);
+        } else {
+          setMascotState(mascot, 'sad'); mascot.textContent = '😅';
+          hotspot.classList.add('found');
+          setTimeout(() => hotspot.classList.remove('found'), 350);
+        }
+        return;
+      }
+
+      document.querySelectorAll(`#screen-science .hotspot[data-part="${part}"]`).forEach(h => h.classList.add('found'));
+
+      const infoBox = document.getElementById('scienceInfo');
+      infoBox.className = 'science-info';
+      infoBox.innerHTML = `<div class="si-emoji">${info.emoji}</div><div class="si-label">${info.label}</div><div class="si-desc">${info.desc}</div>`;
+
+      if(!scienceFound.has(part)){
+        scienceFound.add(part);
+        document.getElementById('scienceFound').textContent = scienceFound.size;
+        const badge = document.getElementById('badge-' + part);
+        if(badge) badge.classList.add('found');
+        addStars(1);
+        setMascotState(mascot, 'happy'); mascot.textContent = '🤩';
+        const rect = hotspot.getBoundingClientRect();
+        burstConfetti(rect.left + rect.width/2, rect.top, 12);
+        document.getElementById('scienceProgress').textContent = `Kamu sudah menemukan ${scienceFound.size} dari ${scienceTotal} bagian tubuh!`;
+
+        if(scienceFound.size >= scienceTotal){
+          setTimeout(startScienceBonus, 900);
+        }
+      } else {
+        setMascotState(mascot, null); mascot.textContent = '🦉';
+      }
+    });
+  });
+
+  function showScienceResult(){
+    showScreen('science-result');
+    document.getElementById('scienceResultMsg').textContent = scienceBonus.correct === scienceBonus.total ? 'Ingatanmu luar biasa! 🎉' : 'Kerja bagus!';
+    document.getElementById('scienceResultSub').textContent = `Menemukan 8 bagian tubuh + tantangan bonus ${scienceBonus.correct}/${scienceBonus.total} benar`;
+    setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+  }
+
+  /* =========================================================
+     MATH — Urutkan Bilangan 0-20
+  ========================================================= */
+  const MATH_SEQ_LEN = 8;
+  const mathState = { target:[], display:[], built:[], mistakes:0, streak:0 };
+  const drawMathNumbers = createShuffleBag(Array.from({length:21}, (_, i) => i));
+
+  function startMathGame(){
+    const picks = drawMathNumbers(MATH_SEQ_LEN);
+    mathState.target = picks.slice().sort((a,b) => a - b);
+    mathState.display = shuffle(picks);
+    mathState.built = [];
+    mathState.mistakes = 0;
+    mathState.streak = 0;
+    document.getElementById('mathBuiltCount').textContent = '0';
+    document.getElementById('mathStats').textContent = '0 kesalahan';
+    document.getElementById('mathSpeech').textContent = 'Hitung bintangnya, lalu ketuk angka yang cocok!';
+    document.getElementById('streakWrap').innerHTML = '';
+    setMascotState(document.getElementById('mascotMath'), null);
+    document.getElementById('mascotMath').textContent = '🦉';
+    renderMathGame();
+    showScreen('math');
+  }
+
+  function renderMathGame(){
+    const seqBar = document.getElementById('seqBar');
+    seqBar.innerHTML = '';
+    mathState.target.forEach((num, idx) => {
+      const chip = document.createElement('div');
+      if(idx < mathState.built.length){
+        chip.className = 'seq-chip';
+        chip.textContent = mathState.built[idx];
+      } else {
+        chip.className = 'seq-chip empty';
+        chip.textContent = '?';
+      }
+      seqBar.appendChild(chip);
+    });
+
+    const tilesWrap = document.getElementById('numTiles');
+    tilesWrap.innerHTML = '';
+    mathState.display.forEach(num => {
+      const btn = document.createElement('button');
+      btn.className = 'num-tile';
+      btn.textContent = num;
+      if(mathState.built.includes(num)) btn.disabled = true;
+      btn.addEventListener('click', () => handleMathTileClick(num, btn));
+      tilesWrap.appendChild(btn);
+    });
+
+    const pct = Math.round((mathState.built.length / MATH_SEQ_LEN) * 100);
+    document.getElementById('mathProgressFill').style.width = pct + '%';
+    document.getElementById('rocketRider').style.left = pct + '%';
+
+    if(mathState.built.length < MATH_SEQ_LEN){
+      const nextNum = mathState.target[mathState.built.length];
+      const starsBox = document.getElementById('thStars');
+      starsBox.innerHTML = '';
+      if(nextNum === 0){
+        starsBox.textContent = '(nol, tidak ada bintang)';
+      } else {
+        for(let s=0; s<nextNum; s++){
+          const starSpan = document.createElement('span');
+          starSpan.textContent = '⭐';
+          starsBox.appendChild(starSpan);
+        }
+      }
+    }
+  }
+
+  function handleMathTileClick(num, btn){
+    if(mathState.built.includes(num)) return;
+    const expected = mathState.target[mathState.built.length];
+    const mascot = document.getElementById('mascotMath');
+    const streakWrap = document.getElementById('streakWrap');
+
+    if(num === expected){
+      mathState.built.push(num);
+      mathState.streak++;
+      document.getElementById('mathBuiltCount').textContent = mathState.built.length;
+      setMascotState(mascot, 'happy'); mascot.textContent = '🤩';
+      document.getElementById('mathSpeech').textContent = 'Tepat sekali!';
+      addStars(1);
+      if(mathState.streak >= 2){
+        streakWrap.innerHTML = `<div class="streak-indicator">🔥 Beruntun x${mathState.streak}</div>`;
+      }
+      const rect = btn.getBoundingClientRect();
+      burstConfetti(rect.left + rect.width/2, rect.top, 10);
+      renderMathGame();
+
+      if(mathState.built.length >= MATH_SEQ_LEN){
+        setTimeout(showMathResult, 500);
+      }
+    } else {
+      mathState.mistakes++;
+      mathState.streak = 0;
+      streakWrap.innerHTML = '';
+      document.getElementById('mathStats').textContent = mathState.mistakes + ' kesalahan';
+      setMascotState(mascot, 'sad'); mascot.textContent = '😅';
+      document.getElementById('mathSpeech').textContent = 'Hitung dulu bintangnya ya, lalu coba lagi!';
+      btn.classList.add('wrong-shake');
+      setTimeout(() => btn.classList.remove('wrong-shake'), 400);
+    }
+  }
+
+  function showMathResult(){
+    showScreen('math-result');
+    let stars = 1;
+    if(mathState.mistakes <= 1) stars = 3; else if(mathState.mistakes <= 4) stars = 2;
+    const starsEl = document.getElementById('mathResultStars');
+    starsEl.innerHTML = '';
+    for(let i=0;i<3;i++){
+      const s = document.createElement('span');
+      s.textContent = i < stars ? '⭐' : '☆';
+      starsEl.appendChild(s);
+    }
+    document.getElementById('mathResultMsg').textContent = stars === 3 ? 'Urutan sempurna! 🎉' : (stars === 2 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+    document.getElementById('mathResultSub').textContent = `Kamu mengurutkan 8 bilangan dengan ${mathState.mistakes} kesalahan`;
+    if(stars === 3) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+  }
+
+  /* =========================================================
+     MATH — Bandingkan Bilangan (>, <, =)
+  ========================================================= */
+  const COMPARE_ROUND_LEN = 8;
+  const compareState = { questions:[], index:0, score:0, answered:false };
+
+  function generateCompareQuestions(count){
+    const list = [];
+    for(let i=0;i<count;i++){
+      const relations = ['lebih','kurang','sama'];
+      const relation = relations[Math.floor(Math.random()*relations.length)];
+      let a, b;
+      if(relation === 'sama'){
+        a = Math.floor(Math.random()*21);
+        b = a;
+      } else {
+        a = Math.floor(Math.random()*21);
+        do { b = Math.floor(Math.random()*21); } while(b === a);
+        if(relation === 'lebih' && a < b) [a,b] = [b,a];
+        if(relation === 'kurang' && a > b) [a,b] = [b,a];
+      }
+      const answer = a > b ? 'lebih' : (a < b ? 'kurang' : 'sama');
+      list.push({ a, b, answer });
+    }
+    return list;
+  }
+
+  const compareOptionDefs = [
+    {key:'lebih', label:'Lebih banyak (>)', phrase:'lebih banyak dari'},
+    {key:'kurang', label:'Kurang dari (<)', phrase:'kurang dari'},
+    {key:'sama', label:'Sama dengan (=)', phrase:'sama dengan'}
+  ];
+
+  function startCompareGame(){
+    compareState.questions = generateCompareQuestions(COMPARE_ROUND_LEN);
+    compareState.index = 0;
+    compareState.score = 0;
+    document.getElementById('compareScore').textContent = '0';
+    showScreen('compare');
+    renderCompareQuestion();
+  }
+
+  function renderStarGroup(container, num){
+    container.innerHTML = '';
+    if(num === 0){
+      container.textContent = '(kosong)';
+      return;
+    }
+    for(let i=0;i<num;i++){
+      const s = document.createElement('span');
+      s.textContent = '⭐';
+      container.appendChild(s);
+    }
+  }
+
+  function renderCompareQuestion(){
+    compareState.answered = false;
+    document.getElementById('btnCompareNext').classList.remove('show');
+    document.getElementById('compareFeedback').textContent = '';
+    const mascot = document.getElementById('mascotCompare');
+    setMascotState(mascot, null);
+    mascot.textContent = '🦉';
+    document.getElementById('compareSpeech').textContent = 'Bandingkan kedua kelompok bintang ini!';
+
+    const pct = Math.round((compareState.index / COMPARE_ROUND_LEN) * 100);
+    document.getElementById('compareProgress').style.width = pct + '%';
+
+    const item = compareState.questions[compareState.index];
+    renderStarGroup(document.getElementById('compareBoxLeft'), item.a);
+    renderStarGroup(document.getElementById('compareBoxRight'), item.b);
+    document.getElementById('compareNumLeft').textContent = item.a;
+    document.getElementById('compareNumRight').textContent = item.b;
+
+    const grid = document.getElementById('compareOptions');
+    grid.innerHTML = '';
+    shuffle(compareOptionDefs).forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'compare-opt';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', () => handleCompareAnswer(btn, opt.key === item.answer, item));
+      grid.appendChild(btn);
+    });
+  }
+
+  function handleCompareAnswer(btn, isCorrect, item){
+    if(compareState.answered) return;
+    compareState.answered = true;
+    const allBtns = document.querySelectorAll('#compareOptions .compare-opt');
+    allBtns.forEach(b => b.disabled = true);
+    const mascot = document.getElementById('mascotCompare');
+    const feedback = document.getElementById('compareFeedback');
+    const correctDef = compareOptionDefs.find(o => o.key === item.answer);
+
+    if(isCorrect){
+      btn.classList.add('correct');
+      compareState.score++;
+      addStars(1);
+      document.getElementById('compareScore').textContent = compareState.score;
+      setMascotState(mascot, 'happy'); mascot.textContent = '🤩';
+      document.getElementById('compareSpeech').textContent = 'Betul sekali!';
+      feedback.style.color = '#33A852';
+      feedback.textContent = `Ya! ${item.a} ${correctDef.phrase} ${item.b}.`;
+      const rect = btn.getBoundingClientRect();
+      burstConfetti(rect.left + rect.width/2, rect.top);
+    } else {
+      btn.classList.add('wrong');
+      setMascotState(mascot, 'sad'); mascot.textContent = '😅';
+      document.getElementById('compareSpeech').textContent = 'Coba lagi ya nanti!';
+      feedback.style.color = '#C64643';
+      feedback.textContent = `Jawaban yang benar: ${correctDef.label}`;
+      allBtns.forEach(b => { if(b.textContent === correctDef.label) b.classList.add('correct'); });
+    }
+    document.getElementById('btnCompareNext').classList.add('show');
+  }
+
+  function compareGoNext(){
+    compareState.index++;
+    if(compareState.index >= COMPARE_ROUND_LEN){
+      showCompareResult();
+    } else {
+      renderCompareQuestion();
+    }
+  }
+
+  function showCompareResult(){
+    showScreen('compare-result');
+    const ratio = compareState.score / COMPARE_ROUND_LEN;
+    let stars = 1;
+    if(ratio >= 0.85) stars = 3; else if(ratio >= 0.5) stars = 2;
+    const starsEl = document.getElementById('compareResultStars');
+    starsEl.innerHTML = '';
+    for(let i=0;i<3;i++){
+      const s = document.createElement('span');
+      s.textContent = i < stars ? '⭐' : '☆';
+      starsEl.appendChild(s);
+    }
+    document.getElementById('compareResultMsg').textContent = stars === 3 ? 'Luar biasa hebat! 🎉' : (stars === 2 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+    document.getElementById('compareResultSub').textContent = `Kamu menjawab benar ${compareState.score} dari ${COMPARE_ROUND_LEN} soal`;
+    if(stars === 3) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+  }
+
+  /* =========================================================
+     ENGLISH — Di Sekolah (At School)
+  ========================================================= */
+  const schoolBank = [
+    {id:'Pensil', en:'Pencil', emoji:'✏️'},
+    {id:'Buku', en:'Book', emoji:'📖'},
+    {id:'Tas', en:'Bag', emoji:'🎒'},
+    {id:'Penggaris', en:'Ruler', emoji:'📏'},
+    {id:'Gunting', en:'Scissors', emoji:'✂️'},
+    {id:'Krayon', en:'Crayon', emoji:'🖍️'},
+    {id:'Pulpen', en:'Pen', emoji:'🖊️'},
+    {id:'Buku Catatan', en:'Notebook', emoji:'📓'},
+    {id:'Tempat Sampah', en:'Trash bin', emoji:'🗑️'},
+    {id:'Kursi', en:'Chair', emoji:'🪑'},
+    {id:'Sekolah', en:'School', emoji:'🏫'},
+    {id:'Guru', en:'Teacher', emoji:'🧑‍🏫'},
+    {id:'Siswa', en:'Student', emoji:'🧑‍🎓'},
+    {id:'Seni', en:'Art', emoji:'🎨'},
+    {id:'Jam', en:'Clock', emoji:'⏰'}
+  ];
+  const ENGLISH_ROUND_LEN = 8;
+  const englishState = { questions:[], index:0, score:0, answered:false };
+  const drawSchoolQuestion = createShuffleBag(schoolBank);
+
+  function buildSchoolOptions(correctEn){
+    const others = schoolBank.map(x => x.en).filter(e => e !== correctEn);
+    const wrong = shuffle(others).slice(0, 3);
+    return shuffle([correctEn, ...wrong]);
+  }
+
+  function startEnglishGame(){
+    englishState.questions = drawSchoolQuestion(ENGLISH_ROUND_LEN);
+    englishState.index = 0;
+    englishState.score = 0;
+    document.getElementById('englishScore').textContent = '0';
+    showScreen('english');
+    renderEnglishQuestion();
+  }
+
+  function renderEnglishQuestion(){
+    englishState.answered = false;
+    document.getElementById('btnEnglishNext').classList.remove('show');
+    document.getElementById('englishFeedback').textContent = '';
+    const mascot = document.getElementById('mascotEnglish');
+    setMascotState(mascot, null);
+    mascot.textContent = '🦉';
+    document.getElementById('englishSpeech').textContent = 'Ayo tebak kosakata sekolah dalam Bahasa Inggris!';
+
+    const pct = Math.round((englishState.index / ENGLISH_ROUND_LEN) * 100);
+    document.getElementById('englishProgress').style.width = pct + '%';
+
+    const item = englishState.questions[englishState.index];
+    document.getElementById('englishEmoji').textContent = item.emoji;
+
+    const options = buildSchoolOptions(item.en);
+    const grid = document.getElementById('englishOptions');
+    grid.innerHTML = '';
+    options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.textContent = opt;
+      btn.addEventListener('click', () => handleEnglishAnswer(btn, opt === item.en, item));
+      grid.appendChild(btn);
+    });
+  }
+
+  function handleEnglishAnswer(btn, isCorrect, item){
+    if(englishState.answered) return;
+    englishState.answered = true;
+    const allBtns = document.querySelectorAll('#englishOptions .opt-btn');
+    allBtns.forEach(b => b.disabled = true);
+    const mascot = document.getElementById('mascotEnglish');
+    const feedback = document.getElementById('englishFeedback');
+
+    if(isCorrect){
+      btn.classList.add('correct');
+      englishState.score++;
+      addStars(1);
+      document.getElementById('englishScore').textContent = englishState.score;
+      setMascotState(mascot, 'happy'); mascot.textContent = '🤩';
+      document.getElementById('englishSpeech').textContent = 'Betul sekali!';
+      feedback.style.color = '#33A852';
+      feedback.textContent = `Ya! "${item.id}" dalam Bahasa Inggris adalah "${item.en}".`;
+      const rect = btn.getBoundingClientRect();
+      burstConfetti(rect.left + rect.width/2, rect.top);
+    } else {
+      btn.classList.add('wrong');
+      setMascotState(mascot, 'sad'); mascot.textContent = '😅';
+      document.getElementById('englishSpeech').textContent = 'Coba lagi ya nanti!';
+      feedback.style.color = '#C64643';
+      feedback.textContent = `Jawaban yang benar: ${item.en} (${item.id})`;
+      allBtns.forEach(b => { if(b.textContent === item.en) b.classList.add('correct'); });
+    }
+    document.getElementById('btnEnglishNext').classList.add('show');
+  }
+
+  function englishGoNext(){
+    englishState.index++;
+    if(englishState.index >= ENGLISH_ROUND_LEN){
+      showEnglishResult();
+    } else {
+      renderEnglishQuestion();
+    }
+  }
+
+  function showEnglishResult(){
+    showScreen('english-result');
+    const ratio = englishState.score / ENGLISH_ROUND_LEN;
+    let stars = 1;
+    if(ratio >= 0.85) stars = 3; else if(ratio >= 0.5) stars = 2;
+    const starsEl = document.getElementById('englishResultStars');
+    starsEl.innerHTML = '';
+    for(let i=0;i<3;i++){
+      const s = document.createElement('span');
+      s.textContent = i < stars ? '⭐' : '☆';
+      starsEl.appendChild(s);
+    }
+    document.getElementById('englishResultMsg').textContent = stars === 3 ? 'Luar biasa hebat! 🎉' : (stars === 2 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+    document.getElementById('englishResultSub').textContent = `Kamu menjawab benar ${englishState.score} dari ${ENGLISH_ROUND_LEN} soal`;
+    if(stars === 3) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+  }
+
+  /* =========================================================
+     FLASHCARDS — Kartu Sekolah
+  ========================================================= */
+  function renderFlashGrid(){
+    const grid = document.getElementById('flashGrid');
+    grid.innerHTML = '';
+    schoolBank.forEach(item => {
+      const tile = document.createElement('div');
+      tile.className = 'flash-tile';
+      tile.innerHTML = `
+        <div class="flash-tile-inner">
+          <div class="flash-tile-face flash-tile-front">
+            <div class="flash-tile-emoji">${item.emoji}</div>
+            <div class="flash-tile-word">${item.id}</div>
+          </div>
+          <div class="flash-tile-face flash-tile-back">
+            <div class="flash-tile-emoji">${item.emoji}</div>
+            <div class="flash-tile-word-en">🔤 ${item.en}</div>
+          </div>
+        </div>`;
+      tile.addEventListener('click', () => tile.classList.toggle('flipped'));
+      grid.appendChild(tile);
+    });
+  }
+
+  /* ---------- Events ---------- */
+  document.getElementById('btnScience').addEventListener('click', startScienceGame);
+  document.getElementById('btnScienceBack').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnScienceReplay').addEventListener('click', startScienceGame);
+  document.getElementById('btnScienceMenu').addEventListener('click', () => showScreen('menu'));
+
+  document.getElementById('btnMath').addEventListener('click', () => showScreen('math-menu'));
+  document.getElementById('btnMathMenuBack').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnMathSort').addEventListener('click', startMathGame);
+  document.getElementById('btnMathCompare').addEventListener('click', startCompareGame);
+  document.getElementById('btnMathBack').addEventListener('click', () => showScreen('math-menu'));
+  document.getElementById('btnMathReplay').addEventListener('click', startMathGame);
+  document.getElementById('btnMathMenu').addEventListener('click', () => showScreen('menu'));
+
+  document.getElementById('btnCompareBack').addEventListener('click', () => showScreen('math-menu'));
+  document.getElementById('btnCompareNext').addEventListener('click', compareGoNext);
+  document.getElementById('btnCompareReplay').addEventListener('click', startCompareGame);
+  document.getElementById('btnCompareMenu').addEventListener('click', () => showScreen('menu'));
+
+  document.getElementById('btnEnglish').addEventListener('click', startEnglishGame);
+  document.getElementById('btnEnglishBack').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnEnglishNext').addEventListener('click', englishGoNext);
+  document.getElementById('btnEnglishReplay').addEventListener('click', startEnglishGame);
+  document.getElementById('btnEnglishMenu').addEventListener('click', () => showScreen('menu'));
+
+  document.getElementById('btnFlash').addEventListener('click', () => { renderFlashGrid(); showScreen('flash'); });
+  document.getElementById('btnFlashBack').addEventListener('click', () => showScreen('menu'));
+
+  showScreen('menu');
+})();
+</script>
+</body>
+</html>

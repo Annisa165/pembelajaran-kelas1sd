@@ -302,9 +302,9 @@
         <small>Uji ingatan</small>
       </button>
       <button class="menu-btn b-flash" id="btnFlash">
-        <span class="emoji">🔤</span>
-        Kartu Huruf
-        <small>Balik & hafalkan</small>
+        <span class="emoji">📇</span>
+        Kartu Belajar
+        <small>Hewan & Buah</small>
       </button>
     </div>
   </div>
@@ -393,14 +393,35 @@
     </div>
   </div>
 
-  <!-- FLASHCARDS -->
+  <!-- FLASHCARD CATEGORIES -->
+  <div class="card hidden" id="screen-flash-categories">
+    <div class="mascot-wrap"><div class="mascot" id="mascotFlashCat">🦋</div></div>
+    <div class="speech">Pilih kartu yang mau kamu ingat-ingat!</div>
+    <h1 class="title">Kartu Belajar</h1>
+    <p class="subtitle">Ketuk kartu untuk melihat detailnya!</p>
+    <div class="menu-grid">
+      <button class="menu-btn b-memory" id="btnFlashAnimal">
+        <span class="emoji">🐾</span>
+        Hewan
+        <small>12 kartu</small>
+      </button>
+      <button class="menu-btn b-sort" id="btnFlashFruit">
+        <span class="emoji">🍎</span>
+        Buah & Sayur
+        <small>12 kartu</small>
+      </button>
+    </div>
+    <button class="back-btn" id="btnFlashCatBack" style="margin-top:20px;">⬅ Menu Utama</button>
+  </div>
+
+  <!-- FLASHCARDS VIEWER -->
   <div class="card hidden" id="screen-flash">
     <div class="game-header">
-      <button class="back-btn" id="btnFlashBack">⬅ Menu</button>
+      <button class="back-btn" id="btnFlashBack">⬅ Kategori</button>
+      <div class="flash-counter" id="flashCounter" style="font-family:'Baloo 2',sans-serif; font-weight:800; color:var(--ink-soft);"></div>
     </div>
     <div class="mascot-wrap"><div class="mascot" id="mascotFlash">🦋</div></div>
-    <div class="speech">Kartu Huruf Abjad A-Z 🔤</div>
-    <div class="flash-hint-text">👆 Ketuk kartu untuk lihat kata Indonesia & Inggrisnya (26 kartu)</div>
+    <div class="flash-hint-text">👆 Ketuk kartu untuk lihat kata Indonesia & Inggrisnya</div>
     <div class="flash-grid" id="flashGrid"></div>
   </div>
 </div>
@@ -503,7 +524,7 @@
   }
 
   /* ---------- Screens ---------- */
-  const screenIds = ['menu','letter','letter-result','sort','sort-result','memory','memory-result','flash'];
+  const screenIds = ['menu','letter','letter-result','sort','sort-result','memory','memory-result','flash-categories','flash'];
   const screens = {};
   screenIds.forEach(id => screens[id] = document.getElementById('screen-' + id));
   function showScreen(name){
@@ -899,38 +920,46 @@
   }
 
   /* =========================================================
-     FLASHCARDS — Kartu Huruf
+     FLASHCARDS — Hewan & Buah
   ========================================================= */
-  function renderFlashGrid(){
-    const alphabetCards = [
-      {letter:'A', word:'Apel', en:'Apple', emoji:'🍎'},
-      {letter:'B', word:'Bola', en:'Ball', emoji:'⚽'},
-      {letter:'C', word:'Cicak', en:'Lizard', emoji:'🦎'},
-      {letter:'D', word:'Domba', en:'Sheep', emoji:'🐑'},
-      {letter:'E', word:'Ember', en:'Bucket', emoji:'🪣'},
-      {letter:'F', word:'Flamingo', en:'Flamingo', emoji:'🦩'},
-      {letter:'G', word:'Gajah', en:'Elephant', emoji:'🐘'},
-      {letter:'H', word:'Harimau', en:'Tiger', emoji:'🐯'},
-      {letter:'I', word:'Ikan', en:'Fish', emoji:'🐟'},
-      {letter:'J', word:'Jam', en:'Clock', emoji:'⏰'},
-      {letter:'K', word:'Kucing', en:'Cat', emoji:'🐱'},
-      {letter:'L', word:'Lebah', en:'Bee', emoji:'🐝'},
-      {letter:'M', word:'Mobil', en:'Car', emoji:'🚗'},
-      {letter:'N', word:'Nanas', en:'Pineapple', emoji:'🍍'},
-      {letter:'O', word:'Ombak', en:'Wave', emoji:'🌊'},
-      {letter:'P', word:'Pisang', en:'Banana', emoji:'🍌'},
-      {letter:'Q', word:'Quokka', en:'Quokka', emoji:'🐹'},
-      {letter:'R', word:'Rumah', en:'House', emoji:'🏠'},
-      {letter:'S', word:'Sepeda', en:'Bicycle', emoji:'🚲'},
-      {letter:'T', word:'Topi', en:'Hat', emoji:'🎩'},
-      {letter:'U', word:'Ular', en:'Snake', emoji:'🐍'},
-      {letter:'V', word:'Voli', en:'Volleyball', emoji:'🏐'},
-      {letter:'W', word:'Wortel', en:'Carrot', emoji:'🥕'},
-      {letter:'X', word:'Sinar-X', en:'X-ray', emoji:'🩻'},
-      {letter:'Y', word:'Yoyo', en:'Yoyo', emoji:'🪀'},
-      {letter:'Z', word:'Zebra', en:'Zebra', emoji:'🦓'}
-    ];
-    const items = alphabetCards;
+  const animalCards = [
+    {word:'Anjing', en:'Dog', emoji:'🐶'},
+    {word:'Kucing', en:'Cat', emoji:'🐱'},
+    {word:'Kelinci', en:'Rabbit', emoji:'🐰'},
+    {word:'Beruang', en:'Bear', emoji:'🐻'},
+    {word:'Singa', en:'Lion', emoji:'🦁'},
+    {word:'Katak', en:'Frog', emoji:'🐸'},
+    {word:'Monyet', en:'Monkey', emoji:'🐵'},
+    {word:'Babi', en:'Pig', emoji:'🐷'},
+    {word:'Ayam', en:'Chicken', emoji:'🐔'},
+    {word:'Burung', en:'Bird', emoji:'🐦'},
+    {word:'Kuda', en:'Horse', emoji:'🐴'},
+    {word:'Kura-kura', en:'Turtle', emoji:'🐢'}
+  ];
+
+  const fruitCards = [
+    {word:'Apel', en:'Apple', emoji:'🍎'},
+    {word:'Stroberi', en:'Strawberry', emoji:'🍓'},
+    {word:'Ceri', en:'Cherry', emoji:'🍒'},
+    {word:'Pisang', en:'Banana', emoji:'🍌'},
+    {word:'Lemon', en:'Lemon', emoji:'🍋'},
+    {word:'Nanas', en:'Pineapple', emoji:'🍍'},
+    {word:'Anggur', en:'Grape', emoji:'🍇'},
+    {word:'Tomat', en:'Tomato', emoji:'🍅'},
+    {word:'Wortel', en:'Carrot', emoji:'🥕'},
+    {word:'Brokoli', en:'Broccoli', emoji:'🥦'},
+    {word:'Timun', en:'Cucumber', emoji:'🥒'},
+    {word:'Apel Hijau', en:'Green Apple', emoji:'🍏'}
+  ];
+
+  function startFlashcards(category){
+    showScreen('flash');
+    renderFlashGrid(category);
+  }
+
+  function renderFlashGrid(category){
+    const items = category === 'animal' ? animalCards : fruitCards;
+    document.getElementById('flashCounter').textContent = category === 'animal' ? 'Hewan' : 'Buah & Sayur';
     const grid = document.getElementById('flashGrid');
     grid.innerHTML = '';
     items.forEach(item => {
@@ -938,10 +967,12 @@
       tile.className = 'flash-tile';
       tile.innerHTML = `
         <div class="flash-tile-inner">
-          <div class="flash-tile-face flash-tile-front"><div class="flash-letter">${item.letter}</div></div>
-          <div class="flash-tile-face flash-tile-back">
+          <div class="flash-tile-face flash-tile-front">
             <div class="flash-tile-emoji">${item.emoji}</div>
             <div class="flash-tile-word">${item.word}</div>
+          </div>
+          <div class="flash-tile-face flash-tile-back">
+            <div class="flash-tile-emoji">${item.emoji}</div>
             <div class="flash-tile-word-en">🔤 ${item.en}</div>
           </div>
         </div>`;
@@ -967,8 +998,11 @@
   document.getElementById('btnMemoryReplay').addEventListener('click', startMemoryGame);
   document.getElementById('btnMemoryMenu').addEventListener('click', () => showScreen('menu'));
 
-  document.getElementById('btnFlash').addEventListener('click', () => { renderFlashGrid(); showScreen('flash'); });
-  document.getElementById('btnFlashBack').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnFlash').addEventListener('click', () => showScreen('flash-categories'));
+  document.getElementById('btnFlashCatBack').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnFlashAnimal').addEventListener('click', () => startFlashcards('animal'));
+  document.getElementById('btnFlashFruit').addEventListener('click', () => startFlashcards('fruit'));
+  document.getElementById('btnFlashBack').addEventListener('click', () => showScreen('flash-categories'));
 
   showScreen('menu');
 })();

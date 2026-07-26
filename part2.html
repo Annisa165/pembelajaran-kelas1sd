@@ -64,7 +64,7 @@
     50%{transform:translateY(-6px) rotate(6deg);}
   }
   .star-total{display:flex; align-items:center; gap:6px; background:var(--card); padding:8px 14px; border-radius:999px; font-weight:800; box-shadow:0 4px 0 rgba(0,0,0,0.08); font-family:'Baloo 2',sans-serif; color:var(--sun-dark);}
-  .home-link{display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:13px; color:var(--ink-soft); background:var(--card); padding:8px 14px; border-radius:999px; box-shadow:0 3px 0 rgba(0,0,0,0.08); margin-bottom:14px; align-self:flex-start;}
+  .home-link{display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:13px; color:var(--ink-soft); background:var(--card); padding:8px 14px; border-radius:999px; box-shadow:0 3px 0 rgba(0,0,0,0.08);}
 
   .card{
     background:var(--card);
@@ -277,7 +277,9 @@
     <a href="index.html" class="brand"><span class="mascot-ico">🦋</span> Taman Ceria</a>
     <div class="star-total">⭐ <span id="totalStars">0</span></div>
   </div>
-  <a href="index.html" class="home-link">🏠 Beranda</a>
+  <div style="width:100%; max-width:640px; margin:-6px 0 14px;">
+    <a href="index.html" class="home-link">🏠 Beranda</a>
+  </div>
 
   <!-- MENU -->
   <div class="card" id="screen-menu">

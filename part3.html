@@ -295,11 +295,17 @@
   .flash-hint-text{font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); margin:2px 0 14px; font-size:14px;}
 
   /* Result */
-  .result-stars{font-size:52px; margin:12px 0; letter-spacing:6px;}
-  .result-stars span{display:inline-block; animation:star-pop 0.5s ease backwards;}
-  .result-stars span:nth-child(1){animation-delay:0.1s;}
-  .result-stars span:nth-child(2){animation-delay:0.3s;}
-  .result-stars span:nth-child(3){animation-delay:0.5s;}
+  .result-stars{font-size:40px; margin:12px 0; display:flex; flex-wrap:wrap; justify-content:center; gap:2px; max-width:360px; margin-left:auto; margin-right:auto;}
+  .result-stars span{display:inline-block; animation:star-pop 0.4s ease backwards;}
+  .result-stars span:nth-child(1){animation-delay:0.05s;}
+  .result-stars span:nth-child(2){animation-delay:0.1s;}
+  .result-stars span:nth-child(3){animation-delay:0.15s;}
+  .result-stars span:nth-child(4){animation-delay:0.2s;}
+  .result-stars span:nth-child(5){animation-delay:0.25s;}
+  .result-stars span:nth-child(6){animation-delay:0.3s;}
+  .result-stars span:nth-child(7){animation-delay:0.35s;}
+  .result-stars span:nth-child(8){animation-delay:0.4s;}
+  .result-stars span:nth-child(n+9){animation-delay:0.45s;}
   @keyframes star-pop{
     0%{transform:scale(0) rotate(-90deg); opacity:0;}
     70%{transform:scale(1.3) rotate(10deg); opacity:1;}
@@ -417,7 +423,7 @@
   <!-- SCIENCE RESULT -->
   <div class="card hidden" id="screen-science-result">
     <div class="mascot-wrap"><div class="mascot happy" id="mascotScienceResult">🏆</div></div>
-    <div class="result-stars"><span>⭐</span><span>⭐</span><span>⭐</span></div>
+    <div class="result-stars" id="scienceResultStars"></div>
     <div class="result-msg" id="scienceResultMsg">Semua bagian tubuh ditemukan! 🎉</div>
     <div class="result-sub" id="scienceResultSub">Kamu berhasil mengenal 8 bagian tubuh dan fungsinya</div>
     <div class="result-actions">
@@ -784,6 +790,15 @@
 
   function showScienceResult(){
     showScreen('science-result');
+    const totalStarsPossible = scienceTotal + scienceBonus.total;
+    const filled = scienceTotal + scienceBonus.correct;
+    const starsEl = document.getElementById('scienceResultStars');
+    starsEl.innerHTML = '';
+    for(let i=0;i<totalStarsPossible;i++){
+      const s = document.createElement('span');
+      s.textContent = i < filled ? '⭐' : '☆';
+      starsEl.appendChild(s);
+    }
     document.getElementById('scienceResultMsg').textContent = scienceBonus.correct === scienceBonus.total ? 'Ingatanmu luar biasa! 🎉' : 'Kerja bagus!';
     document.getElementById('scienceResultSub').textContent = `Menemukan 8 bagian tubuh + tantangan bonus ${scienceBonus.correct}/${scienceBonus.total} benar`;
     setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
@@ -898,18 +913,18 @@
 
   function showMathResult(){
     showScreen('math-result');
-    let stars = 1;
-    if(mathState.mistakes <= 1) stars = 3; else if(mathState.mistakes <= 4) stars = 2;
+    const filled = Math.max(0, MATH_SEQ_LEN - mathState.mistakes);
     const starsEl = document.getElementById('mathResultStars');
     starsEl.innerHTML = '';
-    for(let i=0;i<3;i++){
+    for(let i=0;i<MATH_SEQ_LEN;i++){
       const s = document.createElement('span');
-      s.textContent = i < stars ? '⭐' : '☆';
+      s.textContent = i < filled ? '⭐' : '☆';
       starsEl.appendChild(s);
     }
-    document.getElementById('mathResultMsg').textContent = stars === 3 ? 'Urutan sempurna! 🎉' : (stars === 2 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+    const perfect = mathState.mistakes === 0;
+    document.getElementById('mathResultMsg').textContent = perfect ? 'Urutan sempurna! 🎉' : (filled >= MATH_SEQ_LEN/2 ? 'Bagus sekali!' : 'Terus berlatih ya!');
     document.getElementById('mathResultSub').textContent = `Kamu mengurutkan 8 bilangan dengan ${mathState.mistakes} kesalahan`;
-    if(stars === 3) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+    if(perfect) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
   }
 
   /* =========================================================
@@ -1040,18 +1055,16 @@
   function showCompareResult(){
     showScreen('compare-result');
     const ratio = compareState.score / COMPARE_ROUND_LEN;
-    let stars = 1;
-    if(ratio >= 0.85) stars = 3; else if(ratio >= 0.5) stars = 2;
     const starsEl = document.getElementById('compareResultStars');
     starsEl.innerHTML = '';
-    for(let i=0;i<3;i++){
+    for(let i=0;i<COMPARE_ROUND_LEN;i++){
       const s = document.createElement('span');
-      s.textContent = i < stars ? '⭐' : '☆';
+      s.textContent = i < compareState.score ? '⭐' : '☆';
       starsEl.appendChild(s);
     }
-    document.getElementById('compareResultMsg').textContent = stars === 3 ? 'Luar biasa hebat! 🎉' : (stars === 2 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+    document.getElementById('compareResultMsg').textContent = ratio >= 0.85 ? 'Luar biasa hebat! 🎉' : (ratio >= 0.5 ? 'Bagus sekali!' : 'Terus berlatih ya!');
     document.getElementById('compareResultSub').textContent = `Kamu menjawab benar ${compareState.score} dari ${COMPARE_ROUND_LEN} soal`;
-    if(stars === 3) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+    if(ratio >= 0.85) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
   }
 
   /* =========================================================
@@ -1163,18 +1176,16 @@
   function showEnglishResult(){
     showScreen('english-result');
     const ratio = englishState.score / ENGLISH_ROUND_LEN;
-    let stars = 1;
-    if(ratio >= 0.85) stars = 3; else if(ratio >= 0.5) stars = 2;
     const starsEl = document.getElementById('englishResultStars');
     starsEl.innerHTML = '';
-    for(let i=0;i<3;i++){
+    for(let i=0;i<ENGLISH_ROUND_LEN;i++){
       const s = document.createElement('span');
-      s.textContent = i < stars ? '⭐' : '☆';
+      s.textContent = i < englishState.score ? '⭐' : '☆';
       starsEl.appendChild(s);
     }
-    document.getElementById('englishResultMsg').textContent = stars === 3 ? 'Luar biasa hebat! 🎉' : (stars === 2 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+    document.getElementById('englishResultMsg').textContent = ratio >= 0.85 ? 'Luar biasa hebat! 🎉' : (ratio >= 0.5 ? 'Bagus sekali!' : 'Terus berlatih ya!');
     document.getElementById('englishResultSub').textContent = `Kamu menjawab benar ${englishState.score} dari ${ENGLISH_ROUND_LEN} soal`;
-    if(stars === 3) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+    if(ratio >= 0.85) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
   }
 
   /* =========================================================

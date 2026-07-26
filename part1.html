@@ -429,6 +429,7 @@
   </div>
 </div>
 
+<script src="stats.js"></script>
 <script>
 (function(){
   "use strict";
@@ -463,7 +464,7 @@
 
   /* ---------- State ---------- */
   const state = {
-    totalStars: Number(sessionStorage.getItem('bintang_totalStars') || 0),
+    totalStars: LearnStats.getTotalStars(),
     mode: null,       // 'math' | 'ipas'
     questions: [],
     index: 0,
@@ -525,7 +526,7 @@
   }
 
   function saveStars(){
-    sessionStorage.setItem('bintang_totalStars', String(state.totalStars));
+    LearnStats.addTotalStars(1);
     els.totalStars.textContent = state.totalStars;
   }
 
@@ -982,12 +983,21 @@
     }
   }
 
+  function activityKeyFor(q){
+    if(q.type === 'math') return ['part1_matematika', 'Matematika (Bagian 1)'];
+    if(q.type === 'ipas') return ['part1_ipa', 'IPA: Anggota Tubuh (Bagian 1)'];
+    return ['part1_bahasa_inggris', 'Bahasa Inggris: Angka (Bagian 1)'];
+  }
+
   function handleAnswer(btn, isCorrect, q){
     if(state.answered) return;
     state.answered = true;
 
     const allBtns = els.optionsGrid.querySelectorAll('.opt-btn');
     allBtns.forEach(b => b.disabled = true);
+
+    const [statKey, statLabel] = activityKeyFor(q);
+    LearnStats.recordAnswer(statKey, statLabel, isCorrect);
 
     if(isCorrect){
       btn.classList.add('correct');

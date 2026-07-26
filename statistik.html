@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statistik Belajar 📊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#7FD1FF;
+    --sky-bottom:#FFE9B8;
+    --card:#FFFFFF;
+    --coral:#FF6B6B;
+    --coral-dark:#E5504F;
+    --sun:#FFC93C;
+    --sun-dark:#F0A500;
+    --leaf:#4ECE6F;
+    --leaf-dark:#33A852;
+    --grape:#9B72CF;
+    --ink:#2B3A55;
+    --ink-soft:#5C6C8A;
+    --cream:#FFF8EA;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Nunito',sans-serif;
+    min-height:100vh;
+    background:linear-gradient(180deg,var(--sky-top) 0%, #B9E7FF 40%, var(--sky-bottom) 100%);
+    color:var(--ink);
+  }
+  .app{max-width:720px; margin:0 auto; padding:28px 16px 80px;}
+
+  .topbar{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
+  .brand{display:flex; align-items:center; gap:8px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:20px; color:var(--ink); text-decoration:none;}
+  .home-link{display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:13px; color:var(--ink-soft); background:var(--card); padding:8px 14px; border-radius:999px; box-shadow:0 3px 0 rgba(0,0,0,0.08);}
+
+  .card{background:var(--card); border-radius:28px; box-shadow:0 10px 0 rgba(43,58,85,0.12), 0 16px 30px rgba(43,58,85,0.12); padding:26px 24px; margin-bottom:20px;}
+  h1.title{font-family:'Baloo 2',sans-serif; font-size:clamp(26px,6vw,36px); margin:0 0 4px; font-weight:800; text-align:center;}
+  p.subtitle{text-align:center; color:var(--ink-soft); font-weight:700; margin:0 0 20px; font-size:15px;}
+
+  .summary-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:6px;}
+  .summary-pill{
+    background:var(--cream); border:3px solid #FFE1A3; border-radius:18px; padding:14px 22px; text-align:center; min-width:120px;
+  }
+  .summary-pill .sp-value{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:26px; color:var(--sun-dark);}
+  .summary-pill .sp-label{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:12.5px; color:var(--ink-soft); margin-top:2px;}
+
+  h2.section-title{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:19px; margin:0 0 6px;}
+  p.section-sub{color:var(--ink-soft); font-weight:700; font-size:13.5px; margin:0 0 16px;}
+
+  .activity-row{margin-bottom:16px;}
+  .activity-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; gap:8px;}
+  .activity-name{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:14.5px; color:var(--ink);}
+  .activity-pct{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:14.5px;}
+  .activity-detail{font-size:12px; color:var(--ink-soft); font-weight:700; margin-top:3px;}
+  .bar-track{background:#EFEFEF; border-radius:999px; height:16px; overflow:hidden; box-shadow:inset 0 2px 3px rgba(0,0,0,0.08);}
+  .bar-fill{height:100%; border-radius:999px; transition:width 0.5s ease;}
+
+  .badge-focus{
+    display:inline-block; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:11px;
+    background:#FFE1E1; color:var(--coral-dark); padding:3px 10px; border-radius:999px; margin-left:8px; vertical-align:middle;
+  }
+  .badge-great{
+    display:inline-block; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:11px;
+    background:#DFF7E3; color:var(--leaf-dark); padding:3px 10px; border-radius:999px; margin-left:8px; vertical-align:middle;
+  }
+
+  .empty-state{text-align:center; padding:30px 10px; color:var(--ink-soft); font-weight:700; font-family:'Baloo 2',sans-serif;}
+  .empty-state .ee-emoji{font-size:48px; display:block; margin-bottom:10px;}
+
+  .reset-wrap{text-align:center; margin-top:6px;}
+  .reset-btn{
+    background:none; border:2px solid #FFB4B0; color:var(--coral-dark); font-family:'Baloo 2',sans-serif; font-weight:700;
+    font-size:13px; padding:8px 16px; border-radius:999px; cursor:pointer;
+  }
+  .reset-btn:hover{background:#FFF1F0;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <a href="index.html" class="brand">📊 Statistik Belajar</a>
+    <a href="index.html" class="home-link">🏠 Beranda</a>
+  </div>
+
+  <div class="card">
+    <h1 class="title">Rekap Belajar</h1>
+    <p class="subtitle">Ringkasan performa dari semua permainan yang sudah dicoba</p>
+    <div class="summary-row">
+      <div class="summary-pill">
+        <div class="sp-value" id="sumStars">0</div>
+        <div class="sp-label">⭐ Total Bintang</div>
+      </div>
+      <div class="summary-pill">
+        <div class="sp-value" id="sumAccuracy">-</div>
+        <div class="sp-label">🎯 Rata-rata Benar</div>
+      </div>
+      <div class="summary-pill">
+        <div class="sp-value" id="sumAttempts">0</div>
+        <div class="sp-label">📝 Total Percobaan</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="focusCard">
+    <h2 class="section-title">🔎 Perlu Latihan Lebih</h2>
+    <p class="section-sub">Aktivitas dengan tingkat jawaban benar paling rendah, diurutkan dari yang paling perlu dilatih</p>
+    <div id="focusList"></div>
+  </div>
+
+  <div class="card" id="allCard">
+    <h2 class="section-title">📋 Semua Aktivitas</h2>
+    <p class="section-sub">Detail performa di setiap permainan berbasis kuis/skor</p>
+    <div id="allList"></div>
+    <div class="reset-wrap">
+      <button class="reset-btn" id="btnReset">🗑️ Reset semua statistik</button>
+    </div>
+  </div>
+</div>
+
+<script src="stats.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  function pct(correct, wrong){
+    const total = correct + wrong;
+    if(total === 0) return null;
+    return Math.round((correct / total) * 100);
+  }
+
+  function barColor(p){
+    if(p === null) return '#C7C7C7';
+    if(p >= 80) return 'linear-gradient(90deg,#7FE3B4,#33A852)';
+    if(p >= 50) return 'linear-gradient(90deg,#FFD873,#F0A500)';
+    return 'linear-gradient(90deg,#FF8B6B,#E5504F)';
+  }
+
+  function renderActivityRow(key, data){
+    const p = pct(data.correct, data.wrong);
+    const total = data.correct + data.wrong;
+    const row = document.createElement('div');
+    row.className = 'activity-row';
+
+    let badge = '';
+    if(p !== null){
+      if(p < 50) badge = '<span class="badge-focus">Perlu latihan</span>';
+      else if(p >= 85) badge = '<span class="badge-great">Sudah lancar</span>';
+    }
+
+    row.innerHTML = `
+      <div class="activity-head">
+        <span class="activity-name">${data.label}${badge}</span>
+        <span class="activity-pct" style="color:${p===null ? '#9AA3B5' : (p>=80?'#33A852':(p>=50?'#F0A500':'#E5504F'))}">${p===null ? '-' : p+'%'}</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${p===null?0:p}%; background:${barColor(p)};"></div></div>
+      <div class="activity-detail">${data.correct} benar &middot; ${data.wrong} salah &middot; ${total} percobaan</div>
+    `;
+    return row;
+  }
+
+  function render(){
+    const stats = LearnStats.getStats();
+    const keys = Object.keys(stats);
+    const totalStars = LearnStats.getTotalStars();
+
+    document.getElementById('sumStars').textContent = totalStars;
+
+    let totalCorrect = 0, totalWrong = 0;
+    keys.forEach(k => { totalCorrect += stats[k].correct; totalWrong += stats[k].wrong; });
+    const totalAttempts = totalCorrect + totalWrong;
+    document.getElementById('sumAttempts').textContent = totalAttempts;
+    document.getElementById('sumAccuracy').textContent = totalAttempts === 0 ? '-' : Math.round((totalCorrect/totalAttempts)*100) + '%';
+
+    const allList = document.getElementById('allList');
+    const focusList = document.getElementById('focusList');
+    allList.innerHTML = '';
+    focusList.innerHTML = '';
+
+    if(keys.length === 0){
+      document.getElementById('focusCard').classList.add('hidden');
+      allList.innerHTML = `<div class="empty-state"><span class="ee-emoji">🌱</span>Belum ada data. Yuk mulai bermain dulu di salah satu bagian!</div>`;
+      return;
+    }
+
+    const withPct = keys.map(k => ({ key:k, data:stats[k], p: pct(stats[k].correct, stats[k].wrong) }));
+
+    // Semua aktivitas, urut sesuai kemunculan
+    withPct.forEach(item => allList.appendChild(renderActivityRow(item.key, item.data)));
+
+    // Fokus latihan: yang persentasenya < 70%, diurutkan dari paling rendah
+    const needsFocus = withPct
+      .filter(item => item.p !== null && item.p < 70)
+      .sort((a,b) => a.p - b.p)
+      .slice(0, 5);
+
+    if(needsFocus.length === 0){
+      focusList.innerHTML = `<div class="empty-state"><span class="ee-emoji">🎉</span>Semua aktivitas sudah bagus! Terus pertahankan ya.</div>`;
+    } else {
+      needsFocus.forEach(item => focusList.appendChild(renderActivityRow(item.key, item.data)));
+    }
+  }
+
+  document.getElementById('btnReset').addEventListener('click', () => {
+    if(confirm('Yakin ingin menghapus semua data bintang dan statistik? Tindakan ini tidak bisa dibatalkan.')){
+      LearnStats.resetAllProgress();
+      render();
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

@@ -428,6 +428,7 @@
   </div>
 </div>
 
+<script src="stats.js"></script>
 <script>
 (function(){
   "use strict";
@@ -511,12 +512,11 @@
     }
   }
 
-  let totalStars = Number(sessionStorage.getItem('taman_totalStars') || 0);
+  let totalStars = LearnStats.getTotalStars();
   const totalStarsEl = document.getElementById('totalStars');
   totalStarsEl.textContent = totalStars;
   function addStars(n){
-    totalStars += n;
-    sessionStorage.setItem('taman_totalStars', String(totalStars));
+    totalStars = LearnStats.addTotalStars(n);
     totalStarsEl.textContent = totalStars;
   }
 
@@ -617,6 +617,8 @@
     allBtns.forEach(b => b.disabled = true);
     const mascot = document.getElementById('mascotLetter');
     const feedback = document.getElementById('letterFeedback');
+
+    LearnStats.recordAnswer('part2_tebak_huruf', 'Tebak Huruf (Bagian 2)', isCorrect);
 
     document.getElementById('letterWord').textContent = item.word;
 
@@ -777,6 +779,7 @@
 
   function sortRoundProgress(correct){
     const mascot = document.getElementById('mascotSort');
+    LearnStats.recordAnswer('part2_seret_keranjang', 'Seret ke Keranjang (Bagian 2)', correct);
     if(correct){
       sortState.remaining--;
       addStars(1);
@@ -871,8 +874,10 @@
       const [a, b] = memoryState.flippedIdx;
       const cardA = memoryState.cards[a], cardB = memoryState.cards[b];
       const mascot = document.getElementById('mascotMemory');
+      const isMatch = cardA.emoji === cardB.emoji;
+      LearnStats.recordAnswer('part2_cari_pasangan', 'Cari Pasangan (Bagian 2)', isMatch);
 
-      if(cardA.emoji === cardB.emoji){
+      if(isMatch){
         cardA.matched = true; cardB.matched = true;
         memoryState.matched++;
         document.getElementById('memoryPairs').textContent = memoryState.matched;

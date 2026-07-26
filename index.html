@@ -184,6 +184,11 @@
   <h1 class="title">Petualangan Belajar Bintang</h1>
   <p class="subtitle">Website belajar sambil bermain untuk anak kelas 1 SD, seru dan penuh warna!</p>
 
+  <a href="statistik.html" id="statsLink" style="text-decoration:none; display:inline-flex; align-items:center; gap:10px; background:var(--card); border:3px solid var(--sun); border-radius:999px; padding:10px 20px; margin-bottom:26px; box-shadow:0 4px 0 rgba(0,0,0,0.08);">
+    <span style="font-family:'Baloo 2',sans-serif; font-weight:800; color:var(--sun-dark); font-size:15px;">⭐ <span id="homeTotalStars">0</span> bintang terkumpul</span>
+    <span style="font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); font-size:13px;">📊 Lihat statistik &rarr;</span>
+  </a>
+
   <div class="parts-wrap">
     <div class="part-card">
       <div class="part-top">
@@ -257,9 +262,14 @@
     </div>
   </div>
 
-  <p class="footnote">Skor bintang kamu tersimpan otomatis selama sesi belajar berlangsung. Selamat belajar! 🎉</p>
+  <p class="footnote">⭐ Bintang dan statistik kamu tersimpan permanen di perangkat ini, walau browser ditutup. Selamat belajar! 🎉</p>
 </div>
 
+<script src="stats.js"></script>
+<script>
+  const homeTotalStarsEl = document.getElementById('homeTotalStars');
+  if(homeTotalStarsEl) homeTotalStarsEl.textContent = LearnStats.getTotalStars();
+</script>
 <script>
   const bgDecor = document.getElementById('bgDecor');
   function makeCloud(top, size, duration, delay){

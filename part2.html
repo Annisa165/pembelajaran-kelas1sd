@@ -243,11 +243,17 @@
   .flash-hint-text{font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); margin:2px 0 14px; font-size:14px;}
 
   /* Result screen */
-  .result-stars{font-size:52px; margin:12px 0; letter-spacing:6px;}
-  .result-stars span{display:inline-block; animation:star-pop 0.5s ease backwards;}
-  .result-stars span:nth-child(1){animation-delay:0.1s;}
-  .result-stars span:nth-child(2){animation-delay:0.3s;}
-  .result-stars span:nth-child(3){animation-delay:0.5s;}
+  .result-stars{font-size:40px; margin:12px 0; display:flex; flex-wrap:wrap; justify-content:center; gap:2px; max-width:360px; margin-left:auto; margin-right:auto;}
+  .result-stars span{display:inline-block; animation:star-pop 0.4s ease backwards;}
+  .result-stars span:nth-child(1){animation-delay:0.05s;}
+  .result-stars span:nth-child(2){animation-delay:0.1s;}
+  .result-stars span:nth-child(3){animation-delay:0.15s;}
+  .result-stars span:nth-child(4){animation-delay:0.2s;}
+  .result-stars span:nth-child(5){animation-delay:0.25s;}
+  .result-stars span:nth-child(6){animation-delay:0.3s;}
+  .result-stars span:nth-child(7){animation-delay:0.35s;}
+  .result-stars span:nth-child(8){animation-delay:0.4s;}
+  .result-stars span:nth-child(n+9){animation-delay:0.45s;}
   @keyframes star-pop{
     0%{transform:scale(0) rotate(-90deg); opacity:0;}
     70%{transform:scale(1.3) rotate(10deg); opacity:1;}
@@ -656,18 +662,16 @@
   function showLetterResult(){
     showScreen('letter-result');
     const ratio = letterState.score / LETTER_ROUND_LEN;
-    let stars = 1;
-    if(ratio >= 0.85) stars = 3; else if(ratio >= 0.5) stars = 2;
     const starsEl = document.getElementById('letterResultStars');
     starsEl.innerHTML = '';
-    for(let i=0;i<3;i++){
+    for(let i=0;i<LETTER_ROUND_LEN;i++){
       const s = document.createElement('span');
-      s.textContent = i < stars ? '⭐' : '☆';
+      s.textContent = i < letterState.score ? '⭐' : '☆';
       starsEl.appendChild(s);
     }
-    document.getElementById('letterResultMsg').textContent = stars === 3 ? 'Luar biasa hebat! 🎉' : (stars === 2 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+    document.getElementById('letterResultMsg').textContent = ratio >= 0.85 ? 'Luar biasa hebat! 🎉' : (ratio >= 0.5 ? 'Bagus sekali!' : 'Terus berlatih ya!');
     document.getElementById('letterResultSub').textContent = `Kamu menjawab benar ${letterState.score} dari ${LETTER_ROUND_LEN} soal`;
-    if(stars === 3) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+    if(ratio >= 0.85) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
   }
 
   /* =========================================================
@@ -801,18 +805,18 @@
 
   function showSortResult(){
     showScreen('sort-result');
-    let stars = 1;
-    if(sortState.mistakes <= 1) stars = 3; else if(sortState.mistakes <= 4) stars = 2;
+    const filled = Math.max(0, sortState.total - sortState.mistakes);
     const starsEl = document.getElementById('sortResultStars');
     starsEl.innerHTML = '';
-    for(let i=0;i<3;i++){
+    for(let i=0;i<sortState.total;i++){
       const s = document.createElement('span');
-      s.textContent = i < stars ? '⭐' : '☆';
+      s.textContent = i < filled ? '⭐' : '☆';
       starsEl.appendChild(s);
     }
-    document.getElementById('sortResultMsg').textContent = stars === 3 ? 'Sortir sempurna! 🎉' : (stars === 2 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+    const perfect = sortState.mistakes === 0;
+    document.getElementById('sortResultMsg').textContent = perfect ? 'Sortir sempurna! 🎉' : (filled >= sortState.total/2 ? 'Bagus sekali!' : 'Terus berlatih ya!');
     document.getElementById('sortResultSub').textContent = `Kamu menyortir semua buah dengan ${sortState.mistakes} kesalahan`;
-    if(stars === 3) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+    if(perfect) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
   }
 
   /* =========================================================
@@ -912,18 +916,20 @@
 
   function showMemoryResult(){
     showScreen('memory-result');
-    let stars = 1;
-    if(memoryState.attempts <= 8) stars = 3; else if(memoryState.attempts <= 12) stars = 2;
+    const totalPairs = memoryEmojis.length;
+    const extraTries = Math.max(0, memoryState.attempts - totalPairs);
+    const filled = Math.max(0, totalPairs - extraTries);
     const starsEl = document.getElementById('memoryResultStars');
     starsEl.innerHTML = '';
-    for(let i=0;i<3;i++){
+    for(let i=0;i<totalPairs;i++){
       const s = document.createElement('span');
-      s.textContent = i < stars ? '⭐' : '☆';
+      s.textContent = i < filled ? '⭐' : '☆';
       starsEl.appendChild(s);
     }
-    document.getElementById('memoryResultMsg').textContent = stars === 3 ? 'Ingatan super tajam! 🎉' : (stars === 2 ? 'Bagus sekali!' : 'Terus berlatih ya!');
-    document.getElementById('memoryResultSub').textContent = `Semua 6 pasang ditemukan dalam ${memoryState.attempts} percobaan`;
-    if(stars === 3) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+    const perfect = memoryState.attempts === totalPairs;
+    document.getElementById('memoryResultMsg').textContent = perfect ? 'Ingatan super tajam! 🎉' : (filled >= totalPairs/2 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+    document.getElementById('memoryResultSub').textContent = `Semua ${totalPairs} pasang ditemukan dalam ${memoryState.attempts} percobaan`;
+    if(perfect) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
   }
 
   /* =========================================================

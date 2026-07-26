@@ -560,6 +560,7 @@
   </div>
 </div>
 
+<script src="stats.js"></script>
 <script>
 (function(){
   "use strict";
@@ -634,12 +635,11 @@
     }
   }
 
-  let totalStars = Number(sessionStorage.getItem('sekolah_totalStars') || 0);
+  let totalStars = LearnStats.getTotalStars();
   const totalStarsEl = document.getElementById('totalStars');
   totalStarsEl.textContent = totalStars;
   function addStars(n){
-    totalStars += n;
-    sessionStorage.setItem('sekolah_totalStars', String(totalStars));
+    totalStars = LearnStats.addTotalStars(n);
     totalStarsEl.textContent = totalStars;
   }
 
@@ -729,7 +729,9 @@
 
       if(scienceBonus.active){
         const target = scienceBonus.queue[scienceBonus.index];
-        if(part === target){
+        const isCorrect = part === target;
+        LearnStats.recordAnswer('part3_ipa_tubuhku', 'IPA: Tubuhku (Bagian 3)', isCorrect);
+        if(isCorrect){
           document.querySelectorAll(`#screen-science .hotspot[data-part="${part}"]`).forEach(h => h.classList.add('found'));
           scienceBonus.correct++;
           addStars(2);
@@ -862,8 +864,10 @@
     const expected = mathState.target[mathState.built.length];
     const mascot = document.getElementById('mascotMath');
     const streakWrap = document.getElementById('streakWrap');
+    const isCorrect = num === expected;
+    LearnStats.recordAnswer('part3_matematika_urutkan', 'Matematika: Urutkan Bilangan (Bagian 3)', isCorrect);
 
-    if(num === expected){
+    if(isCorrect){
       mathState.built.push(num);
       mathState.streak++;
       document.getElementById('mathBuiltCount').textContent = mathState.built.length;
@@ -1000,6 +1004,7 @@
     const mascot = document.getElementById('mascotCompare');
     const feedback = document.getElementById('compareFeedback');
     const correctDef = compareOptionDefs.find(o => o.key === item.answer);
+    LearnStats.recordAnswer('part3_matematika_bandingkan', 'Matematika: Bandingkan Bilangan (Bagian 3)', isCorrect);
 
     if(isCorrect){
       btn.classList.add('correct');
@@ -1122,6 +1127,7 @@
     allBtns.forEach(b => b.disabled = true);
     const mascot = document.getElementById('mascotEnglish');
     const feedback = document.getElementById('englishFeedback');
+    LearnStats.recordAnswer('part3_bahasa_inggris', 'Bahasa Inggris: Di Sekolah (Bagian 3)', isCorrect);
 
     if(isCorrect){
       btn.classList.add('correct');

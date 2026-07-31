@@ -262,6 +262,20 @@
   .confetti-piece{position:fixed; top:-20px; width:10px; height:16px; z-index:900; pointer-events:none; animation:fall linear forwards; border-radius:2px;}
   @keyframes fall{ to{transform:translateY(110vh) rotate(540deg); opacity:0.9;} }
 
+  /* Flashcards - Kartu Hewan */
+  .flash-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(110px,1fr)); gap:12px; margin:6px 0 10px;}
+  .flash-tile{perspective:900px; cursor:pointer; height:150px;}
+  .flash-tile-inner{width:100%; height:100%; position:relative; transition:transform 0.5s cubic-bezier(.4,.2,.2,1); transform-style:preserve-3d;}
+  .flash-tile.flipped .flash-tile-inner{transform:rotateY(180deg);}
+  .flash-tile-face{position:absolute; inset:0; backface-visibility:hidden; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px; box-shadow:0 5px 0 rgba(0,0,0,0.1);}
+  .flash-tile-front{background:linear-gradient(160deg,#4FBFA0,var(--forest)); border:3px solid #175A49; color:white;}
+  .flash-tile-back{background:linear-gradient(160deg,#DFF7E3,#B9EFC4); border:3px solid var(--mint); transform:rotateY(180deg);}
+  .flash-tile-emoji{font-size:34px;}
+  .flash-tile-word{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:13px; color:var(--ink); margin-top:4px; text-align:center;}
+  .flash-tile-word-en{font-family:'Baloo 2',sans-serif; font-weight:700; font-size:11.5px; color:var(--rust-dark); margin-top:2px; text-align:center; background:#FFE7DB; padding:2px 8px; border-radius:999px;}
+  .flash-hint-text{font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); margin:2px 0 14px; font-size:14px;}
+  .menu-btn.b-flash{background:linear-gradient(160deg,#7FE3B4,var(--mint-dark));}
+
   .hidden{display:none !important;}
 </style>
 </head>
@@ -305,6 +319,11 @@
         <span class="emoji">🗂️</span>
         Klasifikasi Hewan
         <small>Mamalia/burung/dll</small>
+      </button>
+      <button class="menu-btn b-flash" id="btnFlash">
+        <span class="emoji">📇</span>
+        Kartu Hewan
+        <small>Per kelompok + Inggris</small>
       </button>
     </div>
   </div>
@@ -419,6 +438,48 @@
       <button class="action-btn menu" id="btnClassifyMenu">🏠 Menu</button>
     </div>
   </div>
+
+  <!-- FLASHCARD CATEGORIES -->
+  <div class="card hidden" id="screen-flash-categories">
+    <div class="mascot-wrap"><div class="mascot" id="mascotFlashCat">🦊</div></div>
+    <div class="speech">Pilih kelompok hewan yang mau kamu hafalkan!</div>
+    <h1 class="title">Kartu Hewan</h1>
+    <p class="subtitle">Ketuk kartu untuk lihat nama Indonesia & Inggrisnya!</p>
+    <div class="menu-grid">
+      <button class="menu-btn b-word" id="btnFlashMamalia">
+        <span class="emoji">🐘</span>
+        Mamalia
+        <small id="countMamalia">- kartu</small>
+      </button>
+      <button class="menu-btn b-read" id="btnFlashBurung">
+        <span class="emoji">🦚</span>
+        Burung
+        <small id="countBurung">- kartu</small>
+      </button>
+      <button class="menu-btn b-guess" id="btnFlashReptil">
+        <span class="emoji">🐊</span>
+        Reptil
+        <small id="countReptil">- kartu</small>
+      </button>
+      <button class="menu-btn b-classify" id="btnFlashIkan">
+        <span class="emoji">🦈</span>
+        Ikan
+        <small id="countIkan">- kartu</small>
+      </button>
+    </div>
+    <button class="back-btn" id="btnFlashCatBack" style="margin-top:20px;">⬅ Menu Utama</button>
+  </div>
+
+  <!-- FLASHCARD VIEWER -->
+  <div class="card hidden" id="screen-flash">
+    <div class="game-header">
+      <button class="back-btn" id="btnFlashBack">⬅ Kategori</button>
+      <div class="score-pill" id="flashCounter">Kelompok</div>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotFlash">🦊</div></div>
+    <div class="flash-hint-text">👆 Ketuk kartu untuk membalik</div>
+    <div class="flash-grid" id="flashGrid"></div>
+  </div>
 </div>
 
 <script src="stats.js"></script>
@@ -519,7 +580,7 @@
   }
 
   /* ---------- Screens ---------- */
-  const screenIds = ['menu','word','word-result','read','read-result','guess','guess-result','classify','classify-result'];
+  const screenIds = ['menu','word','word-result','read','read-result','guess','guess-result','classify','classify-result','flash-categories','flash'];
   const screens = {};
   screenIds.forEach(id => screens[id] = document.getElementById('screen-' + id));
   function showScreen(name){
@@ -910,22 +971,22 @@
      KLASIFIKASI HEWAN — Animal Classification
   ========================================================= */
   const classifyBank = [
-    {name:'Gajah', emoji:'🐘', group:'Mamalia'},
-    {name:'Singa', emoji:'🦁', group:'Mamalia'},
-    {name:'Kelinci', emoji:'🐰', group:'Mamalia'},
-    {name:'Paus', emoji:'🐋', group:'Mamalia'},
-    {name:'Kelelawar', emoji:'🦇', group:'Mamalia'},
-    {name:'Elang', emoji:'🦅', group:'Burung'},
-    {name:'Burung Hantu', emoji:'🦉', group:'Burung'},
-    {name:'Merak', emoji:'🦚', group:'Burung'},
-    {name:'Penguin', emoji:'🐧', group:'Burung'},
-    {name:'Ayam', emoji:'🐔', group:'Burung'},
-    {name:'Buaya', emoji:'🐊', group:'Reptil'},
-    {name:'Kura-kura', emoji:'🐢', group:'Reptil'},
-    {name:'Ular', emoji:'🐍', group:'Reptil'},
-    {name:'Cicak', emoji:'🦎', group:'Reptil'},
-    {name:'Ikan Mas', emoji:'🐠', group:'Ikan'},
-    {name:'Hiu', emoji:'🦈', group:'Ikan'}
+    {name:'Gajah', en:'Elephant', emoji:'🐘', group:'Mamalia'},
+    {name:'Singa', en:'Lion', emoji:'🦁', group:'Mamalia'},
+    {name:'Kelinci', en:'Rabbit', emoji:'🐰', group:'Mamalia'},
+    {name:'Paus', en:'Whale', emoji:'🐋', group:'Mamalia'},
+    {name:'Kelelawar', en:'Bat', emoji:'🦇', group:'Mamalia'},
+    {name:'Elang', en:'Eagle', emoji:'🦅', group:'Burung'},
+    {name:'Burung Hantu', en:'Owl', emoji:'🦉', group:'Burung'},
+    {name:'Merak', en:'Peacock', emoji:'🦚', group:'Burung'},
+    {name:'Penguin', en:'Penguin', emoji:'🐧', group:'Burung'},
+    {name:'Ayam', en:'Chicken', emoji:'🐔', group:'Burung'},
+    {name:'Buaya', en:'Crocodile', emoji:'🐊', group:'Reptil'},
+    {name:'Kura-kura', en:'Turtle', emoji:'🐢', group:'Reptil'},
+    {name:'Ular', en:'Snake', emoji:'🐍', group:'Reptil'},
+    {name:'Cicak', en:'Lizard', emoji:'🦎', group:'Reptil'},
+    {name:'Ikan Mas', en:'Goldfish', emoji:'🐠', group:'Ikan'},
+    {name:'Hiu', en:'Shark', emoji:'🦈', group:'Ikan'}
   ];
   const CLASSIFY_ROUND_LEN = 8;
   const classifyGroups = ['Mamalia','Burung','Reptil','Ikan'];
@@ -1017,6 +1078,53 @@
     if(ratio >= 0.85) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
   }
 
+  /* =========================================================
+     KARTU HEWAN — Flashcard per kelompok (ID + EN)
+  ========================================================= */
+  const flashGroupMeta = {
+    Mamalia: {emoji:'🐘', label:'Mamalia'},
+    Burung: {emoji:'🦚', label:'Burung'},
+    Reptil: {emoji:'🐊', label:'Reptil'},
+    Ikan: {emoji:'🦈', label:'Ikan'}
+  };
+
+  function updateFlashCategoryCounts(){
+    Object.keys(flashGroupMeta).forEach(group => {
+      const count = classifyBank.filter(a => a.group === group).length;
+      const el = document.getElementById('count' + group);
+      if(el) el.textContent = count + ' kartu';
+    });
+  }
+
+  function startFlashcards(group){
+    showScreen('flash');
+    renderFlashGrid(group);
+  }
+
+  function renderFlashGrid(group){
+    const items = classifyBank.filter(a => a.group === group);
+    document.getElementById('flashCounter').textContent = flashGroupMeta[group].emoji + ' ' + flashGroupMeta[group].label;
+    const grid = document.getElementById('flashGrid');
+    grid.innerHTML = '';
+    items.forEach(item => {
+      const tile = document.createElement('div');
+      tile.className = 'flash-tile';
+      tile.innerHTML = `
+        <div class="flash-tile-inner">
+          <div class="flash-tile-face flash-tile-front">
+            <div class="flash-tile-emoji">${item.emoji}</div>
+            <div class="flash-tile-word">${item.name}</div>
+          </div>
+          <div class="flash-tile-face flash-tile-back">
+            <div class="flash-tile-emoji">${item.emoji}</div>
+            <div class="flash-tile-word-en">🔤 ${item.en}</div>
+          </div>
+        </div>`;
+      tile.addEventListener('click', () => tile.classList.toggle('flipped'));
+      grid.appendChild(tile);
+    });
+  }
+
   /* ---------- Events ---------- */
   document.getElementById('btnWord').addEventListener('click', startWordGame);
   document.getElementById('btnWordBack').addEventListener('click', () => showScreen('menu'));
@@ -1041,6 +1149,15 @@
   document.getElementById('btnClassifyReplay').addEventListener('click', startClassifyGame);
   document.getElementById('btnClassifyMenu').addEventListener('click', () => showScreen('menu'));
 
+  document.getElementById('btnFlash').addEventListener('click', () => showScreen('flash-categories'));
+  document.getElementById('btnFlashCatBack').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnFlashMamalia').addEventListener('click', () => startFlashcards('Mamalia'));
+  document.getElementById('btnFlashBurung').addEventListener('click', () => startFlashcards('Burung'));
+  document.getElementById('btnFlashReptil').addEventListener('click', () => startFlashcards('Reptil'));
+  document.getElementById('btnFlashIkan').addEventListener('click', () => startFlashcards('Ikan'));
+  document.getElementById('btnFlashBack').addEventListener('click', () => showScreen('flash-categories'));
+
+  updateFlashCategoryCounts();
   showScreen('menu');
 })();
 </script>

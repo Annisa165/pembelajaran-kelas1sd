@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Bagian 4: Rubi si Rubah Cerdik 🦊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#8FD9C4;
+    --sky-bottom:#FFF3D6;
+    --card:#FFFFFF;
+    --cream:#FFF8EA;
+    --ink:#2B3A34;
+    --ink-soft:#5C6F63;
+    --rust:#E8703A;
+    --rust-dark:#C85A28;
+    --gold:#F2B705;
+    --gold-dark:#D69A00;
+    --forest:#1F6F5C;
+    --forest-light:#3E9E85;
+    --plum:#7A57A0;
+    --plum-dark:#5E4080;
+    --mint:#4ECE6F;
+    --mint-dark:#33A852;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Nunito',sans-serif;
+    min-height:100vh;
+    background:linear-gradient(180deg,var(--sky-top) 0%, #CDEEE1 45%, var(--sky-bottom) 100%);
+    overflow-x:hidden;
+    color:var(--ink);
+    position:relative;
+    touch-action:manipulation;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  .bg-decor{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
+  .floater{position:absolute; font-size:24px; animation:drift-diag linear infinite;}
+  @keyframes drift-diag{
+    from{transform:translate(-10vw,0) rotate(0deg);}
+    to{transform:translate(110vw,-4vh) rotate(15deg);}
+  }
+  .sparkle{position:absolute; font-size:18px; animation:sway 3s ease-in-out infinite;}
+  @keyframes sway{
+    0%,100%{opacity:0.3; transform:translateY(0) rotate(-8deg);}
+    50%{opacity:1; transform:translateY(-12px) rotate(8deg);}
+  }
+  .ground{position:fixed; left:0; right:0; bottom:0; height:60px; background:linear-gradient(180deg,#2E8A73,var(--forest)); z-index:0; border-top:6px solid #175A49;}
+
+  .app{position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:20px 16px 90px;}
+
+  .topbar{width:100%; max-width:640px; display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+  .brand{display:flex; align-items:center; gap:8px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:20px; color:var(--ink); text-decoration:none;}
+  .brand .mascot-ico{font-size:26px; animation:flit 3s ease-in-out infinite;}
+  @keyframes flit{
+    0%,100%{transform:translateY(0) rotate(-6deg);}
+    50%{transform:translateY(-6px) rotate(6deg);}
+  }
+  .star-total{display:flex; align-items:center; gap:6px; background:var(--card); padding:8px 14px; border-radius:999px; font-weight:800; box-shadow:0 4px 0 rgba(0,0,0,0.08); font-family:'Baloo 2',sans-serif; color:var(--gold-dark);}
+  .home-link{display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:13px; color:var(--ink-soft); background:var(--card); padding:8px 14px; border-radius:999px; box-shadow:0 3px 0 rgba(0,0,0,0.08);}
+
+  .card{
+    background:var(--card);
+    border-radius:28px;
+    box-shadow:0 10px 0 rgba(31,111,92,0.12), 0 16px 30px rgba(31,111,92,0.12);
+    padding:26px 22px;
+    width:100%;
+    max-width:640px;
+    text-align:center;
+    position:relative;
+  }
+
+  .mascot-wrap{display:flex; justify-content:center; margin-bottom:4px;}
+  .mascot{
+    font-size:68px;
+    display:inline-block;
+    animation:flit2 2.6s ease-in-out infinite;
+    filter:drop-shadow(0 8px 6px rgba(0,0,0,0.15));
+  }
+  @keyframes flit2{
+    0%,100%{transform:translateY(0) rotate(-5deg);}
+    50%{transform:translateY(-9px) rotate(6deg);}
+  }
+  .mascot.happy{animation:happyjump 0.6s ease-in-out 2;}
+  @keyframes happyjump{
+    0%{transform:translateY(0) scale(1);}
+    30%{transform:translateY(-22px) scale(1.15) rotate(-10deg);}
+    60%{transform:translateY(0) scale(0.95) rotate(10deg);}
+    100%{transform:translateY(0) scale(1);}
+  }
+  .mascot.sad{animation:wobble 0.5s ease-in-out;}
+  @keyframes wobble{
+    0%,100%{transform:rotate(0);}
+    25%{transform:rotate(-8deg) translateX(-4px);}
+    75%{transform:rotate(8deg) translateX(4px);}
+  }
+  .speech{
+    display:inline-block;
+    background:var(--cream);
+    border:3px solid #FFDDA8;
+    padding:9px 16px;
+    border-radius:16px;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin-top:4px;
+    font-size:14.5px;
+    min-height:22px;
+  }
+
+  h1.title{
+    font-family:'Baloo 2',sans-serif;
+    font-size:clamp(26px,6vw,38px);
+    margin:6px 0 4px;
+    color:var(--ink);
+    font-weight:800;
+  }
+  p.subtitle{
+    font-size:15.5px;
+    color:var(--ink-soft);
+    margin:0 0 20px;
+    font-weight:700;
+  }
+
+  .menu-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:16px; margin-top:6px;}
+  @media (max-width:480px){ .menu-grid{grid-template-columns:1fr 1fr;} }
+  .menu-btn{
+    border:none; border-radius:22px; padding:22px 14px; cursor:pointer;
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:16px; color:white;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    box-shadow:0 6px 0 rgba(0,0,0,0.15);
+    transition:transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .menu-btn .emoji{font-size:38px;}
+  .menu-btn:active{transform:translateY(5px); box-shadow:0 1px 0 rgba(0,0,0,0.15);}
+  .menu-btn small{font-family:'Nunito',sans-serif; font-weight:700; font-size:11.5px; opacity:0.95;}
+  .menu-btn.b-word{background:linear-gradient(160deg,#F5966A,var(--rust));}
+  .menu-btn.b-read{background:linear-gradient(160deg,#FFD873,var(--gold));}
+  .menu-btn.b-guess{background:linear-gradient(160deg,#4FBFA0,var(--forest));}
+  .menu-btn.b-classify{background:linear-gradient(160deg,#A585C7,var(--plum));}
+
+  .difficulty-badge{
+    display:inline-block; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:11px;
+    background:#FFE1E1; color:var(--rust-dark); padding:3px 10px; border-radius:999px; margin-bottom:14px;
+  }
+
+  .back-btn{
+    background:var(--cream); border:none; border-radius:14px; padding:10px 14px;
+    font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); cursor:pointer;
+    box-shadow:0 3px 0 rgba(0,0,0,0.08);
+  }
+  .game-header{display:flex; align-items:center; justify-content:space-between; width:100%; margin-bottom:16px; gap:10px;}
+  .progress-wrap{flex:1; margin:0 12px;}
+  .progress-track{background:#EFEFEF; border-radius:999px; height:14px; overflow:hidden; box-shadow:inset 0 2px 3px rgba(0,0,0,0.08);}
+  .progress-fill{height:100%; border-radius:999px; background:linear-gradient(90deg,var(--gold),var(--rust)); transition:width 0.4s ease;}
+  .score-pill{display:flex; align-items:center; gap:4px; background:var(--card); border:2px solid var(--gold); border-radius:999px; padding:6px 12px; font-family:'Baloo 2',sans-serif; font-weight:800; color:var(--gold-dark); white-space:nowrap;}
+
+  /* Shared quiz */
+  .quiz-emoji{font-size:56px; margin-bottom:6px;}
+  .question-text{font-family:'Baloo 2',sans-serif; font-size:16px; font-weight:700; color:var(--ink-soft); margin:0 0 18px; line-height:1.5;}
+  .story-box{
+    background:var(--cream); border:3px solid #FFE1A3; border-radius:18px; padding:16px 18px; margin-bottom:16px;
+    font-family:'Baloo 2',sans-serif; font-weight:700; font-size:16px; color:var(--ink); line-height:1.6; text-align:left;
+  }
+  .options-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:420px){ .options-grid{grid-template-columns:1fr;} }
+  .opt-btn{
+    background:var(--cream); border:3px solid #FFDDA8; border-radius:18px; padding:16px 12px;
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:16px; color:var(--ink); cursor:pointer;
+    transition:transform 0.1s ease; box-shadow:0 4px 0 rgba(0,0,0,0.06);
+  }
+  .opt-btn:hover:not(:disabled){transform:translateY(-2px);}
+  .opt-btn:active:not(:disabled){transform:translateY(2px);}
+  .opt-btn:disabled{cursor:default;}
+  .opt-btn.correct{background:#DFF7E3; border-color:var(--mint); color:var(--mint-dark);}
+  .opt-btn.wrong{background:#FFE1DE; border-color:#FF6B6B; color:#C64643; animation:shake 0.4s ease;}
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-8px);}
+    75%{transform:translateX(8px);}
+  }
+  .feedback-banner{margin-top:16px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:15px; min-height:24px; color:var(--ink-soft);}
+  .next-btn{
+    margin-top:14px; background:linear-gradient(160deg,#FFD873,var(--gold)); border:none; border-radius:16px;
+    padding:12px 26px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:16px; color:var(--ink);
+    cursor:pointer; box-shadow:0 5px 0 var(--gold-dark); display:none;
+  }
+  .next-btn.show{display:inline-block; animation:pop-in 0.3s ease;}
+  @keyframes pop-in{
+    0%{transform:scale(0.7); opacity:0;} 100%{transform:scale(1); opacity:1;}
+  }
+
+  /* Word builder */
+  .word-slots{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; min-height:52px; margin:12px 0 18px;}
+  .word-slot{
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:18px; color:white;
+    background:linear-gradient(160deg,#F5966A,var(--rust)); border-radius:10px; padding:8px 14px; min-width:44px; text-align:center;
+  }
+  .word-slot.empty{background:#EFEFEF; color:#C7C7C7; box-shadow:inset 0 2px 3px rgba(0,0,0,0.06);}
+  .syllable-tiles{display:grid; grid-template-columns:repeat(auto-fit, minmax(70px,1fr)); gap:12px;}
+  .syllable-tile{
+    background:var(--cream); border:3px solid #FFDDA8; border-radius:16px; padding:14px 8px;
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:18px; color:var(--ink); cursor:pointer;
+    transition:transform 0.1s ease, opacity 0.2s ease; box-shadow:0 4px 0 rgba(0,0,0,0.06);
+  }
+  .syllable-tile:active:not(:disabled){transform:translateY(2px);}
+  .syllable-tile:disabled{opacity:0.25; cursor:default;}
+  .syllable-tile.wrong-shake{animation:shake 0.4s ease;}
+  .word-stats{font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); margin-top:16px; font-size:14px;}
+
+  /* Guess the animal */
+  .clue-stage{background:var(--cream); border:3px solid #FFE1A3; border-radius:20px; padding:20px; margin:6px 0 18px; min-height:120px;}
+  .clue-item{
+    font-family:'Baloo 2',sans-serif; font-weight:700; font-size:16px; color:var(--ink); text-align:left;
+    padding:8px 0; border-bottom:2px dashed #FFE1A3; animation:pop-in 0.3s ease;
+  }
+  .clue-item:last-child{border-bottom:none;}
+  .clue-number{color:var(--forest); font-weight:800; margin-right:6px;}
+  .clue-points{
+    display:inline-block; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:12px;
+    background:#DFF7E3; color:var(--mint-dark); padding:3px 10px; border-radius:999px; margin-bottom:12px;
+  }
+  .reveal-animal{font-size:64px; text-align:center; margin:10px 0;}
+
+  /* Difficulty tag on cards */
+  .high-tag{
+    position:absolute; top:16px; right:16px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:10.5px;
+    background:var(--plum); color:white; padding:4px 10px; border-radius:999px;
+  }
+
+  /* Result */
+  .result-stars{font-size:40px; margin:14px 0; display:flex; flex-wrap:wrap; justify-content:center; gap:2px; max-width:360px; margin-left:auto; margin-right:auto;}
+  .result-stars span{display:inline-block; animation:star-pop 0.4s ease backwards;}
+  .result-stars span:nth-child(1){animation-delay:0.05s;}
+  .result-stars span:nth-child(2){animation-delay:0.1s;}
+  .result-stars span:nth-child(3){animation-delay:0.15s;}
+  .result-stars span:nth-child(4){animation-delay:0.2s;}
+  .result-stars span:nth-child(5){animation-delay:0.25s;}
+  .result-stars span:nth-child(6){animation-delay:0.3s;}
+  .result-stars span:nth-child(7){animation-delay:0.35s;}
+  .result-stars span:nth-child(8){animation-delay:0.4s;}
+  .result-stars span:nth-child(n+9){animation-delay:0.45s;}
+  @keyframes star-pop{
+    0%{transform:scale(0) rotate(-90deg); opacity:0;}
+    70%{transform:scale(1.3) rotate(10deg); opacity:1;}
+    100%{transform:scale(1) rotate(0);}
+  }
+  .result-msg{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:23px; margin:4px 0 4px; color:var(--ink);}
+  .result-sub{color:var(--ink-soft); font-weight:700; margin-bottom:20px; font-size:14.5px;}
+  .result-actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .action-btn{border:none; border-radius:16px; padding:13px 20px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:15px; color:white; cursor:pointer; box-shadow:0 5px 0 rgba(0,0,0,0.18);}
+  .action-btn.replay{background:linear-gradient(160deg,#F5966A,var(--rust));}
+  .action-btn.menu{background:linear-gradient(160deg,#4FBFA0,var(--forest));}
+  .action-btn:active{transform:translateY(4px); box-shadow:0 1px 0 rgba(0,0,0,0.18);}
+
+  .confetti-piece{position:fixed; top:-20px; width:10px; height:16px; z-index:900; pointer-events:none; animation:fall linear forwards; border-radius:2px;}
+  @keyframes fall{ to{transform:translateY(110vh) rotate(540deg); opacity:0.9;} }
+
+  .hidden{display:none !important;}
+</style>
+</head>
+<body>
+
+<div class="bg-decor" id="bgDecor"></div>
+<div class="ground"></div>
+
+<div class="app">
+  <div class="topbar">
+    <a href="index.html" class="brand"><span class="mascot-ico">🦊</span> Rubi Cerdik</a>
+    <div class="star-total">⭐ <span id="totalStars">0</span></div>
+  </div>
+  <div style="width:100%; max-width:640px; margin:-6px 0 14px;">
+    <a href="index.html" class="home-link">🏠 Beranda</a>
+  </div>
+
+  <!-- MENU -->
+  <div class="card" id="screen-menu">
+    <div class="mascot-wrap"><div class="mascot" id="mascotMenu">🦊</div></div>
+    <div class="speech">Halo! Aku Rubi si rubah cerdik. Siap tantangan lebih seru?</div>
+    <h1 class="title">Bagian 4: Rubi si Rubah Cerdik</h1>
+    <p class="subtitle">Membaca dan mengenal hewan dengan tantangan lebih menantang!</p>
+    <div class="menu-grid">
+      <button class="menu-btn b-word" id="btnWord">
+        <span class="emoji">🧩</span>
+        Susun Kata
+        <small>Gabung suku kata</small>
+      </button>
+      <button class="menu-btn b-read" id="btnRead">
+        <span class="emoji">📖</span>
+        Baca & Jawab
+        <small>Cerita pendek</small>
+      </button>
+      <button class="menu-btn b-guess" id="btnGuess">
+        <span class="emoji">🔍</span>
+        Tebak dari Petunjuk
+        <small>Hewan misterius</small>
+      </button>
+      <button class="menu-btn b-classify" id="btnClassify">
+        <span class="emoji">🗂️</span>
+        Klasifikasi Hewan
+        <small>Mamalia/burung/dll</small>
+      </button>
+    </div>
+  </div>
+
+  <!-- WORD BUILDER -->
+  <div class="card hidden" id="screen-word">
+    <div class="game-header">
+      <button class="back-btn" id="btnWordBack">⬅ Menu</button>
+      <div style="flex:1;"></div>
+      <div class="score-pill">🧩 <span id="wordCount">0</span>/8</div>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotWord">🦊</div></div>
+    <div class="speech" id="wordSpeech">Ketuk suku kata sesuai urutan untuk membentuk kata!</div>
+    <div class="quiz-emoji" id="wordEmoji"></div>
+    <div class="word-slots" id="wordSlots"></div>
+    <div class="syllable-tiles" id="syllableTiles"></div>
+    <div class="word-stats" id="wordStats">0 kesalahan</div>
+  </div>
+
+  <!-- WORD RESULT -->
+  <div class="card hidden" id="screen-word-result">
+    <div class="mascot-wrap"><div class="mascot happy" id="mascotWordResult">🏆</div></div>
+    <div class="result-stars" id="wordResultStars"></div>
+    <div class="result-msg" id="wordResultMsg">Hebat sekali!</div>
+    <div class="result-sub" id="wordResultSub"></div>
+    <div class="result-actions">
+      <button class="action-btn replay" id="btnWordReplay">🔁 Main Lagi</button>
+      <button class="action-btn menu" id="btnWordMenu">🏠 Menu</button>
+    </div>
+  </div>
+
+  <!-- READING COMPREHENSION -->
+  <div class="card hidden" id="screen-read">
+    <div class="game-header">
+      <button class="back-btn" id="btnReadBack">⬅ Menu</button>
+      <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="readProgress" style="width:0%"></div></div></div>
+      <div class="score-pill">⭐ <span id="readScore">0</span></div>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotRead">🦊</div></div>
+    <div class="speech" id="readSpeech">Baca ceritanya baik-baik, lalu jawab pertanyaannya!</div>
+    <div class="story-box" id="readStory"></div>
+    <p class="question-text" id="readQuestion"></p>
+    <div class="options-grid" id="readOptions"></div>
+    <div class="feedback-banner" id="readFeedback"></div>
+    <button class="next-btn" id="btnReadNext">Lanjut ➡</button>
+  </div>
+
+  <!-- READING RESULT -->
+  <div class="card hidden" id="screen-read-result">
+    <div class="mascot-wrap"><div class="mascot happy" id="mascotReadResult">🏆</div></div>
+    <div class="result-stars" id="readResultStars"></div>
+    <div class="result-msg" id="readResultMsg">Hebat sekali!</div>
+    <div class="result-sub" id="readResultSub"></div>
+    <div class="result-actions">
+      <button class="action-btn replay" id="btnReadReplay">🔁 Main Lagi</button>
+      <button class="action-btn menu" id="btnReadMenu">🏠 Menu</button>
+    </div>
+  </div>
+
+  <!-- GUESS THE ANIMAL -->
+  <div class="card hidden" id="screen-guess">
+    <div class="game-header">
+      <button class="back-btn" id="btnGuessBack">⬅ Menu</button>
+      <div style="flex:1;"></div>
+      <div class="score-pill">🏅 <span id="guessPoints">0</span> poin</div>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotGuess">🦊</div></div>
+    <div class="speech" id="guessSpeech">Semakin sedikit petunjuk yang kamu perlukan, semakin besar poinnya!</div>
+    <div class="clue-points" id="cluePoints">Tebak sekarang untuk 3 poin!</div>
+    <div class="clue-stage" id="clueStage"></div>
+    <div class="options-grid" id="guessOptions"></div>
+    <div class="feedback-banner" id="guessFeedback"></div>
+    <button class="next-btn" id="btnGuessNext">Lanjut ➡</button>
+  </div>
+
+  <!-- GUESS RESULT -->
+  <div class="card hidden" id="screen-guess-result">
+    <div class="mascot-wrap"><div class="mascot happy" id="mascotGuessResult">🏆</div></div>
+    <div class="result-stars" id="guessResultStars"></div>
+    <div class="result-msg" id="guessResultMsg">Hebat sekali!</div>
+    <div class="result-sub" id="guessResultSub"></div>
+    <div class="result-actions">
+      <button class="action-btn replay" id="btnGuessReplay">🔁 Main Lagi</button>
+      <button class="action-btn menu" id="btnGuessMenu">🏠 Menu</button>
+    </div>
+  </div>
+
+  <!-- CLASSIFY ANIMALS -->
+  <div class="card hidden" id="screen-classify">
+    <div class="game-header">
+      <button class="back-btn" id="btnClassifyBack">⬅ Menu</button>
+      <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="classifyProgress" style="width:0%"></div></div></div>
+      <div class="score-pill">⭐ <span id="classifyScore">0</span></div>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotClassify">🦊</div></div>
+    <div class="speech" id="classifySpeech">Termasuk kelompok apa hewan ini?</div>
+    <div class="quiz-emoji" id="classifyEmoji"></div>
+    <p class="question-text" id="classifyName"></p>
+    <div class="options-grid" id="classifyOptions"></div>
+    <div class="feedback-banner" id="classifyFeedback"></div>
+    <button class="next-btn" id="btnClassifyNext">Lanjut ➡</button>
+  </div>
+
+  <!-- CLASSIFY RESULT -->
+  <div class="card hidden" id="screen-classify-result">
+    <div class="mascot-wrap"><div class="mascot happy" id="mascotClassifyResult">🏆</div></div>
+    <div class="result-stars" id="classifyResultStars"></div>
+    <div class="result-msg" id="classifyResultMsg">Hebat sekali!</div>
+    <div class="result-sub" id="classifyResultSub"></div>
+    <div class="result-actions">
+      <button class="action-btn replay" id="btnClassifyReplay">🔁 Main Lagi</button>
+      <button class="action-btn menu" id="btnClassifyMenu">🏠 Menu</button>
+    </div>
+  </div>
+</div>
+
+<script src="stats.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Background decor ---------- */
+  const bgDecor = document.getElementById('bgDecor');
+  const floaterEmojis = ['🍂','📖','✨'];
+  for(let i=0;i<7;i++){
+    const f = document.createElement('div');
+    f.className = 'floater';
+    f.textContent = floaterEmojis[i % floaterEmojis.length];
+    f.style.top = (Math.random()*60) + 'vh';
+    f.style.left = '-8vw';
+    f.style.animationDuration = (16 + Math.random()*14) + 's';
+    f.style.animationDelay = (Math.random()*10) + 's';
+    bgDecor.appendChild(f);
+  }
+  const sparkleEmojis = ['✨','🍁','⭐'];
+  for(let i=0;i<8;i++){
+    const p = document.createElement('div');
+    p.className = 'sparkle';
+    p.textContent = sparkleEmojis[i % sparkleEmojis.length];
+    p.style.left = (5 + Math.random()*90) + 'vw';
+    p.style.top = (5 + Math.random()*55) + 'vh';
+    p.style.animationDelay = (Math.random()*2.5) + 's';
+    bgDecor.appendChild(p);
+  }
+
+  /* ---------- Shared helpers ---------- */
+  function shuffle(arr){
+    const a = arr.slice();
+    for(let i=a.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [a[i],a[j]] = [a[j],a[i]];
+    }
+    return a;
+  }
+
+  function createShuffleBag(items){
+    let bag = [];
+    return function draw(n){
+      const result = [];
+      while(result.length < n){
+        if(bag.length === 0){
+          bag = shuffle(items);
+          if(result.length){
+            const resultSet = new Set(result);
+            const fresh = bag.filter(x => !resultSet.has(x));
+            const used = bag.filter(x => resultSet.has(x));
+            bag = fresh.concat(used);
+          }
+        }
+        result.push(bag.shift());
+      }
+      return result;
+    };
+  }
+
+  const confettiColors = ['#E8703A','#F2B705','#1F6F5C','#7A57A0','#4ECE6F'];
+  function burstConfetti(x, y, count){
+    count = count || 18;
+    for(let i=0;i<count;i++){
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = (x + (Math.random()*160-80)) + 'px';
+      piece.style.top = (y) + 'px';
+      piece.style.background = confettiColors[Math.floor(Math.random()*confettiColors.length)];
+      piece.style.animationDuration = (1.2 + Math.random()*0.8) + 's';
+      piece.style.transform = `rotate(${Math.random()*360}deg)`;
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), 2200);
+    }
+  }
+
+  let totalStars = LearnStats.getTotalStars();
+  const totalStarsEl = document.getElementById('totalStars');
+  totalStarsEl.textContent = totalStars;
+  function addStars(n){
+    totalStars = LearnStats.addTotalStars(n);
+    totalStarsEl.textContent = totalStars;
+  }
+
+  function setMascotState(el, mood){
+    el.classList.remove('happy','sad');
+    if(mood) el.classList.add(mood);
+  }
+
+  function renderStarRow(container, filled, total){
+    container.innerHTML = '';
+    for(let i=0;i<total;i++){
+      const s = document.createElement('span');
+      s.textContent = i < filled ? '⭐' : '☆';
+      container.appendChild(s);
+    }
+  }
+
+  /* ---------- Screens ---------- */
+  const screenIds = ['menu','word','word-result','read','read-result','guess','guess-result','classify','classify-result'];
+  const screens = {};
+  screenIds.forEach(id => screens[id] = document.getElementById('screen-' + id));
+  function showScreen(name){
+    screenIds.forEach(id => screens[id].classList.toggle('hidden', id !== name));
+  }
+
+  /* =========================================================
+     SUSUN KATA — Word Builder (suku kata)
+  ========================================================= */
+  const wordBank = [
+    {word:'KUDA', syllables:['KU','DA'], emoji:'🐴'},
+    {word:'BUKU', syllables:['BU','KU'], emoji:'📖'},
+    {word:'MATA', syllables:['MA','TA'], emoji:'👀'},
+    {word:'GAJAH', syllables:['GA','JAH'], emoji:'🐘'},
+    {word:'IKAN', syllables:['I','KAN'], emoji:'🐟'},
+    {word:'RUMAH', syllables:['RU','MAH'], emoji:'🏠'},
+    {word:'PISANG', syllables:['PI','SANG'], emoji:'🍌'},
+    {word:'KELINCI', syllables:['KE','LIN','CI'], emoji:'🐰'},
+    {word:'SEPEDA', syllables:['SE','PE','DA'], emoji:'🚲'},
+    {word:'PAYUNG', syllables:['PA','YUNG'], emoji:'☂️'},
+    {word:'KUCING', syllables:['KU','CING'], emoji:'🐱'},
+    {word:'NANAS', syllables:['NA','NAS'], emoji:'🍍'}
+  ];
+  const WORD_ROUND_LEN = 8;
+  const wordState = { questions:[], index:0, built:[], mistakes:0, totalMistakes:0, completed:0 };
+  const drawWord = createShuffleBag(wordBank);
+
+  function startWordGame(){
+    wordState.questions = drawWord(WORD_ROUND_LEN);
+    wordState.index = 0;
+    wordState.totalMistakes = 0;
+    wordState.completed = 0;
+    document.getElementById('wordCount').textContent = '0';
+    document.getElementById('wordStats').textContent = '0 kesalahan';
+    setMascotState(document.getElementById('mascotWord'), null);
+    document.getElementById('mascotWord').textContent = '🦊';
+    renderWordQuestion();
+    showScreen('word');
+  }
+
+  function renderWordQuestion(){
+    const item = wordState.questions[wordState.index];
+    wordState.built = [];
+    wordState.mistakes = 0;
+    document.getElementById('wordEmoji').textContent = item.emoji;
+    document.getElementById('wordSpeech').textContent = 'Ketuk suku kata sesuai urutan untuk membentuk kata!';
+
+    const slots = document.getElementById('wordSlots');
+    slots.innerHTML = '';
+    item.syllables.forEach((syl, idx) => {
+      const chip = document.createElement('div');
+      chip.className = 'word-slot empty';
+      chip.textContent = '?';
+      slots.appendChild(chip);
+    });
+
+    const tilesWrap = document.getElementById('syllableTiles');
+    tilesWrap.innerHTML = '';
+    shuffle(item.syllables).forEach(syl => {
+      const btn = document.createElement('button');
+      btn.className = 'syllable-tile';
+      btn.textContent = syl;
+      btn.dataset.used = 'false';
+      btn.addEventListener('click', () => handleSyllableClick(syl, btn, item));
+      tilesWrap.appendChild(btn);
+    });
+  }
+
+  function renderWordSlots(item){
+    const slots = document.getElementById('wordSlots');
+    slots.innerHTML = '';
+    item.syllables.forEach((syl, idx) => {
+      const chip = document.createElement('div');
+      if(idx < wordState.built.length){
+        chip.className = 'word-slot';
+        chip.textContent = wordState.built[idx];
+      } else {
+        chip.className = 'word-slot empty';
+        chip.textContent = '?';
+      }
+      slots.appendChild(chip);
+    });
+  }
+
+  function handleSyllableClick(syl, btn, item){
+    if(btn.dataset.used === 'true') return;
+    const expected = item.syllables[wordState.built.length];
+    const mascot = document.getElementById('mascotWord');
+
+    if(syl === expected){
+      btn.dataset.used = 'true';
+      btn.disabled = true;
+      wordState.built.push(syl);
+      renderWordSlots(item);
+      setMascotState(mascot, 'happy'); mascot.textContent = '🤩';
+      document.getElementById('wordSpeech').textContent = 'Tepat sekali!';
+      const rect = btn.getBoundingClientRect();
+      burstConfetti(rect.left + rect.width/2, rect.top, 8);
+
+      if(wordState.built.length >= item.syllables.length){
+        LearnStats.recordAnswer('part4_susun_kata', 'Susun Kata (Bagian 4)', wordState.mistakes === 0);
+        wordState.completed++;
+        addStars(1);
+        document.getElementById('wordCount').textContent = wordState.completed;
+        document.getElementById('mascotWord').textContent = '🎉';
+        setTimeout(() => {
+          wordState.index++;
+          if(wordState.index >= WORD_ROUND_LEN){
+            showWordResult();
+          } else {
+            renderWordQuestion();
+          }
+        }, 800);
+      }
+    } else {
+      wordState.mistakes++;
+      wordState.totalMistakes++;
+      document.getElementById('wordStats').textContent = wordState.totalMistakes + ' kesalahan';
+      setMascotState(mascot, 'sad'); mascot.textContent = '😅';
+      document.getElementById('wordSpeech').textContent = 'Coba lagi, urutannya belum tepat!';
+      btn.classList.add('wrong-shake');
+      setTimeout(() => btn.classList.remove('wrong-shake'), 400);
+    }
+  }
+
+  function showWordResult(){
+    showScreen('word-result');
+    const filled = Math.max(0, WORD_ROUND_LEN - wordState.totalMistakes);
+    renderStarRow(document.getElementById('wordResultStars'), Math.min(filled, WORD_ROUND_LEN), WORD_ROUND_LEN);
+    const perfect = wordState.totalMistakes === 0;
+    document.getElementById('wordResultMsg').textContent = perfect ? 'Susunan sempurna! 🎉' : (filled >= WORD_ROUND_LEN/2 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+    document.getElementById('wordResultSub').textContent = `Kamu menyusun 8 kata dengan ${wordState.totalMistakes} kesalahan`;
+    if(perfect) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+  }
+
+  /* =========================================================
+     BACA & JAWAB — Reading Comprehension
+  ========================================================= */
+  const readBank = [
+    {story:'Ani pergi ke sekolah naik sepeda. Sepedanya berwarna merah.', q:'Ani pergi ke sekolah naik apa?', answer:'Sepeda', options:['Sepeda','Mobil','Bus','Kereta']},
+    {story:'Budi punya seekor kucing berwarna putih. Kucing itu suka minum susu.', q:'Kucing Budi berwarna apa?', answer:'Putih', options:['Putih','Hitam','Coklat','Abu-abu']},
+    {story:'Di taman ada banyak bunga. Bunga itu berwarna merah dan kuning.', q:'Di mana banyak bunga itu berada?', answer:'Taman', options:['Taman','Sekolah','Rumah','Pasar']},
+    {story:'Ibu membeli buah apel dan pisang di pasar.', q:'Buah apa saja yang dibeli Ibu?', answer:'Apel dan pisang', options:['Apel dan pisang','Jeruk dan mangga','Anggur dan melon','Nanas dan semangka']},
+    {story:'Rani suka membaca buku cerita sebelum tidur.', q:'Apa yang Rani suka lakukan sebelum tidur?', answer:'Membaca buku', options:['Membaca buku','Menonton TV','Bermain HP','Makan malam']},
+    {story:'Ayah mengajak Doni memancing ikan di sungai.', q:'Di mana Ayah dan Doni memancing?', answer:'Sungai', options:['Sungai','Laut','Kolam','Danau']},
+    {story:'Siti menyiram bunga setiap pagi menggunakan gayung.', q:'Kapan Siti menyiram bunga?', answer:'Setiap pagi', options:['Setiap pagi','Setiap siang','Setiap sore','Setiap malam']},
+    {story:'Rina dan teman-temannya bermain bola di lapangan sekolah.', q:'Rina bermain apa di lapangan?', answer:'Bola', options:['Bola','Layang-layang','Kelereng','Congklak']},
+    {story:'Made pergi ke kebun binatang bersama keluarganya. Ia melihat gajah dan singa.', q:'Hewan apa yang dilihat Made?', answer:'Gajah dan singa', options:['Gajah dan singa','Ular dan buaya','Kera dan rusa','Zebra dan jerapah']},
+    {story:'Dewi menggambar pemandangan gunung dan sawah.', q:'Apa yang digambar Dewi?', answer:'Gunung dan sawah', options:['Gunung dan sawah','Laut dan pantai','Kota dan gedung','Hutan dan sungai']},
+    {story:'Setiap hari Minggu, keluarga Andi pergi ke pasar membeli sayur.', q:'Kapan keluarga Andi pergi ke pasar?', answer:'Hari Minggu', options:['Hari Minggu','Hari Senin','Hari Jumat','Hari Sabtu']},
+    {story:'Bayu merapikan mainan setelah selesai bermain.', q:'Apa yang dilakukan Bayu setelah bermain?', answer:'Merapikan mainan', options:['Merapikan mainan','Makan camilan','Tidur siang','Menonton TV']}
+  ];
+  const READ_ROUND_LEN = 8;
+  const readState = { questions:[], index:0, score:0, answered:false };
+  const drawRead = createShuffleBag(readBank);
+
+  function startReadGame(){
+    readState.questions = drawRead(READ_ROUND_LEN);
+    readState.index = 0;
+    readState.score = 0;
+    document.getElementById('readScore').textContent = '0';
+    showScreen('read');
+    renderReadQuestion();
+  }
+
+  function renderReadQuestion(){
+    readState.answered = false;
+    document.getElementById('btnReadNext').classList.remove('show');
+    document.getElementById('readFeedback').textContent = '';
+    const mascot = document.getElementById('mascotRead');
+    setMascotState(mascot, null);
+    mascot.textContent = '🦊';
+    document.getElementById('readSpeech').textContent = 'Baca ceritanya baik-baik, lalu jawab pertanyaannya!';
+
+    const pct = Math.round((readState.index / READ_ROUND_LEN) * 100);
+    document.getElementById('readProgress').style.width = pct + '%';
+
+    const item = readState.questions[readState.index];
+    document.getElementById('readStory').textContent = item.story;
+    document.getElementById('readQuestion').textContent = item.q;
+
+    const grid = document.getElementById('readOptions');
+    grid.innerHTML = '';
+    shuffle(item.options).forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.textContent = opt;
+      btn.addEventListener('click', () => handleReadAnswer(btn, opt === item.answer, item));
+      grid.appendChild(btn);
+    });
+  }
+
+  function handleReadAnswer(btn, isCorrect, item){
+    if(readState.answered) return;
+    readState.answered = true;
+    const allBtns = document.querySelectorAll('#readOptions .opt-btn');
+    allBtns.forEach(b => b.disabled = true);
+    const mascot = document.getElementById('mascotRead');
+    const feedback = document.getElementById('readFeedback');
+    LearnStats.recordAnswer('part4_baca_jawab', 'Baca & Jawab (Bagian 4)', isCorrect);
+
+    if(isCorrect){
+      btn.classList.add('correct');
+      readState.score++;
+      addStars(1);
+      document.getElementById('readScore').textContent = readState.score;
+      setMascotState(mascot, 'happy'); mascot.textContent = '🤩';
+      document.getElementById('readSpeech').textContent = 'Betul sekali!';
+      feedback.style.color = '#33A852';
+      feedback.textContent = 'Jawabanmu tepat, kamu membaca dengan teliti!';
+      const rect = btn.getBoundingClientRect();
+      burstConfetti(rect.left + rect.width/2, rect.top);
+    } else {
+      btn.classList.add('wrong');
+      setMascotState(mascot, 'sad'); mascot.textContent = '😅';
+      document.getElementById('readSpeech').textContent = 'Coba baca lagi ceritanya baik-baik ya!';
+      feedback.style.color = '#C64643';
+      feedback.textContent = `Jawaban yang benar: ${item.answer}`;
+      allBtns.forEach(b => { if(b.textContent === item.answer) b.classList.add('correct'); });
+    }
+    document.getElementById('btnReadNext').classList.add('show');
+  }
+
+  function readGoNext(){
+    readState.index++;
+    if(readState.index >= READ_ROUND_LEN){
+      showReadResult();
+    } else {
+      renderReadQuestion();
+    }
+  }
+
+  function showReadResult(){
+    showScreen('read-result');
+    const ratio = readState.score / READ_ROUND_LEN;
+    renderStarRow(document.getElementById('readResultStars'), readState.score, READ_ROUND_LEN);
+    document.getElementById('readResultMsg').textContent = ratio >= 0.85 ? 'Luar biasa hebat! 🎉' : (ratio >= 0.5 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+    document.getElementById('readResultSub').textContent = `Kamu menjawab benar ${readState.score} dari ${READ_ROUND_LEN} soal`;
+    if(ratio >= 0.85) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+  }
+
+  /* =========================================================
+     TEBAK DARI PETUNJUK — Guess the Animal
+  ========================================================= */
+  const animalClueBank = [
+    {name:'Gajah', emoji:'🐘', clues:['Aku hewan darat yang sangat besar.','Aku punya belalai panjang untuk minum dan makan.','Telingaku lebar seperti kipas raksasa.']},
+    {name:'Singa', emoji:'🦁', clues:['Aku dijuluki raja hutan.','Aku punya surai tebal di leher.','Aku suka mengaum keras sekali.']},
+    {name:'Jerapah', emoji:'🦒', clues:['Leherku sangat panjang.','Aku suka makan daun di pohon tinggi.','Tubuhku punya banyak bercak-bercak.']},
+    {name:'Kura-kura', emoji:'🐢', clues:['Aku berjalan sangat lambat.','Aku punya tempurung yang keras.','Aku bisa hidup sangat lama, puluhan tahun!']},
+    {name:'Kupu-kupu', emoji:'🦋', clues:['Dulu aku adalah seekor ulat.','Aku punya sayap yang warna-warni.','Aku suka hinggap dan minum madu bunga.']},
+    {name:'Lebah', emoji:'🐝', clues:['Aku serangga kecil yang rajin.','Aku menghasilkan madu yang manis.','Hati-hati, aku punya sengat!']},
+    {name:'Paus', emoji:'🐋', clues:['Aku hewan laut yang sangat besar.','Aku bernapas dengan paru-paru, bukan insang.','Aku sering menyemburkan air dari atas kepalaku.']},
+    {name:'Burung Hantu', emoji:'🦉', clues:['Aku suka terbang di malam hari.','Mataku sangat besar dan bulat.','Aku bisa memutar kepalaku jauh ke belakang.']},
+    {name:'Unta', emoji:'🐫', clues:['Aku tinggal di gurun pasir.','Aku punya punuk besar di punggung.','Aku bisa bertahan lama tanpa minum air.']},
+    {name:'Panda', emoji:'🐼', clues:['Tubuhku berwarna hitam dan putih.','Aku suka sekali makan bambu.','Aku berasal dari negeri Tiongkok.']},
+    {name:'Buaya', emoji:'🐊', clues:['Aku bisa hidup di air dan di darat.','Gigiku sangat tajam dan banyak.','Kulitku keras seperti perisai.']},
+    {name:'Merak', emoji:'🦚', clues:['Aku burung yang sangat indah.','Ekorku bisa mengembang seperti kipas raksasa.','Warnaku biru kehijauan yang mengilap.']}
+  ];
+  const GUESS_ROUND_LEN = 8;
+  const guessState = { questions:[], index:0, clueIndex:0, points:0, firstTryCorrect:0, answered:false };
+  const drawGuess = createShuffleBag(animalClueBank);
+
+  function startGuessGame(){
+    guessState.questions = drawGuess(GUESS_ROUND_LEN);
+    guessState.index = 0;
+    guessState.points = 0;
+    guessState.firstTryCorrect = 0;
+    document.getElementById('guessPoints').textContent = '0';
+    showScreen('guess');
+    renderGuessQuestion();
+  }
+
+  function renderGuessQuestion(){
+    guessState.clueIndex = 0;
+    guessState.answered = false;
+    document.getElementById('btnGuessNext').classList.remove('show');
+    document.getElementById('guessFeedback').textContent = '';
+    document.getElementById('clueStage').innerHTML = '';
+    const mascot = document.getElementById('mascotGuess');
+    setMascotState(mascot, null);
+    mascot.textContent = '🦊';
+    document.getElementById('guessSpeech').textContent = 'Semakin sedikit petunjuk yang kamu perlukan, semakin besar poinnya!';
+    revealNextClue();
+    renderGuessOptions();
+  }
+
+  function pointsForClueIndex(idx){
+    if(idx === 0) return 3;
+    if(idx === 1) return 2;
+    return 1;
+  }
+
+  function revealNextClue(){
+    const item = guessState.questions[guessState.index];
+    const clueBox = document.getElementById('clueStage');
+    const p = document.createElement('div');
+    p.className = 'clue-item';
+    p.innerHTML = `<span class="clue-number">Petunjuk ${guessState.clueIndex+1}:</span> ${item.clues[guessState.clueIndex]}`;
+    clueBox.appendChild(p);
+    document.getElementById('cluePoints').textContent = `Tebak sekarang untuk ${pointsForClueIndex(guessState.clueIndex)} poin!`;
+  }
+
+  function renderGuessOptions(){
+    const item = guessState.questions[guessState.index];
+    const others = animalClueBank.map(a => a.name).filter(n => n !== item.name);
+    const wrong = shuffle(others).slice(0, 3);
+    const options = shuffle([item.name, ...wrong]);
+    const grid = document.getElementById('guessOptions');
+    grid.innerHTML = '';
+    options.forEach(name => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.textContent = name;
+      btn.addEventListener('click', () => handleGuessAnswer(btn, name === item.name, item));
+      grid.appendChild(btn);
+    });
+  }
+
+  function handleGuessAnswer(btn, isCorrect, item){
+    if(guessState.answered) return;
+    const allBtns = document.querySelectorAll('#guessOptions .opt-btn');
+    const mascot = document.getElementById('mascotGuess');
+    const feedback = document.getElementById('guessFeedback');
+
+    if(isCorrect){
+      guessState.answered = true;
+      allBtns.forEach(b => b.disabled = true);
+      const earnedPoints = pointsForClueIndex(guessState.clueIndex);
+      guessState.points += earnedPoints;
+      if(guessState.clueIndex === 0) guessState.firstTryCorrect++;
+      LearnStats.recordAnswer('part4_tebak_hewan', 'Tebak dari Petunjuk (Bagian 4)', guessState.clueIndex === 0);
+      addStars(1);
+      document.getElementById('guessPoints').textContent = guessState.points;
+      btn.classList.add('correct');
+      setMascotState(mascot, 'happy'); mascot.textContent = '🤩';
+      document.getElementById('guessSpeech').textContent = 'Tebakanmu tepat!';
+      feedback.style.color = '#33A852';
+      feedback.textContent = `Benar! Ini ${item.emoji} ${item.name}. Kamu dapat ${earnedPoints} poin!`;
+      const rect = btn.getBoundingClientRect();
+      burstConfetti(rect.left + rect.width/2, rect.top);
+      document.getElementById('btnGuessNext').classList.add('show');
+    } else {
+      btn.classList.add('wrong');
+      btn.disabled = true;
+      setMascotState(mascot, 'sad'); mascot.textContent = '😅';
+
+      if(guessState.clueIndex < item.clues.length - 1){
+        guessState.clueIndex++;
+        document.getElementById('guessSpeech').textContent = 'Belum tepat, ini petunjuk tambahan!';
+        setTimeout(() => {
+          revealNextClue();
+          allBtns.forEach(b => { b.disabled = false; b.classList.remove('wrong'); });
+        }, 700);
+      } else {
+        guessState.answered = true;
+        LearnStats.recordAnswer('part4_tebak_hewan', 'Tebak dari Petunjuk (Bagian 4)', false);
+        allBtns.forEach(b => {
+          b.disabled = true;
+          if(b.textContent === item.name) b.classList.add('correct');
+        });
+        document.getElementById('guessSpeech').textContent = 'Yuk lihat jawabannya!';
+        feedback.style.color = '#C64643';
+        feedback.textContent = `Jawabannya adalah ${item.emoji} ${item.name}.`;
+        document.getElementById('btnGuessNext').classList.add('show');
+      }
+    }
+  }
+
+  function guessGoNext(){
+    guessState.index++;
+    if(guessState.index >= GUESS_ROUND_LEN){
+      showGuessResult();
+    } else {
+      renderGuessQuestion();
+    }
+  }
+
+  function showGuessResult(){
+    showScreen('guess-result');
+    const ratio = guessState.firstTryCorrect / GUESS_ROUND_LEN;
+    renderStarRow(document.getElementById('guessResultStars'), guessState.firstTryCorrect, GUESS_ROUND_LEN);
+    document.getElementById('guessResultMsg').textContent = ratio >= 0.85 ? 'Detektif hewan sejati! 🎉' : (ratio >= 0.5 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+    document.getElementById('guessResultSub').textContent = `Total ${guessState.points} poin, dengan ${guessState.firstTryCorrect} dari ${GUESS_ROUND_LEN} tebakan tepat di petunjuk pertama`;
+    if(ratio >= 0.85) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+  }
+
+  /* =========================================================
+     KLASIFIKASI HEWAN — Animal Classification
+  ========================================================= */
+  const classifyBank = [
+    {name:'Gajah', emoji:'🐘', group:'Mamalia'},
+    {name:'Singa', emoji:'🦁', group:'Mamalia'},
+    {name:'Kelinci', emoji:'🐰', group:'Mamalia'},
+    {name:'Paus', emoji:'🐋', group:'Mamalia'},
+    {name:'Kelelawar', emoji:'🦇', group:'Mamalia'},
+    {name:'Elang', emoji:'🦅', group:'Burung'},
+    {name:'Burung Hantu', emoji:'🦉', group:'Burung'},
+    {name:'Merak', emoji:'🦚', group:'Burung'},
+    {name:'Penguin', emoji:'🐧', group:'Burung'},
+    {name:'Ayam', emoji:'🐔', group:'Burung'},
+    {name:'Buaya', emoji:'🐊', group:'Reptil'},
+    {name:'Kura-kura', emoji:'🐢', group:'Reptil'},
+    {name:'Ular', emoji:'🐍', group:'Reptil'},
+    {name:'Cicak', emoji:'🦎', group:'Reptil'},
+    {name:'Ikan Mas', emoji:'🐠', group:'Ikan'},
+    {name:'Hiu', emoji:'🦈', group:'Ikan'}
+  ];
+  const CLASSIFY_ROUND_LEN = 8;
+  const classifyGroups = ['Mamalia','Burung','Reptil','Ikan'];
+  const classifyState = { questions:[], index:0, score:0, answered:false };
+  const drawClassify = createShuffleBag(classifyBank);
+
+  function startClassifyGame(){
+    classifyState.questions = drawClassify(CLASSIFY_ROUND_LEN);
+    classifyState.index = 0;
+    classifyState.score = 0;
+    document.getElementById('classifyScore').textContent = '0';
+    showScreen('classify');
+    renderClassifyQuestion();
+  }
+
+  function renderClassifyQuestion(){
+    classifyState.answered = false;
+    document.getElementById('btnClassifyNext').classList.remove('show');
+    document.getElementById('classifyFeedback').textContent = '';
+    const mascot = document.getElementById('mascotClassify');
+    setMascotState(mascot, null);
+    mascot.textContent = '🦊';
+    document.getElementById('classifySpeech').textContent = 'Termasuk kelompok apa hewan ini?';
+
+    const pct = Math.round((classifyState.index / CLASSIFY_ROUND_LEN) * 100);
+    document.getElementById('classifyProgress').style.width = pct + '%';
+
+    const item = classifyState.questions[classifyState.index];
+    document.getElementById('classifyEmoji').textContent = item.emoji;
+    document.getElementById('classifyName').textContent = `${item.name} termasuk kelompok apa?`;
+
+    const grid = document.getElementById('classifyOptions');
+    grid.innerHTML = '';
+    shuffle(classifyGroups).forEach(group => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.textContent = group;
+      btn.addEventListener('click', () => handleClassifyAnswer(btn, group === item.group, item));
+      grid.appendChild(btn);
+    });
+  }
+
+  function handleClassifyAnswer(btn, isCorrect, item){
+    if(classifyState.answered) return;
+    classifyState.answered = true;
+    const allBtns = document.querySelectorAll('#classifyOptions .opt-btn');
+    allBtns.forEach(b => b.disabled = true);
+    const mascot = document.getElementById('mascotClassify');
+    const feedback = document.getElementById('classifyFeedback');
+    LearnStats.recordAnswer('part4_klasifikasi_hewan', 'Klasifikasi Hewan (Bagian 4)', isCorrect);
+
+    if(isCorrect){
+      btn.classList.add('correct');
+      classifyState.score++;
+      addStars(1);
+      document.getElementById('classifyScore').textContent = classifyState.score;
+      setMascotState(mascot, 'happy'); mascot.textContent = '🤩';
+      document.getElementById('classifySpeech').textContent = 'Betul sekali!';
+      feedback.style.color = '#33A852';
+      feedback.textContent = `Ya! ${item.name} termasuk ${item.group}.`;
+      const rect = btn.getBoundingClientRect();
+      burstConfetti(rect.left + rect.width/2, rect.top);
+    } else {
+      btn.classList.add('wrong');
+      setMascotState(mascot, 'sad'); mascot.textContent = '😅';
+      document.getElementById('classifySpeech').textContent = 'Coba lagi ya nanti!';
+      feedback.style.color = '#C64643';
+      feedback.textContent = `${item.name} sebenarnya termasuk kelompok ${item.group}.`;
+      allBtns.forEach(b => { if(b.textContent === item.group) b.classList.add('correct'); });
+    }
+    document.getElementById('btnClassifyNext').classList.add('show');
+  }
+
+  function classifyGoNext(){
+    classifyState.index++;
+    if(classifyState.index >= CLASSIFY_ROUND_LEN){
+      showClassifyResult();
+    } else {
+      renderClassifyQuestion();
+    }
+  }
+
+  function showClassifyResult(){
+    showScreen('classify-result');
+    const ratio = classifyState.score / CLASSIFY_ROUND_LEN;
+    renderStarRow(document.getElementById('classifyResultStars'), classifyState.score, CLASSIFY_ROUND_LEN);
+    document.getElementById('classifyResultMsg').textContent = ratio >= 0.85 ? 'Ahli klasifikasi hewan! 🎉' : (ratio >= 0.5 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+    document.getElementById('classifyResultSub').textContent = `Kamu menjawab benar ${classifyState.score} dari ${CLASSIFY_ROUND_LEN} soal`;
+    if(ratio >= 0.85) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+  }
+
+  /* ---------- Events ---------- */
+  document.getElementById('btnWord').addEventListener('click', startWordGame);
+  document.getElementById('btnWordBack').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnWordReplay').addEventListener('click', startWordGame);
+  document.getElementById('btnWordMenu').addEventListener('click', () => showScreen('menu'));
+
+  document.getElementById('btnRead').addEventListener('click', startReadGame);
+  document.getElementById('btnReadBack').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnReadNext').addEventListener('click', readGoNext);
+  document.getElementById('btnReadReplay').addEventListener('click', startReadGame);
+  document.getElementById('btnReadMenu').addEventListener('click', () => showScreen('menu'));
+
+  document.getElementById('btnGuess').addEventListener('click', startGuessGame);
+  document.getElementById('btnGuessBack').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnGuessNext').addEventListener('click', guessGoNext);
+  document.getElementById('btnGuessReplay').addEventListener('click', startGuessGame);
+  document.getElementById('btnGuessMenu').addEventListener('click', () => showScreen('menu'));
+
+  document.getElementById('btnClassify').addEventListener('click', startClassifyGame);
+  document.getElementById('btnClassifyBack').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnClassifyNext').addEventListener('click', classifyGoNext);
+  document.getElementById('btnClassifyReplay').addEventListener('click', startClassifyGame);
+  document.getElementById('btnClassifyMenu').addEventListener('click', () => showScreen('menu'));
+
+  showScreen('menu');
+})();
+</script>
+</body>
+</html>

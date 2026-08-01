@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Bagian 5: Kai Si Penyihir Cerdas 🧙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#B79FE0;
+    --sky-bottom:#FFE9B8;
+    --card:#FFFFFF;
+    --cream:#FFF8EA;
+    --ink:#2B2438;
+    --ink-soft:#63587A;
+    --amethyst:#8E5FCF;
+    --amethyst-dark:#6E42A8;
+    --gold:#F2B705;
+    --gold-dark:#D69A00;
+    --teal:#2E93B3;
+    --emerald:#2E9E6B;
+    --emerald-dark:#207A52;
+    --rose:#E85D8A;
+    --rose-dark:#C43F6A;
+    --night:#2D1B4E;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Nunito',sans-serif;
+    min-height:100vh;
+    background:linear-gradient(180deg,var(--sky-top) 0%, #D8C7F0 45%, var(--sky-bottom) 100%);
+    overflow-x:hidden;
+    color:var(--ink);
+    position:relative;
+    touch-action:manipulation;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  .bg-decor{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
+  .floater{position:absolute; font-size:24px; animation:drift-diag linear infinite;}
+  @keyframes drift-diag{
+    from{transform:translate(-10vw,0) rotate(0deg);}
+    to{transform:translate(110vw,-4vh) rotate(15deg);}
+  }
+  .sparkle{position:absolute; font-size:18px; animation:sway 3s ease-in-out infinite;}
+  @keyframes sway{
+    0%,100%{opacity:0.3; transform:translateY(0) rotate(-8deg);}
+    50%{opacity:1; transform:translateY(-12px) rotate(8deg);}
+  }
+  .ground{position:fixed; left:0; right:0; bottom:0; height:60px; background:linear-gradient(180deg,#6E42A8,var(--night)); z-index:0; border-top:6px solid #1D1236;}
+
+  .app{position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:20px 16px 90px;}
+
+  .topbar{width:100%; max-width:640px; display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+  .brand{display:flex; align-items:center; gap:8px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:20px; color:var(--ink); text-decoration:none;}
+  .brand .mascot-ico{font-size:26px; animation:flit 3s ease-in-out infinite;}
+  @keyframes flit{
+    0%,100%{transform:translateY(0) rotate(-6deg);}
+    50%{transform:translateY(-6px) rotate(6deg);}
+  }
+  .star-total{display:flex; align-items:center; gap:6px; background:var(--card); padding:8px 14px; border-radius:999px; font-weight:800; box-shadow:0 4px 0 rgba(0,0,0,0.08); font-family:'Baloo 2',sans-serif; color:var(--gold-dark);}
+  .home-link{display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:13px; color:var(--ink-soft); background:var(--card); padding:8px 14px; border-radius:999px; box-shadow:0 3px 0 rgba(0,0,0,0.08);}
+
+  .card{
+    background:var(--card);
+    border-radius:28px;
+    box-shadow:0 10px 0 rgba(45,27,78,0.12), 0 16px 30px rgba(45,27,78,0.12);
+    padding:26px 22px;
+    width:100%;
+    max-width:640px;
+    text-align:center;
+    position:relative;
+  }
+
+  .mascot-wrap{display:flex; justify-content:center; margin-bottom:4px;}
+  .mascot{
+    font-size:68px;
+    display:inline-block;
+    animation:flit2 2.6s ease-in-out infinite;
+    filter:drop-shadow(0 8px 6px rgba(0,0,0,0.15));
+  }
+  @keyframes flit2{
+    0%,100%{transform:translateY(0) rotate(-5deg);}
+    50%{transform:translateY(-9px) rotate(6deg);}
+  }
+  .mascot.happy{animation:happyjump 0.6s ease-in-out 2;}
+  @keyframes happyjump{
+    0%{transform:translateY(0) scale(1);}
+    30%{transform:translateY(-22px) scale(1.15) rotate(-10deg);}
+    60%{transform:translateY(0) scale(0.95) rotate(10deg);}
+    100%{transform:translateY(0) scale(1);}
+  }
+  .mascot.sad{animation:wobble 0.5s ease-in-out;}
+  @keyframes wobble{
+    0%,100%{transform:rotate(0);}
+    25%{transform:rotate(-8deg) translateX(-4px);}
+    75%{transform:rotate(8deg) translateX(4px);}
+  }
+  .speech{
+    display:inline-block;
+    background:var(--cream);
+    border:3px solid #FFDDA8;
+    padding:9px 16px;
+    border-radius:16px;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    color:var(--ink);
+    margin-top:4px;
+    font-size:14.5px;
+    min-height:22px;
+  }
+
+  h1.title{
+    font-family:'Baloo 2',sans-serif;
+    font-size:clamp(26px,6vw,38px);
+    margin:6px 0 4px;
+    color:var(--ink);
+    font-weight:800;
+  }
+  p.subtitle{
+    font-size:15.5px;
+    color:var(--ink-soft);
+    margin:0 0 10px;
+    font-weight:700;
+  }
+  .hardmode-badge{
+    display:inline-block; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:12px;
+    background:var(--night); color:#FFD700; padding:5px 14px; border-radius:999px; margin-bottom:18px;
+    letter-spacing:0.5px;
+  }
+
+  .menu-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:16px; margin-top:6px;}
+  @media (max-width:480px){ .menu-grid{grid-template-columns:1fr 1fr;} }
+  .menu-btn{
+    border:none; border-radius:22px; padding:22px 14px; cursor:pointer;
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:16px; color:white;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    box-shadow:0 6px 0 rgba(0,0,0,0.15);
+    transition:transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .menu-btn .emoji{font-size:38px;}
+  .menu-btn:active{transform:translateY(5px); box-shadow:0 1px 0 rgba(0,0,0,0.15);}
+  .menu-btn small{font-family:'Nunito',sans-serif; font-weight:700; font-size:11.5px; opacity:0.95;}
+  .menu-btn.b-tik{background:linear-gradient(160deg,#7FDDF4,#2E93B3);}
+  .menu-btn.b-math5{background:linear-gradient(160deg,#F5966A,#C43F6A);}
+  .menu-btn.b-ipas5{background:linear-gradient(160deg,#7FE3B4,var(--emerald));}
+  .menu-btn.b-keluarga{background:linear-gradient(160deg,#B292E8,var(--amethyst));}
+
+  .back-btn{
+    background:var(--cream); border:none; border-radius:14px; padding:10px 14px;
+    font-family:'Baloo 2',sans-serif; font-weight:700; color:var(--ink-soft); cursor:pointer;
+    box-shadow:0 3px 0 rgba(0,0,0,0.08);
+  }
+  .game-header{display:flex; align-items:center; justify-content:space-between; width:100%; margin-bottom:16px; gap:10px;}
+  .progress-wrap{flex:1; margin:0 12px;}
+  .progress-track{background:#EFEFEF; border-radius:999px; height:14px; overflow:hidden; box-shadow:inset 0 2px 3px rgba(0,0,0,0.08);}
+  .progress-fill{height:100%; border-radius:999px; background:linear-gradient(90deg,var(--gold),var(--amethyst)); transition:width 0.4s ease;}
+  .score-pill{display:flex; align-items:center; gap:4px; background:var(--card); border:2px solid var(--gold); border-radius:999px; padding:6px 12px; font-family:'Baloo 2',sans-serif; font-weight:800; color:var(--gold-dark); white-space:nowrap;}
+
+  .quiz-emoji{font-size:56px; margin-bottom:6px;}
+  .question-text{font-family:'Baloo 2',sans-serif; font-size:16px; font-weight:700; color:var(--ink-soft); margin:0 0 18px; line-height:1.5;}
+  .clue-card{
+    background:var(--cream); border:3px solid #FFE1A3; border-radius:18px; padding:16px 18px; margin-bottom:16px;
+    font-family:'Baloo 2',sans-serif; font-weight:700; font-size:16px; color:var(--ink); line-height:1.6;
+  }
+  .options-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:420px){ .options-grid{grid-template-columns:1fr;} }
+  .opt-btn{
+    background:var(--cream); border:3px solid #FFDDA8; border-radius:18px; padding:16px 12px;
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:15.5px; color:var(--ink); cursor:pointer;
+    transition:transform 0.1s ease; box-shadow:0 4px 0 rgba(0,0,0,0.06);
+  }
+  .opt-btn:hover:not(:disabled){transform:translateY(-2px);}
+  .opt-btn:active:not(:disabled){transform:translateY(2px);}
+  .opt-btn:disabled{cursor:default;}
+  .opt-btn.correct{background:#DFF7E3; border-color:#4ECE6F; color:#207A52;}
+  .opt-btn.wrong{background:#FFE1DE; border-color:#FF6B6B; color:#C64643; animation:shake 0.4s ease;}
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-8px);}
+    75%{transform:translateX(8px);}
+  }
+  .feedback-banner{margin-top:16px; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:14.5px; min-height:24px; color:var(--ink-soft);}
+  .next-btn{
+    margin-top:14px; background:linear-gradient(160deg,#B292E8,var(--amethyst)); border:none; border-radius:16px;
+    padding:12px 26px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:16px; color:white;
+    cursor:pointer; box-shadow:0 5px 0 var(--amethyst-dark); display:none;
+  }
+  .next-btn.show{display:inline-block; animation:pop-in 0.3s ease;}
+  @keyframes pop-in{
+    0%{transform:scale(0.7); opacity:0;} 100%{transform:scale(1); opacity:1;}
+  }
+
+  .result-stars{font-size:40px; margin:14px 0; display:flex; flex-wrap:wrap; justify-content:center; gap:2px; max-width:360px; margin-left:auto; margin-right:auto;}
+  .result-stars span{display:inline-block; animation:star-pop 0.4s ease backwards;}
+  .result-stars span:nth-child(1){animation-delay:0.05s;}
+  .result-stars span:nth-child(2){animation-delay:0.1s;}
+  .result-stars span:nth-child(3){animation-delay:0.15s;}
+  .result-stars span:nth-child(4){animation-delay:0.2s;}
+  .result-stars span:nth-child(5){animation-delay:0.25s;}
+  .result-stars span:nth-child(6){animation-delay:0.3s;}
+  .result-stars span:nth-child(7){animation-delay:0.35s;}
+  .result-stars span:nth-child(8){animation-delay:0.4s;}
+  .result-stars span:nth-child(n+9){animation-delay:0.45s;}
+  @keyframes star-pop{
+    0%{transform:scale(0) rotate(-90deg); opacity:0;}
+    70%{transform:scale(1.3) rotate(10deg); opacity:1;}
+    100%{transform:scale(1) rotate(0);}
+  }
+  .result-msg{font-family:'Baloo 2',sans-serif; font-weight:800; font-size:23px; margin:4px 0 4px; color:var(--ink);}
+  .result-sub{color:var(--ink-soft); font-weight:700; margin-bottom:20px; font-size:14.5px;}
+  .result-actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .action-btn{border:none; border-radius:16px; padding:13px 20px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:15px; color:white; cursor:pointer; box-shadow:0 5px 0 rgba(0,0,0,0.18);}
+  .action-btn.replay{background:linear-gradient(160deg,#B292E8,var(--amethyst));}
+  .action-btn.menu{background:linear-gradient(160deg,#7FDDF4,#2E93B3);}
+  .action-btn:active{transform:translateY(4px); box-shadow:0 1px 0 rgba(0,0,0,0.18);}
+
+  .confetti-piece{position:fixed; top:-20px; width:10px; height:16px; z-index:900; pointer-events:none; animation:fall linear forwards; border-radius:2px;}
+  @keyframes fall{ to{transform:translateY(110vh) rotate(540deg); opacity:0.9;} }
+
+  .hidden{display:none !important;}
+</style>
+</head>
+<body>
+
+<div class="bg-decor" id="bgDecor"></div>
+<div class="ground"></div>
+
+<div class="app">
+  <div class="topbar">
+    <a href="index.html" class="brand"><span class="mascot-ico">🧙</span> Kai Cerdas</a>
+    <div class="star-total">⭐ <span id="totalStars">0</span></div>
+  </div>
+  <div style="width:100%; max-width:640px; margin:-6px 0 14px;">
+    <a href="index.html" class="home-link">🏠 Beranda</a>
+  </div>
+
+  <!-- MENU -->
+  <div class="card" id="screen-menu">
+    <div class="mascot-wrap"><div class="mascot" id="mascotMenu">🧙</div></div>
+    <div class="speech">Halo! Aku Kai. Siap dengan tantangan level tersulit?</div>
+    <h1 class="title">Bagian 5: Kai Si Penyihir Cerdas</h1>
+    <p class="subtitle">TIK, Matematika, IPAS, dan Bahasa Indonesia — level lanjutan!</p>
+    <div class="hardmode-badge">🔥 MODE HARD</div>
+    <div class="menu-grid">
+      <button class="menu-btn b-tik" id="btnTik">
+        <span class="emoji">💻</span>
+        TIK
+        <small>Bagian komputer</small>
+      </button>
+      <button class="menu-btn b-math5" id="btnMath5">
+        <span class="emoji">🧮</span>
+        Matematika
+        <small>Soal cerita</small>
+      </button>
+      <button class="menu-btn b-ipas5" id="btnIpas5">
+        <span class="emoji">🫀</span>
+        IPAS
+        <small>Organ tubuh</small>
+      </button>
+      <button class="menu-btn b-keluarga" id="btnKeluarga">
+        <span class="emoji">👨‍👩‍👧‍👦</span>
+        B. Indonesia
+        <small>Silsilah keluarga</small>
+      </button>
+    </div>
+  </div>
+
+  <!-- TIK -->
+  <div class="card hidden" id="screen-tik">
+    <div class="game-header">
+      <button class="back-btn" id="btnTikBack">⬅ Menu</button>
+      <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="tikProgress" style="width:0%"></div></div></div>
+      <div class="score-pill">⭐ <span id="tikScore">0</span></div>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotTik">🧙</div></div>
+    <div class="speech" id="tikSpeech">Baca fungsinya, lalu tebak nama alatnya!</div>
+    <div class="clue-card" id="tikClue"></div>
+    <p class="question-text">Apa nama alat ini?</p>
+    <div class="options-grid" id="tikOptions"></div>
+    <div class="feedback-banner" id="tikFeedback"></div>
+    <button class="next-btn" id="btnTikNext">Lanjut ➡</button>
+  </div>
+
+  <!-- TIK RESULT -->
+  <div class="card hidden" id="screen-tik-result">
+    <div class="mascot-wrap"><div class="mascot happy" id="mascotTikResult">🏆</div></div>
+    <div class="result-stars" id="tikResultStars"></div>
+    <div class="result-msg" id="tikResultMsg">Hebat sekali!</div>
+    <div class="result-sub" id="tikResultSub"></div>
+    <div class="result-actions">
+      <button class="action-btn replay" id="btnTikReplay">🔁 Main Lagi</button>
+      <button class="action-btn menu" id="btnTikMenu">🏠 Menu</button>
+    </div>
+  </div>
+
+  <!-- MATEMATIKA -->
+  <div class="card hidden" id="screen-math5">
+    <div class="game-header">
+      <button class="back-btn" id="btnMath5Back">⬅ Menu</button>
+      <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="math5Progress" style="width:0%"></div></div></div>
+      <div class="score-pill">⭐ <span id="math5Score">0</span></div>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotMath5">🧙</div></div>
+    <div class="speech" id="math5Speech">Baca soal ceritanya baik-baik, lalu hitung jawabannya!</div>
+    <div class="clue-card" id="math5Question"></div>
+    <p class="question-text">Berapa jawabannya?</p>
+    <div class="options-grid" id="math5Options"></div>
+    <div class="feedback-banner" id="math5Feedback"></div>
+    <button class="next-btn" id="btnMath5Next">Lanjut ➡</button>
+  </div>
+
+  <!-- MATEMATIKA RESULT -->
+  <div class="card hidden" id="screen-math5-result">
+    <div class="mascot-wrap"><div class="mascot happy" id="mascotMath5Result">🏆</div></div>
+    <div class="result-stars" id="math5ResultStars"></div>
+    <div class="result-msg" id="math5ResultMsg">Hebat sekali!</div>
+    <div class="result-sub" id="math5ResultSub"></div>
+    <div class="result-actions">
+      <button class="action-btn replay" id="btnMath5Replay">🔁 Main Lagi</button>
+      <button class="action-btn menu" id="btnMath5Menu">🏠 Menu</button>
+    </div>
+  </div>
+
+  <!-- IPAS -->
+  <div class="card hidden" id="screen-ipas5">
+    <div class="game-header">
+      <button class="back-btn" id="btnIpas5Back">⬅ Menu</button>
+      <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="ipas5Progress" style="width:0%"></div></div></div>
+      <div class="score-pill">⭐ <span id="ipas5Score">0</span></div>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotIpas5">🧙</div></div>
+    <div class="speech" id="ipas5Speech">Baca fungsinya, lalu tebak nama organ atau bagian tubuhnya!</div>
+    <div class="clue-card" id="ipas5Clue"></div>
+    <p class="question-text">Apa nama bagian tubuh ini?</p>
+    <div class="options-grid" id="ipas5Options"></div>
+    <div class="feedback-banner" id="ipas5Feedback"></div>
+    <button class="next-btn" id="btnIpas5Next">Lanjut ➡</button>
+  </div>
+
+  <!-- IPAS RESULT -->
+  <div class="card hidden" id="screen-ipas5-result">
+    <div class="mascot-wrap"><div class="mascot happy" id="mascotIpas5Result">🏆</div></div>
+    <div class="result-stars" id="ipas5ResultStars"></div>
+    <div class="result-msg" id="ipas5ResultMsg">Hebat sekali!</div>
+    <div class="result-sub" id="ipas5ResultSub"></div>
+    <div class="result-actions">
+      <button class="action-btn replay" id="btnIpas5Replay">🔁 Main Lagi</button>
+      <button class="action-btn menu" id="btnIpas5Menu">🏠 Menu</button>
+    </div>
+  </div>
+
+  <!-- KELUARGA (BAHASA INDONESIA) -->
+  <div class="card hidden" id="screen-keluarga">
+    <div class="game-header">
+      <button class="back-btn" id="btnKeluargaBack">⬅ Menu</button>
+      <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="keluargaProgress" style="width:0%"></div></div></div>
+      <div class="score-pill">⭐ <span id="keluargaScore">0</span></div>
+    </div>
+    <div class="mascot-wrap"><div class="mascot" id="mascotKeluarga">🧙</div></div>
+    <div class="speech" id="keluargaSpeech">Ayo uji pengetahuanmu tentang silsilah keluarga!</div>
+    <p class="question-text" id="keluargaQuestion" style="font-size:18px; color:var(--ink);"></p>
+    <div class="options-grid" id="keluargaOptions"></div>
+    <div class="feedback-banner" id="keluargaFeedback"></div>
+    <button class="next-btn" id="btnKeluargaNext">Lanjut ➡</button>
+  </div>
+
+  <!-- KELUARGA RESULT -->
+  <div class="card hidden" id="screen-keluarga-result">
+    <div class="mascot-wrap"><div class="mascot happy" id="mascotKeluargaResult">🏆</div></div>
+    <div class="result-stars" id="keluargaResultStars"></div>
+    <div class="result-msg" id="keluargaResultMsg">Hebat sekali!</div>
+    <div class="result-sub" id="keluargaResultSub"></div>
+    <div class="result-actions">
+      <button class="action-btn replay" id="btnKeluargaReplay">🔁 Main Lagi</button>
+      <button class="action-btn menu" id="btnKeluargaMenu">🏠 Menu</button>
+    </div>
+  </div>
+</div>
+
+<script src="stats.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Background decor ---------- */
+  const bgDecor = document.getElementById('bgDecor');
+  const floaterEmojis = ['✨','📜','🔮'];
+  for(let i=0;i<7;i++){
+    const f = document.createElement('div');
+    f.className = 'floater';
+    f.textContent = floaterEmojis[i % floaterEmojis.length];
+    f.style.top = (Math.random()*60) + 'vh';
+    f.style.left = '-8vw';
+    f.style.animationDuration = (16 + Math.random()*14) + 's';
+    f.style.animationDelay = (Math.random()*10) + 's';
+    bgDecor.appendChild(f);
+  }
+  const sparkleEmojis = ['⭐','✨','💫'];
+  for(let i=0;i<8;i++){
+    const p = document.createElement('div');
+    p.className = 'sparkle';
+    p.textContent = sparkleEmojis[i % sparkleEmojis.length];
+    p.style.left = (5 + Math.random()*90) + 'vw';
+    p.style.top = (5 + Math.random()*55) + 'vh';
+    p.style.animationDelay = (Math.random()*2.5) + 's';
+    bgDecor.appendChild(p);
+  }
+
+  /* ---------- Shared helpers ---------- */
+  function shuffle(arr){
+    const a = arr.slice();
+    for(let i=a.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [a[i],a[j]] = [a[j],a[i]];
+    }
+    return a;
+  }
+
+  function createShuffleBag(items){
+    let bag = [];
+    return function draw(n){
+      const result = [];
+      while(result.length < n){
+        if(bag.length === 0){
+          bag = shuffle(items);
+          if(result.length){
+            const resultSet = new Set(result);
+            const fresh = bag.filter(x => !resultSet.has(x));
+            const used = bag.filter(x => resultSet.has(x));
+            bag = fresh.concat(used);
+          }
+        }
+        result.push(bag.shift());
+      }
+      return result;
+    };
+  }
+
+  const confettiColors = ['#8E5FCF','#F2B705','#2E9E6B','#E85D8A','#2E93B3'];
+  function burstConfetti(x, y, count){
+    count = count || 18;
+    for(let i=0;i<count;i++){
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = (x + (Math.random()*160-80)) + 'px';
+      piece.style.top = (y) + 'px';
+      piece.style.background = confettiColors[Math.floor(Math.random()*confettiColors.length)];
+      piece.style.animationDuration = (1.2 + Math.random()*0.8) + 's';
+      piece.style.transform = `rotate(${Math.random()*360}deg)`;
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), 2200);
+    }
+  }
+
+  let totalStars = LearnStats.getTotalStars();
+  const totalStarsEl = document.getElementById('totalStars');
+  totalStarsEl.textContent = totalStars;
+  function addStars(n){
+    totalStars = LearnStats.addTotalStars(n);
+    totalStarsEl.textContent = totalStars;
+  }
+
+  function setMascotState(el, mood){
+    el.classList.remove('happy','sad');
+    if(mood) el.classList.add(mood);
+  }
+
+  function renderStarRow(container, filled, total){
+    container.innerHTML = '';
+    for(let i=0;i<total;i++){
+      const s = document.createElement('span');
+      s.textContent = i < filled ? '⭐' : '☆';
+      container.appendChild(s);
+    }
+  }
+
+  /* ---------- Screens ---------- */
+  const screenIds = ['menu','tik','tik-result','math5','math5-result','ipas5','ipas5-result','keluarga','keluarga-result'];
+  const screens = {};
+  screenIds.forEach(id => screens[id] = document.getElementById('screen-' + id));
+  function showScreen(name){
+    screenIds.forEach(id => screens[id].classList.toggle('hidden', id !== name));
+  }
+
+  /* Generic quiz runner factory to avoid repeating boilerplate */
+  function makeQuizRunner(cfg){
+    // cfg: {bank, roundLen, screenName, prefix, statKey, statLabel, buildQuestionUI, buildOptions}
+    const state = { questions:[], index:0, score:0, answered:false };
+    const draw = createShuffleBag(cfg.bank);
+
+    function start(){
+      state.questions = draw(cfg.roundLen);
+      state.index = 0;
+      state.score = 0;
+      document.getElementById(cfg.prefix + 'Score').textContent = '0';
+      showScreen(cfg.screenName);
+      renderQuestion();
+    }
+
+    function renderQuestion(){
+      state.answered = false;
+      document.getElementById('btn' + cfg.Prefix + 'Next').classList.remove('show');
+      document.getElementById(cfg.prefix + 'Feedback').textContent = '';
+      const mascot = document.getElementById('mascot' + cfg.Prefix);
+      setMascotState(mascot, null);
+      mascot.textContent = '🧙';
+      document.getElementById(cfg.prefix + 'Speech').textContent = cfg.introText;
+
+      const pct = Math.round((state.index / cfg.roundLen) * 100);
+      const progEl = document.getElementById(cfg.prefix + 'Progress');
+      if(progEl) progEl.style.width = pct + '%';
+
+      const item = state.questions[state.index];
+      const { correctAnswer, buildOptionsList } = cfg.buildQuestionUI(item);
+
+      const grid = document.getElementById(cfg.prefix + 'Options');
+      grid.innerHTML = '';
+      buildOptionsList().forEach(optText => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.textContent = optText;
+        btn.addEventListener('click', () => handleAnswer(btn, optText === correctAnswer, item, correctAnswer));
+        grid.appendChild(btn);
+      });
+    }
+
+    function handleAnswer(btn, isCorrect, item, correctAnswer){
+      if(state.answered) return;
+      state.answered = true;
+      const allBtns = document.querySelectorAll('#' + cfg.prefix + 'Options .opt-btn');
+      allBtns.forEach(b => b.disabled = true);
+      const mascot = document.getElementById('mascot' + cfg.Prefix);
+      const feedback = document.getElementById(cfg.prefix + 'Feedback');
+      LearnStats.recordAnswer(cfg.statKey, cfg.statLabel, isCorrect);
+
+      if(isCorrect){
+        btn.classList.add('correct');
+        state.score++;
+        addStars(1);
+        document.getElementById(cfg.prefix + 'Score').textContent = state.score;
+        setMascotState(mascot, 'happy'); mascot.textContent = '🤩';
+        document.getElementById(cfg.prefix + 'Speech').textContent = 'Betul sekali!';
+        feedback.style.color = '#207A52';
+        feedback.textContent = cfg.correctFeedback ? cfg.correctFeedback(item) : 'Jawaban tepat!';
+        const rect = btn.getBoundingClientRect();
+        burstConfetti(rect.left + rect.width/2, rect.top);
+      } else {
+        btn.classList.add('wrong');
+        setMascotState(mascot, 'sad'); mascot.textContent = '😅';
+        document.getElementById(cfg.prefix + 'Speech').textContent = 'Coba lagi ya nanti!';
+        feedback.style.color = '#C64643';
+        feedback.textContent = cfg.wrongFeedback ? cfg.wrongFeedback(item, correctAnswer) : `Jawaban yang benar: ${correctAnswer}`;
+        allBtns.forEach(b => { if(b.textContent === correctAnswer) b.classList.add('correct'); });
+      }
+      document.getElementById('btn' + cfg.Prefix + 'Next').classList.add('show');
+    }
+
+    function goNext(){
+      state.index++;
+      if(state.index >= cfg.roundLen){
+        showResult();
+      } else {
+        renderQuestion();
+      }
+    }
+
+    function showResult(){
+      showScreen(cfg.screenName + '-result');
+      const ratio = state.score / cfg.roundLen;
+      renderStarRow(document.getElementById(cfg.prefix + 'ResultStars'), state.score, cfg.roundLen);
+      document.getElementById(cfg.prefix + 'ResultMsg').textContent = ratio >= 0.85 ? (cfg.perfectMsg || 'Luar biasa hebat! 🎉') : (ratio >= 0.5 ? 'Bagus sekali!' : 'Terus berlatih ya!');
+      document.getElementById(cfg.prefix + 'ResultSub').textContent = `Kamu menjawab benar ${state.score} dari ${cfg.roundLen} soal`;
+      if(ratio >= 0.85) setTimeout(() => burstConfetti(window.innerWidth/2, 120, 36), 200);
+    }
+
+    return { start, goNext };
+  }
+
+  /* =========================================================
+     TIK — Bagian Komputer
+  ========================================================= */
+  const tikBank = [
+    {name:'Keyboard', emoji:'⌨️', desc:'Alat ini digunakan untuk mengetik huruf dan angka ke komputer.'},
+    {name:'Mouse', emoji:'🖱️', desc:'Alat ini digunakan untuk menggerakkan kursor dan mengklik di layar.'},
+    {name:'Monitor', emoji:'🖥️', desc:'Alat ini digunakan untuk menampilkan gambar dan tulisan dari komputer.'},
+    {name:'Printer', emoji:'🖨️', desc:'Alat ini digunakan untuk mencetak dokumen di atas kertas.'},
+    {name:'Speaker', emoji:'🔊', desc:'Alat ini digunakan untuk mengeluarkan suara dari komputer.'},
+    {name:'Headphone', emoji:'🎧', desc:'Alat ini digunakan untuk mendengarkan suara sendirian tanpa mengganggu orang lain.'},
+    {name:'Webcam', emoji:'📷', desc:'Alat ini digunakan untuk merekam video saat melakukan panggilan video.'},
+    {name:'Charger', emoji:'🔌', desc:'Alat ini digunakan untuk mengisi daya baterai laptop.'},
+    {name:'Laptop', emoji:'💻', desc:'Ini adalah jenis komputer yang bisa dibawa ke mana-mana.'},
+    {name:'CPU', emoji:'📦', desc:'Bagian ini adalah otak komputer yang memproses semua data.'},
+    {name:'Baterai', emoji:'🔋', desc:'Bagian ini menyimpan daya listrik agar laptop tetap menyala tanpa kabel.'},
+    {name:'Flashdisk', emoji:'💽', desc:'Alat kecil ini digunakan untuk menyimpan dan memindahkan data.'}
+  ];
+  const tikRunner = makeQuizRunner({
+    bank: tikBank,
+    roundLen: 8,
+    screenName: 'tik',
+    prefix: 'tik',
+    Prefix: 'Tik',
+    statKey: 'part5_tik',
+    statLabel: 'TIK: Bagian Komputer (Bagian 5)',
+    introText: 'Baca fungsinya, lalu tebak nama alatnya!',
+    buildQuestionUI(item){
+      document.getElementById('tikClue').textContent = item.desc;
+      const others = tikBank.map(x => x.name).filter(n => n !== item.name);
+      const options = shuffle([item.name, ...shuffle(others).slice(0,3)]);
+      return { correctAnswer:item.name, buildOptionsList: () => options };
+    },
+    correctFeedback(item){ return `Ya! Ini adalah ${item.emoji} ${item.name}.`; },
+    perfectMsg: 'Ahli komputer cilik! 🎉'
+  });
+
+  /* =========================================================
+     MATEMATIKA — Soal Cerita Tingkat Lanjut
+  ========================================================= */
+  const math5Bank = [
+    {q:'Budi punya 8 kelereng. Ia diberi 5 kelereng lagi oleh temannya. Berapa jumlah kelereng Budi sekarang?', answer:13},
+    {q:'Ani punya 15 permen. Ia memberikan 6 permen ke adiknya. Berapa sisa permen Ani?', answer:9},
+    {q:'Di dalam kandang ada 7 ekor ayam. Kemudian datang lagi 6 ekor ayam. Berapa jumlah ayam sekarang?', answer:13},
+    {q:'Ibu membeli 20 apel. 8 apel dimakan sekeluarga. Berapa sisa apel Ibu?', answer:12},
+    {q:'Doni mempunyai 9 pensil, lalu ia membeli 7 pensil lagi. Berapa jumlah pensil Doni sekarang?', answer:16},
+    {q:'Ada 18 burung di pohon. 9 burung terbang pergi. Berapa burung yang tersisa?', answer:9},
+    {q:'Rina mengumpulkan 6 bunga di pagi hari dan 8 bunga di sore hari. Berapa total bunga Rina?', answer:14},
+    {q:'Kelas 1 punya 25 buku. 10 buku dipinjam murid. Berapa buku yang tersisa di kelas?', answer:15},
+    {q:'Pak Tono punya 14 ekor bebek. Ia menjual 5 ekor. Berapa bebek yang tersisa?', answer:9},
+    {q:'Siti memiliki 10 balon. Ia membeli 9 balon lagi. Berapa jumlah balon Siti sekarang?', answer:19},
+    {q:'Ada 12 kupu-kupu di taman. 4 kupu-kupu terbang pergi, lalu datang lagi 3 kupu-kupu. Berapa jumlah kupu-kupu sekarang?', answer:11},
+    {q:'Andi punya 20 kelereng. Ia memberi 7 ke Budi dan 5 ke Citra. Berapa sisa kelereng Andi?', answer:8}
+  ];
+  function buildMathOptions(correct){
+    const pool = new Set([correct]);
+    let guard = 0;
+    while(pool.size < 4 && guard < 30){
+      guard++;
+      const offset = Math.floor(Math.random()*7) - 3;
+      const candidate = Math.max(0, correct + offset);
+      if(candidate !== correct) pool.add(candidate);
+    }
+    return shuffle(Array.from(pool)).slice(0,4).map(String);
+  }
+  const math5Runner = makeQuizRunner({
+    bank: math5Bank,
+    roundLen: 8,
+    screenName: 'math5',
+    prefix: 'math5',
+    Prefix: 'Math5',
+    statKey: 'part5_matematika',
+    statLabel: 'Matematika: Soal Cerita (Bagian 5)',
+    introText: 'Baca soal ceritanya baik-baik, lalu hitung jawabannya!',
+    buildQuestionUI(item){
+      document.getElementById('math5Question').textContent = item.q;
+      const options = buildMathOptions(item.answer);
+      return { correctAnswer:String(item.answer), buildOptionsList: () => options };
+    },
+    correctFeedback(item){ return `Ya! Jawabannya ${item.answer}.`; },
+    perfectMsg: 'Jagoan matematika! 🎉'
+  });
+
+  /* =========================================================
+     IPAS — Organ Tubuh & Fungsinya
+  ========================================================= */
+  const ipas5Bank = [
+    {name:'Jantung', emoji:'❤️', desc:'Organ ini memompa darah ke seluruh tubuh.'},
+    {name:'Paru-paru', emoji:'🫁', desc:'Organ ini digunakan untuk bernapas, menghirup dan mengeluarkan udara.'},
+    {name:'Otak', emoji:'🧠', desc:'Organ ini digunakan untuk berpikir dan mengatur seluruh tubuh.'},
+    {name:'Lambung', emoji:'🫃', desc:'Organ ini mencerna makanan yang kita makan.'},
+    {name:'Usus', emoji:'🌀', desc:'Organ ini menyerap sari-sari makanan untuk tubuh.'},
+    {name:'Ginjal', emoji:'🫘', desc:'Organ ini menyaring darah dan membuang zat sisa lewat air seni.'},
+    {name:'Hati', emoji:'🟤', desc:'Organ ini menyaring racun dari dalam tubuh.'},
+    {name:'Tulang', emoji:'🦴', desc:'Bagian ini menopang dan membentuk kerangka tubuh kita.'},
+    {name:'Otot', emoji:'💪', desc:'Bagian ini membantu tubuh kita bergerak.'},
+    {name:'Kulit', emoji:'🧴', desc:'Organ ini melindungi seluruh permukaan tubuh dari luar.'},
+    {name:'Mata', emoji:'👀', desc:'Organ ini digunakan untuk melihat.'},
+    {name:'Gigi', emoji:'🦷', desc:'Bagian ini digunakan untuk mengunyah makanan sebelum ditelan.'}
+  ];
+  const ipas5Runner = makeQuizRunner({
+    bank: ipas5Bank,
+    roundLen: 8,
+    screenName: 'ipas5',
+    prefix: 'ipas5',
+    Prefix: 'Ipas5',
+    statKey: 'part5_ipas',
+    statLabel: 'IPAS: Organ Tubuh (Bagian 5)',
+    introText: 'Baca fungsinya, lalu tebak nama organ atau bagian tubuhnya!',
+    buildQuestionUI(item){
+      document.getElementById('ipas5Clue').textContent = item.desc;
+      const others = ipas5Bank.map(x => x.name).filter(n => n !== item.name);
+      const options = shuffle([item.name, ...shuffle(others).slice(0,3)]);
+      return { correctAnswer:item.name, buildOptionsList: () => options };
+    },
+    correctFeedback(item){ return `Ya! Ini adalah ${item.emoji} ${item.name}.`; },
+    perfectMsg: 'Ahli tubuh manusia! 🎉'
+  });
+
+  /* =========================================================
+     BAHASA INDONESIA — Silsilah Keluarga
+  ========================================================= */
+  const keluargaBank = [
+    {q:'Anak dari paman atau bibi kita disebut?', answer:'Sepupu', options:['Sepupu','Adik','Kakak','Keponakan']},
+    {q:'Adik laki-laki dari ayah atau ibu kita disebut?', answer:'Paman', options:['Paman','Bibi','Kakek','Sepupu']},
+    {q:'Adik perempuan dari ayah atau ibu kita disebut?', answer:'Bibi', options:['Bibi','Paman','Nenek','Sepupu']},
+    {q:'Ayah dari ayah atau ibu kita disebut?', answer:'Kakek', options:['Kakek','Nenek','Paman','Ayah']},
+    {q:'Ibu dari ayah atau ibu kita disebut?', answer:'Nenek', options:['Nenek','Kakek','Bibi','Ibu']},
+    {q:'Anak dari kakak atau adik kita disebut?', answer:'Keponakan', options:['Keponakan','Sepupu','Cucu','Cicit']},
+    {q:'Anak dari anak kita sendiri disebut?', answer:'Cucu', options:['Cucu','Cicit','Sepupu','Keponakan']},
+    {q:'Saudara yang lahir bersamaan pada hari yang sama disebut?', answer:'Saudara Kembar', options:['Saudara Kembar','Sepupu','Saudara Tiri','Saudara Angkat']},
+    {q:'Suami dari kakak atau adik perempuan kita disebut?', answer:'Kakak/Adik Ipar', options:['Kakak/Adik Ipar','Paman','Sepupu','Menantu']},
+    {q:'Istri dari anak laki-laki kita disebut?', answer:'Menantu', options:['Menantu','Ipar','Cucu','Keponakan']},
+    {q:'Orang tua dari kakek dan nenek kita disebut?', answer:'Buyut', options:['Buyut','Cicit','Sepupu','Paman']},
+    {q:'Anak yang diadopsi dan dirawat oleh orang tua disebut?', answer:'Anak Angkat', options:['Anak Angkat','Anak Tiri','Anak Kandung','Keponakan']}
+  ];
+  const keluargaRunner = makeQuizRunner({
+    bank: keluargaBank,
+    roundLen: 8,
+    screenName: 'keluarga',
+    prefix: 'keluarga',
+    Prefix: 'Keluarga',
+    statKey: 'part5_keluarga',
+    statLabel: 'B. Indonesia: Silsilah Keluarga (Bagian 5)',
+    introText: 'Ayo uji pengetahuanmu tentang silsilah keluarga!',
+    buildQuestionUI(item){
+      document.getElementById('keluargaQuestion').textContent = item.q;
+      const options = shuffle(item.options);
+      return { correctAnswer:item.answer, buildOptionsList: () => options };
+    },
+    perfectMsg: 'Ahli silsilah keluarga! 🎉'
+  });
+
+  /* ---------- Events ---------- */
+  document.getElementById('btnTik').addEventListener('click', tikRunner.start);
+  document.getElementById('btnTikBack').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnTikNext').addEventListener('click', tikRunner.goNext);
+  document.getElementById('btnTikReplay').addEventListener('click', tikRunner.start);
+  document.getElementById('btnTikMenu').addEventListener('click', () => showScreen('menu'));
+
+  document.getElementById('btnMath5').addEventListener('click', math5Runner.start);
+  document.getElementById('btnMath5Back').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnMath5Next').addEventListener('click', math5Runner.goNext);
+  document.getElementById('btnMath5Replay').addEventListener('click', math5Runner.start);
+  document.getElementById('btnMath5Menu').addEventListener('click', () => showScreen('menu'));
+
+  document.getElementById('btnIpas5').addEventListener('click', ipas5Runner.start);
+  document.getElementById('btnIpas5Back').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnIpas5Next').addEventListener('click', ipas5Runner.goNext);
+  document.getElementById('btnIpas5Replay').addEventListener('click', ipas5Runner.start);
+  document.getElementById('btnIpas5Menu').addEventListener('click', () => showScreen('menu'));
+
+  document.getElementById('btnKeluarga').addEventListener('click', keluargaRunner.start);
+  document.getElementById('btnKeluargaBack').addEventListener('click', () => showScreen('menu'));
+  document.getElementById('btnKeluargaNext').addEventListener('click', keluargaRunner.goNext);
+  document.getElementById('btnKeluargaReplay').addEventListener('click', keluargaRunner.start);
+  document.getElementById('btnKeluargaMenu').addEventListener('click', () => showScreen('menu'));
+
+  showScreen('menu');
+})();
+</script>
+</body>
+</html>
